@@ -53,7 +53,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::domain(get_domain($prefix))
             ->middleware('web')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace. '\\' . ucfirst($prefix))
             ->group(base_path('routes/' . $prefix . '.php'));
     }
 
@@ -68,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::domain(get_domain('api'))
             ->middleware('api')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace. '\\' . ucfirst('api'))
             ->group(base_path('routes/api.php'));
     }
 }

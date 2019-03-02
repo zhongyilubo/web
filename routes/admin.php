@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return get_domain('api');
+Route::group(['prefix' => 'index', 'as' => 'index.', 'namespace' => 'Index'], function(){
+    Route::any('index', ['as' => 'index', 'uses' => 'IndexController@index']);
 });
