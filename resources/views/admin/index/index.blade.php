@@ -183,5 +183,13 @@
 
 @stop
 @section('script')
+<script>
+    var __seajs_debug = 0;
+    seajs.use("/admin/js/app.js", function (app) {
+        app.context.user = {login: 9};
+        app.bootstrap();
+        app.load('index/index');
+    });
 
+</script>
 @stop

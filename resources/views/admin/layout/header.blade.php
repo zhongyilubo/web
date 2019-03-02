@@ -10,6 +10,6 @@
     <link rel="stylesheet" href="/admin/css/theme.css">
     <link rel="stylesheet" href="/admin/css/flex.css">
     <link rel="stylesheet" href="/admin/css/ModifyNew.css">
-    <script src="http://tenant.cw100.cn/vendor/seajs/1.3.1/sea.js" id="seajsnode"></script>
+    <script src="/vendor/seajs/1.3.1/sea.js"></script>
     @yield('style')
 </head>
