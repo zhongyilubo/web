@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class IndexController extends InitController
 {
+    public function __construct()
+    {
+
+    }
+
     public function index(Request $request){
-        return 'duanzhiwei';
+
+        return view( 'admin.index.'. __FUNCTION__);
     }
 }
