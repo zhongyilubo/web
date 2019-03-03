@@ -1,7 +1,7 @@
 <ul class="top-suspension">
     <li class="li-left top-picture">
         <a href="javascript:;">
-            <img src="/admin/images/logo.png" alt=""/>
+            <img src="#" alt=""/>
         </a>
     </li>
     <li class="li-left sixty"><a href=""> <i class="iconfont">&#xe640;</i></a></li>
