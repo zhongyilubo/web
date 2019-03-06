@@ -30,7 +30,8 @@
             <a href="/tmall/manage/apply" target="_self">
                 <li class="">
                     <i class="iconfont"></i>
-                    店铺
+                    @inject('menu','App\Presenters\Admin\MenuPresenter')
+                    {{$menu->init()}}
                 </li>
             </a>
             <a href="/goods/manage/index" target="_self">
