@@ -15,7 +15,6 @@ class IndexController extends InitController
     }
 
     public function index(Request $request){
-
 //        dd(Route::currentRouteName());
         return view( 'admin.index.'. __FUNCTION__);
     }
