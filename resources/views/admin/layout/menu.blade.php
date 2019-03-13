@@ -23,15 +23,16 @@
     </li>
 
 </ul>
+@inject('menu','App\Presenters\Admin\MenuPresenter')
 
 <div class="nav_wrap_ch">
+
     <div class="nav_first_ch">
         <ul>
             <a href="/tmall/manage/apply" target="_self">
                 <li class="">
                     <i class="iconfont"></i>
-                    @inject('menu','App\Presenters\Admin\MenuPresenter')
-                    {{$menu->init()}}
+                    {!! $menu->init() !!}
                 </li>
             </a>
             <a href="/goods/manage/index" target="_self">
@@ -136,4 +137,6 @@
             </li>
         </ul>
     </div>
+
 </div>
+

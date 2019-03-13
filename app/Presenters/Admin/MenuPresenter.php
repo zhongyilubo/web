@@ -3,11 +3,21 @@ namespace App\Presenters\Admin;
 
 class MenuPresenter{
 
-    private $date = [
+    public function __construct()
+    {
+        $this->tmp = 'admin.presenters.';
+    }
 
+    private $date = [
+        'index' => [
+            'index' => [
+                'icon' => '',
+            ],
+        ],
     ];
 
     public function init(){
-        return view( 'admin.presenters.'. __FUNCTION__);
+
+        return '11111111';
     }
 }
