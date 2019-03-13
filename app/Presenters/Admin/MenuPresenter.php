@@ -7,14 +7,7 @@ class MenuPresenter{
     {
         $this->tmp = 'admin.presenters.';
     }
-
-    private $date = [
-        'index' => [
-            'index' => [
-                'icon' => '',
-            ],
-        ],
-    ];
+    
 
     public function init(){
 
