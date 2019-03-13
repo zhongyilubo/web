@@ -7,7 +7,6 @@ class MenuPresenter{
     {
         $this->tmp = 'admin.presenters.';
     }
-    
 
     public function init(){
 
