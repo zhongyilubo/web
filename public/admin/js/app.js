@@ -51,13 +51,8 @@ var $, message, common, ajaxaction;
 define(function(require, exports, module) {
 
     $ = require("jquery");
-    require('jquery.form')($);
-    window.$ = window.jQuery = $;
-    message = require('message');
-    ajaxaction = require("ajaxactionjs");
-    require("bootstrap-min")($);
-    require("bootstrap.select")($);
-    require("bootstrap-slider")($);
+    window.$ = $;
+
     exports.context = {};
     exports.load = function(e, a) {
         require.async("./modules/" + e + ".js", function(e) {
@@ -68,57 +63,6 @@ define(function(require, exports, module) {
     };
     window.app_load = exports.load;
     exports.bootstrap = function() {
-
-        //表单提交
-        var options = {
-            beforeSerialize: function() {
-                $(':submit').attr('disabled', true);
-            },
-            success: function(data) {
-                $(':submit').attr('disabled', false);
-                if (data.status) {
-                    message.success(data.message);
-                    if (data.url)
-                        window.location.href = data.url;
-                    else
-                        window.location.reload();
-                } else {
-                    message.error(data.message);
-                }
-            }
-        };
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-            }
-        });
-        //基础ajax提交
-        $('body').on('focus', 'input', function() {
-            $(':submit').attr('disabled', false);
-        })
-        $('.base_form').ajaxForm(options);
-        $('.base_form_add').ajaxForm(options);
-        $(document).on('click', '.submit-add', function() {
-            $('.base_form_add').ajaxForm(options);
-        })
-
-
-        //全选功能
-        $('body').on('change', '.choice-goods .all-input', function() {
-            $('.checkall tbody input[type="checkbox"]').prop('checked', this.checked);
-            $("#have-choose").html($('.layui-layer .checkall tbody input[type="checkbox"]:checked').length);
-        })
-        $('body').on('change', '.checkall tbody input[type="checkbox"]', function() {
-            var n = $('.layui-layer .checkall tbody input[type="checkbox"]:checked').length;
-            var m = $('.layui-layer .checkall tbody input[type="checkbox"]').length;
-            if (n == m) {
-                $('.choice-goods .all-input').prop('checked', true);
-            } else {
-                $('.choice-goods .all-input').prop('checked', false);
-            }
-            var inNum = $("#goods_num").length != 0 ? $("#goods_num").html() * 1 : 0;
-            $("#have-choose").html(inNum + $('.layui-layer .checkall tbody .check-all:checked[disabled!=disabled]').length);
-        })
 
     }
 });
