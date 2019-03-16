@@ -14,9 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //驱动
-//        app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
-//            return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-//        });
+        app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+            return new \Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+        });
     }
 
     /**

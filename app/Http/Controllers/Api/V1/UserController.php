@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api\V1;
 
-use App\Fractal\MyCustomTransformer;
+use App\Transformers\MyCustomTransformer;
 use App\Models\User;
 use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
