@@ -18,6 +18,11 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',['namespace'=>'App\Http\Controllers\Api\V1','middleware' => 'api.throttle','limit' => 100, 'expires' => 5], function ($api) {
+$api->version('v1',['namespace'=>'App\Http\Controllers\Api'], function ($api) {
     $api->get('users/{id}', 'UserController@show');
+
+    $api->post('logout', 'UserController@logout');
+    $api->post('refresh', 'UserController@refresh');
+    $api->post('me', 'UserController@me');
+
 });
