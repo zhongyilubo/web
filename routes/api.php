@@ -14,10 +14,10 @@ use Illuminate\Http\Request;
 */
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',['namespace'=>'App\Http\Controllers\Api\V1'], function ($api) {
-    $api->get('users/{id}', 'UserController@show');
+app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
+    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$api->version('v1',['namespace'=>'App\Http\Controllers\Api\V1'], function ($api) {
+    $api->get('users/{id}', 'UserController@show');
 });

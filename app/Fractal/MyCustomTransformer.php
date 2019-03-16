@@ -1,17 +1,16 @@
 <?php
 namespace App\Fractal;
 
-use Dingo\Api\Http\Request;
-use Dingo\Api\Transformer\Binding;
-use Dingo\Api\Contract\Transformer\Adapter;
+use App\Models\User;
+use League\Fractal\TransformerAbstract;
 
-class MyCustomTransformer implements Adapter
+class MyCustomTransformer extends TransformerAbstract
 {
-    public function transform($response, $transformer, Binding $binding, Request $request)
+    public function transform(User $user)
     {
         // 在这里可以使用你的转换层转换给出的响应
         return [
-            'name' => 'duan'
+            'name' => $user->id
         ];
     }
 }

@@ -11,7 +11,14 @@ class UserController extends Controller{
     use Helpers;
 
     public function show($id = 0){
-        $user = User::findOrFail($id);
-        return $this->response->item($user, new MyCustomTransformer());
+
+
+
+        $user = User::find(1);
+        return $this->response->item($user, new MyCustomTransformer())->withHeader('X-Foo', 'Bar');
+
+//        $user = User::paginate(10);
+//        return $this->response->paginator($user, new MyCustomTransformer());
+
     }
 }
