@@ -21,6 +21,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',['namespace'=>'App\Http\Controllers\Api'], function ($api) {
     $api->get('users/{id}', 'UserController@show');
 
+    $api->post('login', 'UserController@login');
     $api->post('logout', 'UserController@logout');
     $api->post('refresh', 'UserController@refresh');
     $api->post('me', 'UserController@me');

@@ -36,11 +36,17 @@ class UserController extends Controller{
 
     public function login(Request $request)
     {
-        if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
-            return response()->json(['user_not_found'], 404);
-        }
 
-        return response()->json(compact('token'));
+        $token = auth()->tokenById(1);
+        return $this->respondWithToken($token);
+
+//        $credentials = $request->only('email', 'password');
+//
+//        if ($token = $this->guard()->attempt($credentials)) {
+//            return $this->respondWithToken($token);
+//        }
+//
+//        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**
