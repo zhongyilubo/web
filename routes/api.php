@@ -14,10 +14,6 @@ use Illuminate\Http\Request;
 */
 $api = app('Dingo\Api\Routing\Router');
 
-//app('Dingo\Api\Auth\Auth')->extend('jwt', function ($app) {
-//    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-//});
-
 $api->version('v1',['namespace'=>'App\Http\Controllers\Api\V1'], function ($api) {
     $api->get('users/{id}', 'UserController@show');
 });
