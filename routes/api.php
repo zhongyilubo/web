@@ -20,12 +20,12 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1',['namespace'=>'App\Http\Controllers\Api'], function ($api) {
 
-    $api->post('login', 'UserController@login');
+    $api->post('login', 'LoginController@login');
 
     $api->group(['middleware' => ['auth:api']], function ($api) {
-        $api->post('logout', 'UserController@logout');
-        $api->post('refresh', 'UserController@refresh');
-        $api->post('me', 'UserController@me');
+        $api->post('logout', 'LoginController@logout');
+        $api->post('refresh', 'LoginController@refresh');
+        $api->post('me', 'LoginController@me');
     });
 
 

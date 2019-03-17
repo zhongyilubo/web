@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
 //        app('Dingo\Api\Http\RateLimit\Handler')->setRateLimiter(function ($app, $request) {
 //            return $app['example']->getRateLimiterKey();
 //        });
+
     }
 
     /**
