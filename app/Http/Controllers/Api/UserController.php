@@ -37,7 +37,13 @@ class UserController extends Controller{
     public function login(Request $request)
     {
 
-        $token = auth()->tokenById(1);
+        $user = User::first();
+        $token = \JWTAuth::fromUser($user);
+
+//        $user = User::first();
+//        $token = auth()->login($user);
+
+//        $token = auth()->tokenById(1);
         return $this->respondWithToken($token);
 
 //        $credentials = $request->only('email', 'password');
