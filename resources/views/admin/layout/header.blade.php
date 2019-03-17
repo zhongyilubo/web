@@ -4,7 +4,7 @@
     </title>
     <meta name="csrf_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="/admin/css/style-min.css">
-    <link rel="stylesheet" href="/admin/css/font_904289_101i8t6l9zn.css">
+    <link rel="stylesheet" href="/admin/css/font_zn.css">
     <link rel="stylesheet" href="/admin/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/admin/css/theme.css">
