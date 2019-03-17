@@ -19,18 +19,6 @@ class UserController extends Controller{
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
-
-    public function show($id = 0){
-
-
-
-        $user = User::find(1);
-        return $this->response->item($user, new MyCustomTransformer())->withHeader('X-Foo', 'Bar');
-
-//        $user = User::paginate(10);
-//        return $this->response->paginator($user, new MyCustomTransformer());
 
     }
 
@@ -62,7 +50,8 @@ class UserController extends Controller{
      */
     public function me()
     {
-        return response()->json($this->guard()->user());
+        $user = $this->guard()->user();
+        return $this->response->item($user, new MyCustomTransformer())->withHeader('X-Foo', 'Bar');
     }
 
     /**
