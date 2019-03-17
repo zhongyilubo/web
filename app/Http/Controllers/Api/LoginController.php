@@ -3,14 +3,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Transformers\UserTransformer;
-use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller{
-
-    use Helpers;
+class LoginController extends InitController{
 
     /**
      * Create a new AuthController instance.

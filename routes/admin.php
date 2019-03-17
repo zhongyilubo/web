@@ -10,7 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('login', 'LoginController@login');
 
-Route::group(['prefix' => 'index', 'as' => 'index.', 'namespace' => 'Index'], function(){
-    Route::any('index', ['as' => 'index', 'uses' => 'IndexController@index']);
+Route::group(['middleware' => ['auth:admin']], function () {
+
+    Route::post('logout', 'LoginController@logout');
+
+    Route::group(['prefix' => 'index', 'as' => 'index.', 'namespace' => 'Index'], function(){
+        Route::any('index', ['as' => 'index', 'uses' => 'IndexController@index']);
+    });
+
 });
+
+
