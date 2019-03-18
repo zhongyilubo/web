@@ -15,7 +15,6 @@ class Premission
      */
     public function handle($request, Closure $next)
     {
-        dd('sdf');
         return $next($request);
     }
 }
