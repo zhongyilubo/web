@@ -18,8 +18,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('logout', 'LoginController@logout');
     Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
-    Route::group(['prefix' => 'goods', 'as' => 'good.', 'namespace' => 'Good'], function(){
-        Route::any('index', ['as' => 'index', 'uses' => 'IndexController@index']);
+    Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
+        Route::any('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
     });
 
 });

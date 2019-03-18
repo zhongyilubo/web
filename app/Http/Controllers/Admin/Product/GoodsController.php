@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Good;
+namespace App\Http\Controllers\Admin\Product;
 
 
 use App\Http\Controllers\Admin\InitController;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class IndexController extends InitController
+class GoodsController extends InitController
 {
     public function __construct()
     {
-
+        $this->template = 'admin.product.goods.';
     }
 
     public function index(Request $request){
@@ -30,6 +29,6 @@ class IndexController extends InitController
 //        dd($role,$permission);
 
 //        dd(Route::currentRouteName());
-        return view( 'admin.index.'. __FUNCTION__);
+        return view( $this->template. __FUNCTION__);
     }
 }
