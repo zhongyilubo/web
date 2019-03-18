@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Index;
+namespace App\Http\Controllers\Admin\Good;
 
 
 use App\Http\Controllers\Admin\InitController;

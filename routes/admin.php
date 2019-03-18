@@ -15,9 +15,10 @@ Route::post('login', 'LoginController@login');
 
 Route::group(['middleware' => ['auth:admin']], function () {
 
-    Route::post('logout', 'LoginController@logout');
+    Route::get('logout', 'LoginController@logout');
+    Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
-    Route::group(['prefix' => 'index', 'as' => 'index.', 'namespace' => 'Index'], function(){
+    Route::group(['prefix' => 'goods', 'as' => 'good.', 'namespace' => 'Good'], function(){
         Route::any('index', ['as' => 'index', 'uses' => 'IndexController@index']);
     });
 
