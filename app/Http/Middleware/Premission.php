@@ -15,6 +15,7 @@ class Premission
      */
     public function handle($request, Closure $next)
     {
+        dd(\Route::currentRouteName());
         return $next($request);
     }
 }

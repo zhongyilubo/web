@@ -28,7 +28,6 @@ class GoodsController extends InitController
 //        $permission->assignRole($role);
 //        dd($role,$permission);
 
-//        dd(Route::currentRouteName());
         return view( $this->template. __FUNCTION__);
     }
 }
