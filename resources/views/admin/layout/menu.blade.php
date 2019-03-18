@@ -7,7 +7,7 @@
     <li class="li-left sixty"><a href=""> <i class="iconfont">&#xe640;</i></a></li>
     <li class="li-left sixty"><a href="#"> <i class="iconfont">&#xe604;</i></a></li>
     <li class="li-right hundred-three">
-        段志伟<sup></sup>
+        {{$user['name'] ?? ' -- '}}<sup></sup>
         <div class="account-information">
             <a href="{{url('base/account/log')}}">登录日志</a>
             <a href="{{url('base/account/password')}}">修改密码</a>
