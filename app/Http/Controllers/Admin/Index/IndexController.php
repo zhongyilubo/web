@@ -19,13 +19,11 @@ class IndexController extends InitController
 
     public function index(Request $request){
 
-        $user = User::find(1);
-
-        $user->givePermissionTo('edit articles');
-        $permissions = $user->permissions;
+//        $user->givePermissionTo('edit articles');
+//        $permissions = $user->permissions;
 //        $permissions = $user->getAllPermissions();
 //        $roles = $user->getRoleNames();
-dd($permissions);
+
 //        $role = Role::create(['name' => 'writer']);
 //        $permission = Permission::create(['name' => 'edit articles']);
 //        $permission->assignRole($role);
