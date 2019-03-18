@@ -15,11 +15,15 @@ Route::post('login', 'LoginController@login');
 
 Route::group(['middleware' => ['auth:admin']], function () {
 
+    Route::get('/', 'HomeController@index');
     Route::get('logout', 'LoginController@logout');
-    Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
-    Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
-        Route::any('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
+    Route::group(['middleware' => ['permission']], function () {
+
+        Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
+            Route::any('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
+        });
+
     });
 
 });
