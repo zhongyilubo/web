@@ -56,7 +56,7 @@
                         </table>
                     </div>
                     @if(!$lists->isEmpty())
-                        {!! $lists->appends(request()->all())->render() !!}
+                        {!! $lists->appends(request()->all())->render('admin.layout.page') !!}
                     @endif
                 </div>
                 <!--tab 切换1 end-->

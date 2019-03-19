@@ -29,6 +29,9 @@ class PermissionController extends InitController
         $lists =  $permissions->forPage($page,self::PAGESIZE);
         $lists = new LengthAwarePaginator($lists,$permissions->count(),self::PAGESIZE,$page);
 
+        $url  = url('system/develop/permission');
+        $lists->withPath($url);
+
         return view( $this->template. __FUNCTION__,compact('lists','guard'));
     }
 
