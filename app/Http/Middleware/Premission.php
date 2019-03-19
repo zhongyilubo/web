@@ -15,7 +15,14 @@ class Premission
      */
     public function handle($request, Closure $next)
     {
-        dd(\Route::currentRouteName());
-        return $next($request);
+        if(\Auth::user()->id == env('SUPER_ID',0)){
+            return $next($request);
+        }
+
+        if(\Auth::user()->can(\Route::currentRouteName())){
+            return $next($request);
+        }else{
+            return abort(403,'对不起，您无权访问该页面！');
+        }
     }
 }
