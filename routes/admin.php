@@ -21,7 +21,11 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::group(['middleware' => 'permission'], function () {
 
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
-            Route::any('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
+            Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
+        });
+
+        Route::group(['prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'], function(){
+            Route::get('premission', ['as' => 'premission', 'uses' => 'PremissionController@index']);
         });
 
     });

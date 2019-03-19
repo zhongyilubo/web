@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Product;
-
+namespace App\Http\Controllers\Admin\System;
 
 use App\Http\Controllers\Admin\InitController;
 use Illuminate\Http\Request;
 
-class GoodsController extends InitController
+class PremissionController extends InitController
 {
     public function __construct()
     {
@@ -14,7 +13,7 @@ class GoodsController extends InitController
     }
 
     public function index(Request $request){
-
+dd('dfg');
         return view( $this->template. __FUNCTION__);
     }
 }
