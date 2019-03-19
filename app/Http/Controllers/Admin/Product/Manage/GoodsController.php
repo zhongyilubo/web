@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\System;
+namespace App\Http\Controllers\Admin\Product\Manage;
+
 
 use App\Http\Controllers\Admin\InitController;
 use Illuminate\Http\Request;
 
-class PremissionController extends InitController
+class GoodsController extends InitController
 {
     public function __construct()
     {
-        $this->template = 'admin.product.goods.';
+        $this->template = 'admin.product.manage.goods.';
     }
 
     public function index(Request $request){
-dd('dfg');
+
         return view( $this->template. __FUNCTION__);
     }
 }
