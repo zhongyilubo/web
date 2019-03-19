@@ -43,7 +43,7 @@
                                     <td>{{$lv->is_menu == 1? '是':'否'}}</td>
                                     <td>{{$lv->status == 1 ? '正常':'停止'}}</td>
                                     <td>{{$lv->sorts ?? 0}}</td>
-                                    <td>{!! $lv->icon_class or '' !!}</td>
+                                    <td>{{$lv->icon_class}}</td>
                                     <td>
                                         <a  href="{!! url('system/develop/permission/create',['id'=>$lv['id']]) !!}?guard={{$guard}}">编辑</a>
                                     </td>
@@ -74,7 +74,7 @@
         var __seajs_debug = 1;
         seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
-            app.load('system/develop/premission/index');
+            app.load('system/develop/permission/index');
         });
 
     </script>

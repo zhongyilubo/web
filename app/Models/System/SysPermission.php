@@ -12,7 +12,7 @@ use App\Models\Collection;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 
-class SysPremission extends Permission
+class SysPermission extends Permission
 {
 
     protected  $appends = ['link'];

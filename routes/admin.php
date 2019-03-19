@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
         Route::group(['prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'], function(){
             Route::group(['prefix' => 'develop', 'as' => 'develop.', 'namespace' => 'Develop'], function(){
-                Route::get('premission', ['as' => 'premission', 'uses' => 'PremissionController@index']);
+                Route::get('permission', ['as' => 'permission', 'uses' => 'PermissionController@index']);
             });
         });
 

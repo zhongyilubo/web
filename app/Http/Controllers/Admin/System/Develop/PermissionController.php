@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin\System\Develop;
 
 use App\Http\Controllers\Admin\InitController;
-use App\Models\System\SysPremission;
+use App\Models\System\SysPermission;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class PremissionController extends InitController
+class PermissionController extends InitController
 {
     public function __construct()
     {
-        $this->template = 'admin.system.develop.premission.';
+        $this->template = 'admin.system.develop.permission.';
     }
 
     public function index(Request $request){
@@ -19,7 +19,7 @@ class PremissionController extends InitController
         $page = $request->page ?? 1;
         $guard = $request->guard ?? 'admin';
 
-        $permissions = SysPremission::getModules([$guard])->mergeTree('node');
+        $permissions = SysPermission::getModules([$guard])->mergeTree('node');
         $lists =  $permissions->forPage($page,self::PAGESIZE);
         $lists = new LengthAwarePaginator($lists,$permissions->count(),self::PAGESIZE,$page);
 
