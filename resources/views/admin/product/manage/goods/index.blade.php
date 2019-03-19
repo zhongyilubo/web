@@ -18,7 +18,7 @@
                 <form method="get" name="search">
                     <input name="system_tag" value="" hidden="">
                     <input name="tag" value="" hidden="">
-                    <div class="Client-list-head clearfix layui-form" id="layerDemo">
+                    <div class="Client-list-head clearfix layui-form">
                         <button type="button" data-method="fansAddTag" class="btn btn-primary label-btn">打标签</button>
                         <button type="button" data-method="fansDistribution" data-url="http://tenant.ftcy.cc/store/guide/user/allot" class="btn btn-primary label-btn">粉丝指配</button>
                         <div class="fr" style="width:75%;">

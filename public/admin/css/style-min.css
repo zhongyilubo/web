@@ -1488,7 +1488,6 @@ ins {
 label[disabled],
 input[disabled],
 .base_form [disabled],
-.base_form [readonly],
 .form-control[disabled]+.bootstrap-select span {
     cursor: no-drop !important;
     color: #999;

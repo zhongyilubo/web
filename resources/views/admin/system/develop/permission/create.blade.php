@@ -10,33 +10,35 @@
                     创建/编辑{{request('guard') == 'tenant' ? '租客':'系统'}}权限
                 </li>
             </ul>
-            <div class="mainbox">
-                <form name="profile-form" id="profile-form" method="post" class="mtb20 base_form">
+            <div>
+                <form method="post" class="mtb20 base_form layui-form">
                     {!! csrf_field() !!}
                     @if(!empty($permission))
-                        <input type="hidden" name="data[id]" value="{!! $permission['id'] or '' !!}">
+                        <input type="hidden" name="data[id]" value="{!! $permission['id'] ?? '' !!}">
                     @endif
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>显示名称：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="模块名称" name="data[display_name]" required="" value="{!! $permission['display_name'] or '' !!}">
+                            <input type="text" class="form-control" placeholder="模块名称" name="data[display_name]" required="" value="{!! $permission['display_name'] ?? '' !!}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>权限名称：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="权限名称" name="data[name]" value="{!! $permission['name'] or '' !!}">
+                            <input type="text" class="form-control" placeholder="权限名称" name="data[name]" value="{!! $permission['name'] ?? '' !!}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 t_r">上级模块：</label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-4">
                             <select name="data[parent_id]" class="form-control w260">
                                 <option level="0" value="0">--请选择--</option>
                                 @foreach($modules as $lv)
-                                    <option value="{!! $lv['id'] or '' !!}" @if((!empty($permission) && $permission->parent_id == $lv['id']))selected @endif>
-                                        |{{str_repeat(' -- ',$lv['level'])}}{!! $lv['display_name'] or '' !!}
-                                    </option>
+                                    <option value="{!! $lv['id'] ?? '' !!}"
+                                    @if((!empty($permission) && $permission->parent_id == $lv['id']))
+                                        selected
+                                    @endif
+                                    >|{{str_repeat(' -- ',$lv['level'])}}{!! $lv['display_name'] ?? '' !!}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -64,7 +66,7 @@
                     <div class="form-group">
                         <label class="col-xs-2 t_r">排序：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="0" name="data[sorts]" value="{!! $permission['sorts'] or 0 !!}">
+                            <input type="text" class="form-control" placeholder="0" name="data[sorts]" value="{!! $permission['sorts'] ?? 0 !!}">
                         </div>
                     </div>
                     <div class="form-group">

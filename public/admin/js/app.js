@@ -51,7 +51,9 @@ var $, message, common, ajaxaction;
 define(function(require, exports, module) {
 
     $ = require("jquery");
+    require('jquery.form')($);
     window.$ = $;
+    message = require('message');
 
     exports.context = {};
     exports.load = function(e, a) {
@@ -63,6 +65,36 @@ define(function(require, exports, module) {
     };
     window.app_load = exports.load;
     exports.bootstrap = function() {
+
+        //表单提交
+        var options = {
+            beforeSerialize: function() {
+
+            },
+            success: function(data) {
+                if (data.status)
+                {
+                    message.success(data.message);
+                    if (data.url)
+                    {
+                        window.location.href = data.url;
+                    }
+                    else{
+                        window.location.reload();
+                    }
+                }
+                else
+                {
+                    message.error(data.message);
+                }
+            }
+        };
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+            }
+        });
+        $('.base_form').ajaxForm(options);
 
     }
 });

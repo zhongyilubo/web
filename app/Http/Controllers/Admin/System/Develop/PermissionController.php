@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\System\Develop;
 
 use App\Http\Controllers\Admin\InitController;
 use App\Models\System\SysPermission;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -46,21 +47,23 @@ class PermissionController extends InitController
             return view($this->template.__FUNCTION__,compact('permission','modules','guard'));
         }
 
-        $data = $request->get('data');
+        $data = $request->data;
 
         $rules = [
-            'name' => 'required',
+            'name' => 'required|unique:sys_permissions,name,'.($permission['id'] ?? 'NULL').',id,guard_name,'.$guard,
             'display_name' => 'required',
         ];
         $messages = [
             'name.required' => '请输入权限名称',
-            'name' => 'unique:permissions,name,' . !empty($permission['id']) ? $permission['id'] : 'NULL' . ',id,guard_name,'.$guard,
+            'name.unique' => '节点已存在',
             'display_name.required' => '请输入权限显示',
         ];
+
         $validator = Validator::make($data, $rules, $messages);
         if ($validator->fails()) {
             return $this->error($validator->errors()->first(), null, true);
         }
+        dd('in');
         try {
             if(!empty($permission->id)) {
                 $permission->name = $data['name'];
