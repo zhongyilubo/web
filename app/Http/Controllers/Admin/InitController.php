@@ -9,5 +9,5 @@ use App\Http\Traits\ResponseTrait;
 class InitController extends Controller
 {
     use ResponseTrait;
-    const PAGESIZE = 20;
+    const PAGESIZE = 10;
 }

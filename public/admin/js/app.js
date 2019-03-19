@@ -69,10 +69,9 @@ define(function(require, exports, module) {
         //表单提交
         var options = {
             beforeSerialize: function() {
-                $(':submit').attr('disabled', true);
+
             },
             success: function(data) {
-                $(':submit').attr('disabled', false);
                 if (data.status)
                 {
                     message.success(data.message);

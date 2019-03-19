@@ -83,7 +83,7 @@
                     数据
                 </li>
             </a>
-            <a href="/system/setting/media" target="_self">
+            <a href="/system/develop/permission" target="_self">
                 <li class="">
                     <i class="iconfont"></i>
                     系统

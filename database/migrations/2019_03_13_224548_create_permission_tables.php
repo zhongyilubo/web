@@ -23,7 +23,7 @@ class CreatePermissionTables extends Migration
             $table->tinyInteger('is_menu')->default(2)->comment('1是 2不是');
             $table->tinyInteger('status')->default(2)->comment('1正常 2冻结');
             $table->integer('parent_id')->default(0);
-            $table->string('icon_class',20)->default('')->comment('图标');
+            $table->string('icon_class',20)->nullable()->comment('图标');
             $table->integer('sorts')->default(0)->comment('排序');
             $table->string('guard_name',10)->comment('权限名称');
             $table->timestamps();

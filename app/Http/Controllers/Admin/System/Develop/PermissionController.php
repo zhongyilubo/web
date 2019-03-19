@@ -63,7 +63,7 @@ class PermissionController extends InitController
         if ($validator->fails()) {
             return $this->error($validator->errors()->first(), null, true);
         }
-        dd('in');
+
         try {
             if(!empty($permission->id)) {
                 $permission->name = $data['name'];
@@ -77,12 +77,9 @@ class PermissionController extends InitController
                 $permission->save();
             } else {
                 $data['guard_name'] = $guard;
-                Permission::create($data);
+                SysPermission::create($data);
             }
-            $url =  url('system/develop/permission');
-            if($guard != 'admin')
-                $url .= '?guard=' . $guard;
-            return $this->success('创建模块完成',$url);
+            return $this->success('创建模块完成',url('system/develop/permission').'?guard=' . $guard);
         }catch (\Exception $e) {
             return $this->error('创建模块异常，请联系开发人员');
         }
