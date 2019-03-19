@@ -14,6 +14,11 @@ class PermissionController extends InitController
         $this->template = 'admin.system.develop.permission.';
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * 权限列表
+     */
     public function index(Request $request){
 
         $page = $request->page ?? 1;
@@ -24,5 +29,60 @@ class PermissionController extends InitController
         $lists = new LengthAwarePaginator($lists,$permissions->count(),self::PAGESIZE,$page);
 
         return view( $this->template. __FUNCTION__,compact('lists','guard'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Permission $permission
+     *
+     * 创建功能权限
+     */
+    public function create(Request $request,SysPermission $permission=null)
+    {
+        $guard = $request->guard ?? 'admin';
+
+        if($request->isMethod('get')) {
+            $modules = SysPermission::getModules($guard)->mergeTree('node')->where('level','<',3);
+            return view($this->template.__FUNCTION__,compact('permission','modules','guard'));
+        }
+
+        $data = $request->get('data');
+
+        $rules = [
+            'name' => 'required',
+            'display_name' => 'required',
+        ];
+        $messages = [
+            'name.required' => '请输入权限名称',
+            'name' => 'unique:permissions,name,' . !empty($permission['id']) ? $permission['id'] : 'NULL' . ',id,guard_name,'.$guard,
+            'display_name.required' => '请输入权限显示',
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first(), null, true);
+        }
+        try {
+            if(!empty($permission->id)) {
+                $permission->name = $data['name'];
+                $permission->display_name = $data['display_name'];
+                $permission->parent_id = $data['parent_id'];
+                $permission->icon_class = $data['icon_class'];
+                $permission->status = $data['status'];
+                $permission->is_menu =  $data['is_menu'];
+                $permission->sorts = $data['sorts'];
+                $permission->guard_name = $guard;
+                $permission->save();
+            } else {
+                $data['guard_name'] = $guard;
+                Permission::create($data);
+            }
+            $url =  url('system/develop/permission');
+            if($guard != 'admin')
+                $url .= '?guard=' . $guard;
+            return $this->success('创建模块完成',$url);
+        }catch (\Exception $e) {
+            return $this->error('创建模块异常，请联系开发人员');
+        }
+
     }
 }

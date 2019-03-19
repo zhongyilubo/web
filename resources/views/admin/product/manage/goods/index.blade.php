@@ -26,21 +26,21 @@
                                 <select name="store" class="form-control" id="store" lay-filter="stores">
                                     <option value="">选择门店</option>
                                     <option value="4">M测试店</option>
-                                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="选择门店" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">选择门店</dd><dd lay-value="4" class="">M测试店</dd></dl></div>
+                                </select>
                             </div>
                             <div class="col-xs-2 pd010" id="guide">
                                 <select name="guide" class="form-control">
                                     <option value="">全部导购</option>
                                     <option value="0">未绑定粉丝</option>
                                     <option data-store="4" value="9">A</option>
-                                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="全部导购" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">全部导购</dd><dd lay-value="0" class="">未绑定粉丝</dd><dd lay-value="9" class="">A</dd></dl></div>
+                                </select>
                             </div>
                             <div class="col-xs-2 pd010">
                                 <select name="type" class="form-control">
                                     <option value="">全部粉丝</option>
                                     <option value="1">粉丝</option>
                                     <option value="0">意向客户</option>
-                                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="全部粉丝" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">全部粉丝</dd><dd lay-value="1" class="">粉丝</dd><dd lay-value="0" class="">意向客户</dd></dl></div>
+                                </select>
                             </div>
                             <div class="col-xs-2 pd010">
                                 <input type="text" name="name" class="form-control" placeholder="输入手机号/客户姓名" value="">
@@ -187,7 +187,7 @@
     var __seajs_debug = 1;
     seajs.use("/admin/js/app.js", function (app) {
         app.bootstrap();
-        app.load('index/index');
+        app.load('product/manage/goods/index');
     });
 
 </script>

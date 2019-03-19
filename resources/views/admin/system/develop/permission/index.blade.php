@@ -13,8 +13,7 @@
             <ul class="nav_pills mb10 clearfix">
                 <li @if(!request('guard') || request('guard') == 'admin') class="selected" @endif><a href="{{url('system/develop/permission')}}">系统权限</a></li>
                 <li @if(request('guard') == 'tenant') class="selected"@endif><a href="{{url('system/develop/permission')}}?guard=tenant">租客权限</a></li>
-                <li @if(request('guard') == 'weixin') class="selected"@endif><a href="{{url('system/develop/permission')}}?guard=weixin">前端功能列表</a></li>
-                <a class="btn btn_r" href="{!! url('system/develop/permission/create') !!}@if(request()->has('guard'))?guard={{request('guard')}} @endif">新增权限</a>
+                <a class="btn btn_r" href="{!! url('system/develop/permission/create') !!}?guard={{$guard}}">新增权限</a>
             </ul>
             <div class="mainbox">
                 <!--tab 切换1 bengin-->
