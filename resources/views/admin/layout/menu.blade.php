@@ -41,52 +41,35 @@
             @endforeach
         </ul>
     </div>
-    <div class="nav_second_ch">
-        <ul class="nav_left_second sidenav">
-            <li class="on">
-                <div class="nav_tit  selected ">
-                    <a href="#">
-                        进销管理
-                    </a>
-                </div>
-                <div class="nav_children">
-                    <a href="/stock/inventory/index" class=" current ">
-                        库存查询
-                    </a>
-                    <a href="/stock/inventory/godownentry" class="">
-                        入库管理
-                    </a>
-                    <a href="/stock/inventory/placingentry" class="">
-                        出库管理
-                    </a>
-                    <a href="/stock/inventory/purchase" class="">
-                        采购管理
-                    </a>
-                    <a href="/stock/inventory/transfer" class="">
-                        调拨管理
-                    </a>
-                </div>
-            </li>
-            <li class="">
-                <div class="nav_tit ">
-                    <a href="#">
-                        设置管理
-                    </a>
-                </div>
-                <div class="nav_children">
-                    <a href="#" class="">
-                        供应商管理
-                    </a>
-                    <a href="#" class="">
-                        仓库管理
-                    </a>
-                    <a href="#" class="">
-                        物流管理
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <?php $menu = $items->where('current','on')->first(); ?>
+    @if(!empty($menu) && !empty($menu->node))
+        @if(!$menu->node->isEmpty())
+            <div class="nav_second_ch">
+                <ul class="nav_left_second sidenav">
+                    @foreach($menu->node as $second)
+                        <?php $second = $system->currentMenu($second,2);?>
+                        @if(!$second->node->isEmpty() && !$second->node->isEmpty())
+                            <li class="{{$second['current'] ?? ''}}" >
+                                <div class='nav_tit @if($second['current'] == 'on') selected @endif'>
+                                    <a href='{!! $system->link($second->name) !!}'>
+                                        {!! $second['display_name'] ?? '二级菜单' !!}
+                                    </a>
+                                </div>
+                                <div class='nav_children'>
+                                    @foreach($second->node as $node)
+                                        <?php $node = $system->currentMenu($node,3);?>
+                                        <a href="{{$system->link($node->name)}}" class="@if($node['current'] == 'on') current @endif">
+                                            {!! $node['display_name'] ?? '' !!}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    @endif
 
 </div>
 
