@@ -66,6 +66,11 @@ define(function(require, exports, module) {
     window.app_load = exports.load;
     exports.bootstrap = function() {
 
+        //子菜单切换
+        $(".sidenav .nav_tit").off().click(function() {
+            $(this).parent().toggleClass('on').siblings().removeClass('on');
+        });
+
         //表单提交
         var options = {
             beforeSerialize: function() {

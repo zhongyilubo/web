@@ -10,7 +10,6 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
-    protected $guard_name = 'admin';
 
     use HasRoles,Notifiable;
 

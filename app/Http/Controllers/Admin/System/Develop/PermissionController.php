@@ -25,7 +25,7 @@ class PermissionController extends InitController
         $page = $request->page ?? 1;
         $guard = $request->guard ?? 'admin';
 
-        $permissions = SysPermission::getModules([$guard])->mergeTree('node');
+        $permissions = SysPermission::getModules($guard)->mergeTree('node');
         $lists =  $permissions->forPage($page,self::PAGESIZE);
         $lists = new LengthAwarePaginator($lists,$permissions->count(),self::PAGESIZE,$page);
 
@@ -46,7 +46,7 @@ class PermissionController extends InitController
         $guard = $request->guard ?? 'admin';
 
         if($request->isMethod('get')) {
-            $modules = SysPermission::getModules([$guard])->mergeTree('node')->where('level','<',3);
+            $modules = SysPermission::getModules($guard)->mergeTree('node')->where('level','<',3);
             return view($this->template.__FUNCTION__,compact('permission','modules','guard'));
         }
 

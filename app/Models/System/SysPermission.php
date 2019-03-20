@@ -25,10 +25,10 @@ class SysPermission extends Permission
      *
      * 获取所有模块
      */
-    public static function getModules($guard = [],User $user = null)
+    public static function getModules($guard,User $user = null)
     {
-        return (new Collection(app(PermissionRegistrar::class)->getPermissions()))->sortByDesc('sorts')->whereIn('guard_name',$guard)->filter(function($item) use($user){
-            if($user == null || $user->id == env('SUPER_ID',0) || $user->can($item['name'])){
+        return (new Collection(app(PermissionRegistrar::class)->getPermissions()))->sortByDesc('sorts')->where('guard_name',$guard)->filter(function($item) use($user,$guard){
+            if($user == null || $user->id == env('SUPER_ID',0) || $user->hasPermissionTo($item['name'],$guard)){
                 return true;
             }else{
                 return false;
