@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,18 @@ class LoginController extends InitController
      */
     protected function authenticated(Request $request, $user)
     {
-
+        $logout = function($message)use($request){
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+            return back()->withErrors($message);
+        };
+        if(!($user['type'] & User::USER_TYPE_ADMIN)){
+            return $logout(['mobile'=>'该账号不是管理员']);
+        }
+        if($user['status'] != User::USER_STATUS_OPEN) {
+            return $logout(['mobile'=>'该账号已经被锁定，不能登录']);
+        }
     }
 
     /**

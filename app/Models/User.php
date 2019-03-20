@@ -13,6 +13,13 @@ class User extends Authenticatable implements JWTSubject
 
     use HasRoles,Notifiable;
 
+    const USER_STATUS_OPEN = 1;
+    const USER_STATUS_STOP = 0;
+    const USER_TYPE_ADMIN = 1;
+    const USER_TYPE_TENANT = 2;
+    const USER_TYPE_STAFF = 4;
+    const USER_TYPE_MEMBER = 8;
+
     /**
      * The attributes that are mass assignable.
      *

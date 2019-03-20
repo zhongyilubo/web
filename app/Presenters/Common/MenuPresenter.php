@@ -6,7 +6,7 @@ use App\Models\System\SysPermission;
 class MenuPresenter{
 
     public function init($guard = 'admin'){
-        return SysPermission::getModules($guard,\Auth::user())->where('is_menu',1)->where('status',1);
+        return SysPermission::getModules($guard,\Auth::user(),true,true);
     }
 
     /**

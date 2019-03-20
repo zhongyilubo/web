@@ -48,21 +48,19 @@
                 <ul class="nav_left_second sidenav">
                     @foreach($menu->node as $second)
                         <?php $second = $system->currentMenu($second,2);?>
-                        @if(!$second->node->isEmpty() && !$second->node->isEmpty())
-                            <li class="{{$second['current'] ?? ''}}" >
-                                <div class='nav_tit @if($second['current'] == 'on') selected @endif'>
-                                    <a href='{!! $system->link($second->name) !!}'>{!! $second['display_name'] ?? '二级菜单' !!} ></a>
-                                </div>
-                                <div class='nav_children'>
-                                    @foreach($second->node as $node)
-                                        <?php $node = $system->currentMenu($node,3);?>
-                                        <a href="{{$system->link($node->name)}}" class="@if($node['current'] == 'on') current @endif">
-                                            {!! $node['display_name'] ?? '' !!}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </li>
-                        @endif
+                        <li class="{{$second['current'] ?? ''}}" >
+                            <div class='nav_tit @if($second['current'] == 'on') selected @endif'>
+                                <a href='{!! $system->link($second->name) !!}'>{!! $second['display_name'] ?? '二级菜单' !!} ></a>
+                            </div>
+                            <div class='nav_children'>
+                                @foreach($second->node as $node)
+                                    <?php $node = $system->currentMenu($node,3);?>
+                                    <a href="{{$system->link($node->name)}}" class="@if($node['current'] == 'on') current @endif">
+                                        {!! $node['display_name'] ?? '' !!}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </li>
                     @endforeach
                 </ul>
             </div>
