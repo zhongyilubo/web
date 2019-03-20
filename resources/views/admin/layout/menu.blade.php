@@ -51,9 +51,7 @@
                         @if(!$second->node->isEmpty() && !$second->node->isEmpty())
                             <li class="{{$second['current'] ?? ''}}" >
                                 <div class='nav_tit @if($second['current'] == 'on') selected @endif'>
-                                    <a href='{!! $system->link($second->name) !!}'>
-                                        {!! $second['display_name'] ?? '二级菜单' !!}
-                                    </a>
+                                    <a href='{!! $system->link($second->name) !!}'>{!! $second['display_name'] ?? '二级菜单' !!} ></a>
                                 </div>
                                 <div class='nav_children'>
                                     @foreach($second->node as $node)

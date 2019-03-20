@@ -4629,7 +4629,8 @@ small {
 
 .sidenav li a {
     color: #333;
-    text-align: center;
+    text-align: left;
+    text-indent: 2em;
 }
 
 .nav_children a {
