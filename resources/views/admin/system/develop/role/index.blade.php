@@ -11,9 +11,9 @@
         <div class="admin_info clearfix">
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
-                <li @if(!request('guard') || request('guard') == 'admin') class="selected" @endif><a href="{{url('system/develop/permission')}}">系统权限</a></li>
-                <li @if(request('guard') == 'tenant') class="selected"@endif><a href="{{url('system/develop/permission')}}?guard=tenant">租客权限</a></li>
-                <a class="btn btn_r" href="{!! url('system/develop/permission/create') !!}?guard={{$guard}}">新增权限</a>
+                <li @if(!request('guard') || request('guard') == 'admin') class="selected" @endif><a href="{{url('system/develop/role')}}">系统角色</a></li>
+                <li @if(request('guard') == 'tenant') class="selected"@endif><a href="{{url('system/develop/role')}}?guard=tenant">租客角色</a></li>
+                <a class="btn btn_r" href="{!! url('system/develop/role/create') !!}?guard={{$guard}}">新增角色</a>
             </ul>
             <div class="mainbox">
                 <!--tab 切换1 bengin-->
@@ -24,28 +24,13 @@
                             <thead>
                             <tr>
                                 <th width="20%">显示名称</th>
-                                <th width="20%">功能名称</th>
-                                <th width="5%">组信息</th>
-                                <th width="5%">菜单</th>
-                                <th width="5%">状态</th>
-                                <th width="5%">排序</th>
-                                <th width="5%">图标</th>
-                                <th width="10%">操作</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($lists as $lv)
                                 <tr>
-                                    <td>|{{str_repeat(' -- ',$lv['level']) }}{{$lv->display_name  ?? "--"}}</td>
-                                    <td>{{$lv->name ?? ''}}</td>
-                                    <td>{{$lv->guard_name ?? ' -- '}}</td>
-                                    <td>{{$lv->is_menu == 1? '是':'否'}}</td>
-                                    <td>{{$lv->status == 1 ? '正常':'停止'}}</td>
-                                    <td>{{$lv->sorts ?? 0}}</td>
-                                    <td>{!! $lv->icon_class !!}</td>
-                                    <td>
-                                        <a  href="{!! url('system/develop/permission/create',['id'=>$lv['id']]) !!}?guard={{$guard}}">编辑</a>
-                                    </td>
+                                    <td>asd</td>
                                 </tr>
                             @empty
                                 <tr>

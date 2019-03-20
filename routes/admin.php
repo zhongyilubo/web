@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::group(['prefix' => 'develop', 'as' => 'develop.', 'namespace' => 'Develop'], function(){
                 Route::get('permission', ['as' => 'permission', 'uses' => 'PermissionController@index']);
                 Route::any('permission/create/{permission?}', ['as' => 'permission.create', 'uses' => 'PermissionController@create']);
+                Route::get('role', ['as' => 'role', 'uses' => 'RoleController@index']);
             });
         });
 
