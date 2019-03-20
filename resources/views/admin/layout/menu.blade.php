@@ -23,72 +23,22 @@
     </li>
 
 </ul>
-@inject('menu','App\Presenters\Admin\MenuPresenter')
+@inject('system','App\Presenters\Common\MenuPresenter')
+<?php $items = $system->init('admin');?>
 
 <div class="nav_wrap_ch">
 
     <div class="nav_first_ch">
         <ul>
-            <a href="/tmall/manage/apply" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    {!! $menu->init() !!}
-                </li>
-            </a>
-            <a href="/goods/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    商品
-                </li>
-            </a>
-            <a href="/stock/inventory/index" target="_self">
-                <li class="on">
-                    <i class="iconfont"></i>
-                    库存
-                </li>
-            </a>
-            <a href="/store/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    门店
-                </li>
-            </a>
-            <a href="/order/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    订单
-                </li>
-            </a>
-            <a href="/customer/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    客户
-                </li>
-            </a>
-            <a href="/service/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    售后
-                </li>
-            </a>
-            <a href="/market/manage/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    营销
-                </li>
-            </a>
-            <a href="/census/tmall/index" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    数据
-                </li>
-            </a>
-            <a href="/system/develop/permission" target="_self">
-                <li class="">
-                    <i class="iconfont"></i>
-                    系统
-                </li>
-            </a>
+            @foreach ($items as $item)
+                <?php $item = $system->currentMenu($item);?>
+                <a href="{{$system->getNodeLink($item)}}" target="_self">
+                    <li  class="{!! $item['current'] ?? '' !!}">
+                        {!! $item['icon_class'] ?? '' !!}
+                        {!! $item['display_name'] ?? '' !!}
+                    </li>
+                </a>
+            @endforeach
         </ul>
     </div>
     <div class="nav_second_ch">

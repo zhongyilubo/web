@@ -9,6 +9,7 @@
 namespace App\Models\System;
 
 use App\Models\Collection;
+use App\Models\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -24,9 +25,14 @@ class SysPermission extends Permission
      *
      * 获取所有模块
      */
-    public static function getModules($guard = [])
+    public static function getModules($guard = [],User $user = null)
     {
-        $collection = (new Collection(app(PermissionRegistrar::class)->getPermissions()))->sortByDesc('sorts')->whereIn('guard_name',$guard);
-        return $collection->buildTree('parent_id', 'node');
+        return (new Collection(app(PermissionRegistrar::class)->getPermissions()))->sortByDesc('sorts')->whereIn('guard_name',$guard)->filter(function($item) use($user){
+            if($user == null || $user->id == env('SUPER_ID',0) || $user->can($item['name'])){
+                return true;
+            }else{
+                return false;
+            }
+        })->buildTree('parent_id', 'node');
     }
 }

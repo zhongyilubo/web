@@ -84,7 +84,7 @@ class PermissionController extends InitController
             }
             return $this->success('创建模块完成',url('system/develop/permission').'?guard=' . $guard);
         }catch (\Exception $e) {
-            return $this->error('创建模块异常，请联系开发人员');
+            return $this->error('创建模块异常，请联系开发人员'.$e->getMessage());
         }
 
     }
