@@ -49,7 +49,7 @@
                                                     <label>
                                                         <div class="all-checked fl pr10" style="margin-top:3px;">
                                                             <input type="checkbox" value="{!! $child['name'] !!}" data-id="{!! $child['id'] !!}" data-parent="{!! $child['parent_id'] !!}" data-depend="{{$child['depend'] ?? 0}}"
-                                                                   data-key="{!! $child['name'] !!}"  name="permissions[]">
+                                                                   data-key="{!! $child['name'] !!}"  name="permissions[]" @if($module->hasPermissionTo($child['name'])) checked @endif>
                                                             <i class="layui-icon layui-icon-ok"></i>
                                                         </div>
                                                         {!! $child['display_name'] !!}
@@ -84,6 +84,7 @@
         var __seajs_debug = 1;
         seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
+            app.load('system/develop/role/create');
         });
 
     </script>

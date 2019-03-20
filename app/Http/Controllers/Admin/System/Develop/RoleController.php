@@ -37,7 +37,7 @@ class RoleController extends InitController
 
         if($request->isMethod('get')) {
             $modules = SysPermission::getModules($guard);
-            return view($this->template.__FUNCTION__ ,compact('model','modules','permissions'));
+            return view($this->template.__FUNCTION__ ,compact('model','modules'));
         }
 
         $permissions = $request->get('permissions');
