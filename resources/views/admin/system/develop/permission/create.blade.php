@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label class="col-xs-2 t_r">图标：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="图标" name="data[icon_class]" value="{{ !empty($permission['icon_class']) ? htmlspecialchars($permission['icon_class']) : '' }}">
+                            <input type="text" class="form-control" placeholder="图标" name="data[icon_class]" value="{{ $permission['icon_class'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group">
