@@ -11,8 +11,8 @@
         <div class="admin_info clearfix">
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
-                <li @if(!request('guard') || request('guard') == 'admin') class="selected" @endif><a href="{{url('system/develop/permission')}}">系统权限</a></li>
-                <li @if(request('guard') == 'tenant') class="selected"@endif><a href="{{url('system/develop/permission')}}?guard=tenant">租客权限</a></li>
+                <li @if(!request('guard') || request('guard') == config('permission.guard.admin')) class="selected" @endif><a href="{{url('system/develop/permission')}}">系统权限</a></li>
+                <li @if(request('guard') == config('permission.guard.tenant')) class="selected"@endif><a href="{{url('system/develop/permission')}}?guard={{config('permission.guard.tenant')}}">租客权限</a></li>
                 <a class="btn btn_r" href="{!! url('system/develop/permission/create') !!}?guard={{$guard}}">新增权限</a>
             </ul>
             <div class="mainbox">

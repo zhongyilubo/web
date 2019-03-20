@@ -18,7 +18,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/', 'HomeController@index');
     Route::get('logout', 'LoginController@logout');
 
-    Route::group(['middleware' => 'permission:admin'], function () {
+    Route::group(['middleware' => 'permission:'.config('permission.guard.admin')], function () {
 
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::get('permission', ['as' => 'permission', 'uses' => 'PermissionController@index']);
                 Route::any('permission/create/{permission?}', ['as' => 'permission.create', 'uses' => 'PermissionController@create']);
                 Route::get('role', ['as' => 'role', 'uses' => 'RoleController@index']);
+                Route::any('role/create/{model?}', ['as' => 'role.create', 'uses' => 'RoleController@create']);
             });
         });
 

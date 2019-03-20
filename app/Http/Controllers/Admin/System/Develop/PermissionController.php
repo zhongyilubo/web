@@ -23,7 +23,7 @@ class PermissionController extends InitController
     public function index(Request $request){
 
         $page = $request->page ?? 1;
-        $guard = $request->guard ?? 'admin';
+        $guard = $request->guard ?? config('permission.guard.admin');
 
         $permissions = SysPermission::getModules($guard)->mergeTree('node');
         $lists =  $permissions->forPage($page,self::PAGESIZE);
@@ -43,7 +43,7 @@ class PermissionController extends InitController
      */
     public function create(Request $request,SysPermission $permission=null)
     {
-        $guard = $request->guard ?? 'admin';
+        $guard = $request->guard ?? config('permission.guard.admin');
 
         if($request->isMethod('get')) {
             $modules = SysPermission::getModules($guard)->mergeTree('node')->where('level','<',3);
