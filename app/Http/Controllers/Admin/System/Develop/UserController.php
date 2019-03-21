@@ -18,7 +18,7 @@ class UserController extends InitController
 {
     public function __construct()
     {
-        $this->template = 'admin.system.develop.member.';
+        $this->template = 'admin.system.develop.user.';
     }
 
     /**
@@ -28,7 +28,7 @@ class UserController extends InitController
      */
     public function index(Request $request){
         $guard = $request->guard ?? config('permission.guard.admin');
-        $lists = User::where('guard_name',$guard)->paginate(self::PAGESIZE);
+        $lists = User::paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists','guard'));
     }
 }

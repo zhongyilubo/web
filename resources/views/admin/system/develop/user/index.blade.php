@@ -1,5 +1,7 @@
-@extends('tenant.layout.main')
-@section('title')-员工管理@stop
+@extends('admin.layout.main')
+@section('title')
+    -User
+@stop
 @section('content')
     <div class="content_ch">
         <div class="admin_info clearfix">
@@ -45,12 +47,9 @@
                                         </td>
                                         <td>{{$lv['type'] & 2 ? '租客':'员工'}}</td>
                                         <td> {{!empty($lv['password']) ? '是':'否'}}</td>
-                                        <td>{{$lv->group->name or '----'}}</td>
+                                        <td></td>
                                         <td>
-                                            @if($lv['type'] & $tenant)所有权限 @endif
-                                            @if($lv['type'] & $staff)
-                                                {{$lv->roles->implode('display_name',',')}}
-                                            @endif
+
                                         </td>
                                         <td>{{$lv['mobile'] or  ''}}</td>
                                         <td>{{$lv['email'] or  ''}}</td>
@@ -74,10 +73,10 @@
                     </div>
                     <!--table 列表 end-->
                     <!--分页 bengin-->
-                @if(!$lists->isEmpty())
-                    {!! $lists->render('vendor/pagination/admin') !!}
-                @endif
-                <!--分页 end-->
+                    @if(!$lists->isEmpty())
+                        {!! $lists->appends(request()->all())->render('admin.layout.page') !!}
+                    @endif
+                    <!--分页 end-->
                 </div>
                 <!--tab 切换1 end-->
             </div>
@@ -88,11 +87,10 @@
 @stop
 @section('script')
     <script>
-        var __seajs_debug = 0;
-        seajs.use("/admin/bundles/app.js", function (app) {
-            app.context.user = {login: {!! auth('tenant')->user()->getAuthIdentifier()!!}};
+        var __seajs_debug = 1;
+        seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
-            app.load('core/auto');
         });
+
     </script>
 @stop
