@@ -24,7 +24,13 @@ define(function(require, exports, module) {
 
         function upselect(_this,name) {
             var str = decodeURI(name.substring(0, name.lastIndexOf("\.")));
-            _this.parents('.crole-children').find('input[data-key="'+str+'"]').prop('checked', true);
+            var nodes = _this.parents('.crole-children').find('input[data-key="'+str+'"]');
+            if(nodes.length > 0){
+                console.log(str);
+                nodes.prop('checked', true);
+                upselect(_this,str);
+            }
+            return false;
         }
 
         function downtake(_this,name) {
