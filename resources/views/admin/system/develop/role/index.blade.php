@@ -36,7 +36,7 @@
                                     <td>{{$lv->created_at}}</td>
                                     <td>{{$lv->updated_at ?? ' -- '}}</td>
                                     <td>
-                                        <a href="{!! url('system/develop/role/create') !!}/{{$lv->id ?? ''}}">编辑</a>
+                                        <a href="{!! url('system/develop/role/create') !!}/{{$lv->id ?? ''}}?guard={{$guard}}">编辑</a>
                                     </td>
                                 </tr>
                             @empty
