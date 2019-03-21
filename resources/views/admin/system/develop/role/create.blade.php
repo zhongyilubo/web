@@ -35,7 +35,10 @@
                                         <td class="w160 ml20 fl">
                                             <label>
                                                 <div class="all-checked fl pr10" style="margin-top:11px;">
-                                                    <input type="checkbox" value="{!! $second['id'] !!}" data-id="{!! $second['id'] !!}">
+                                                    <input type="checkbox" value="{!! $second['name'] !!}"
+                                                           data-id="{!! $second['id'] !!}"
+                                                           data-key="{!! $second['name'] !!}"
+                                                           name="permissions[]" @if($module->hasPermissionTo($second['name'])) checked @endif>
                                                     <i class="layui-icon layui-icon-ok"></i>
                                                 </div>
                                                 <span>{{$module['display_name']}} - {!! $second['display_name'] ?? ''  !!}</span>
@@ -48,12 +51,13 @@
                                                 <td class="w160 ml20 fl">
                                                     <label>
                                                         <div class="all-checked fl pr10" style="margin-top:3px;">
-                                                            <input type="checkbox" value="{!! $child['name'] !!}" data-id="{!! $child['id'] !!}" data-parent="{!! $child['parent_id'] !!}" data-depend="{{$child['depend'] ?? 0}}"
-                                                                   data-key="{!! $child['name'] !!}"  name="permissions[]" @if($module->hasPermissionTo($child['name'])) checked @endif>
+                                                            <input type="checkbox" value="{!! $child['name'] !!}"
+                                                                   data-id="{!! $child['id'] !!}"
+                                                                   data-key="{!! $child['name'] !!}"
+                                                                   name="permissions[]" @if($module->hasPermissionTo($child['name'])) checked @endif>
                                                             <i class="layui-icon layui-icon-ok"></i>
                                                         </div>
                                                         {!! $child['display_name'] !!}
-
                                                     </label>
                                                 </td>
                                             @endforeach
