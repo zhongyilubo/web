@@ -91,7 +91,7 @@ class UserController extends InitController
                 $model->save();
             } else {
                 $data['type'] = $type;
-                $data['password'] = \Hash::make(env('DEFAULT_PASSWD',12345678));
+                $data['password'] = \Hash::make(config('app.password'));
                 User::saveBy($data);
             }
 

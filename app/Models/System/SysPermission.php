@@ -33,7 +33,7 @@ class SysPermission extends Permission
         $status && $collection = $collection->where('status',$status);
 
         return $collection->filter(function($item) use($user,$guard){
-            if($user == null || $user->id == env('SUPER_ID',0) || $user->hasPermissionTo($item['name'],$guard)){
+            if($user == null || $user->id == config('app.super_id') || $user->hasPermissionTo($item['name'],$guard)){
                 return true;
             }else{
                 return false;

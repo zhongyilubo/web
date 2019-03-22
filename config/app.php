@@ -53,8 +53,9 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
     'asset_url' => env('ASSET_URL', null),
+    'super_id' => env('SUPER_ID', 0),
+    'defaule_pwd' => env('DEFAULT_PASSWD','12345678'),
 
     /*
     |--------------------------------------------------------------------------

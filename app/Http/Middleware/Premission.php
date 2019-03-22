@@ -15,7 +15,7 @@ class Premission
      */
     public function handle($request, Closure $next,$guard = null)
     {
-        if(\Auth::user()->id == env('SUPER_ID',0)){
+        if(\Auth::user()->id == config('app.super_id')){
             return $next($request);
         }
 
