@@ -46,8 +46,22 @@
                             <table>
                                 <tbody>
                                 @foreach($modules as $module)
+                                    <tr class="crole-header module_{{$module['id']}}" data-sign="module_{{$module['id']}}">
+                                        <td class="w160 ml20 fl">
+                                            <label>
+                                                <div class="all-checked fl pr10" style="margin-top:16px;">
+                                                    <input type="checkbox" value="{!! $module['name'] !!}"
+                                                           data-id="{!! $module['id'] !!}"
+                                                           data-key="{!! $module['name'] !!}"
+                                                           name="permissions[]" @if($model && $model->hasPermissionTo($module['name'],$guard)) checked @endif>
+                                                    <i class="layui-icon layui-icon-ok"></i>
+                                                </div>
+                                                <span>{{$module['display_name']}}</span>
+                                            </label>
+                                        </td>
+                                    </tr>
                                     @foreach($module->node as $second)
-                                        <tr class="crole-parent">
+                                        <tr class="crole-parent module_{{$module['id']}}" data-sign="module_{{$module['id']}}">
                                             <td class="w160 ml20 fl">
                                                 <label>
                                                     <div class="all-checked fl pr10" style="margin-top:11px;">
@@ -62,7 +76,7 @@
                                             </td>
                                         </tr>
                                         @if(!$second->node->isEmpty())
-                                            <tr class="crole-children">
+                                            <tr class="crole-children module_{{$module['id']}}" data-sign="module_{{$module['id']}}">
                                                 @foreach($second->node  as $child)
                                                     <td class="w160 ml20 fl">
                                                         <label>

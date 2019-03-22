@@ -12804,6 +12804,13 @@ input[type=button].goods_filter_submit {
     height: 32px;
 }
 
+.crole-header{
+    height: 50px;
+    line-height: 50px;
+    background: #249cd2;
+    color: #fff;
+}
+
 .crole-parent {
     height: 40px;
     line-height: 40px;
