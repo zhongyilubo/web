@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PermissionController extends InitController
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->template = 'admin.system.develop.permission.';
     }
@@ -23,7 +23,11 @@ class PermissionController extends InitController
     public function index(Request $request){
 
         $page = $request->page ?? 1;
+
         $guard = $request->guard ?? config('permission.guard.admin');
+        if(!in_array($guard,config('permission.guard'))){
+            return back();
+        }
 
         $permissions = SysPermission::getModules($guard)->mergeTree('node');
         $lists =  $permissions->forPage($page,self::PAGESIZE);
@@ -43,7 +47,10 @@ class PermissionController extends InitController
      */
     public function create(Request $request,SysPermission $permission=null)
     {
-        $guard = $request->guard ?? config('permission.guard.admin');
+        $guard = $permission['guard_name'] ?? $request->guard ?? config('permission.guard.admin');
+        if(!in_array($guard,config('permission.guard'))){
+            return $request->isMethod('get') ? back():$this->error('guard error');
+        }
 
         if($request->isMethod('get')) {
             $modules = SysPermission::getModules($guard)->mergeTree('node')->where('level','<',3);
@@ -76,7 +83,6 @@ class PermissionController extends InitController
                 $permission->status = $data['status'];
                 $permission->is_menu =  $data['is_menu'];
                 $permission->sorts = $data['sorts'];
-                $permission->guard_name = $guard;
                 $permission->save();
             } else {
                 $data['guard_name'] = $guard;

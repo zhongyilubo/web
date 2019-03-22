@@ -9,7 +9,7 @@
                 <li @if(!request('type') || request('type') == \App\Models\User::USER_TYPE_ADMIN) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_ADMIN}}">管理员</a></li>
                 <li @if(request('type') == \App\Models\User::USER_TYPE_TENANT) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_TENANT}}">租客管理</a></li>
                 <li @if(request('type') == \App\Models\User::USER_TYPE_STAFF) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_STAFF}}">员工管理</a></li>
-                <a class="btn btn_r" href="{{url('system/develop/user/create')}}?type={{$type}}">+ 创建{{request('type') == \App\Models\User::USER_TYPE_ADMIN ? '管理员':(request('type') == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}</a>
+                <a class="btn btn_r" href="{{url('system/develop/user/create')}}?type={{$type}}">+ 创建{{$type == \App\Models\User::USER_TYPE_ADMIN ? '管理员':($type == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}</a>
             </ul>
             <div class="mainbox">
                 <!--tab 切换1 bengin-->
@@ -46,9 +46,9 @@
                                         <td>{{$lv['mobile'] ??  ''}}</td>
                                         <td>{{$lv['email'] ??  ''}}</td>
                                         <td>
-                                            <a href="{!! url('system/develop/user/create',['user'=>$lv['id']]) !!}?type={{$type}}">编辑</a>
-                                            <a href="{{url('system/develop/user/passwd',['user'=>$lv['id']])}}?type={{$type}}">密码</a>
-                                            <a href="{!! url('system/develop/user/auth',['user'=>$lv['id']]) !!}?type={{$type}}">权限</a>
+                                            <a href="{!! url('system/develop/user/create',['user'=>$lv['id']]) !!}">编辑</a>
+                                            <a href="{{url('system/develop/user/passwd',['user'=>$lv['id']])}}">密码</a>
+                                            <a href="{!! url('system/develop/user/auth',['user'=>$lv['id']]) !!}">权限</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Admin\System\Develop;
 
 use App\Http\Controllers\Admin\InitController;
+use App\Models\System\SysPermission;
+use App\Models\System\SysRole;
 use App\Models\User;
 use App\Rules\Mobile;
 use Illuminate\Http\Request;
@@ -28,7 +30,12 @@ class UserController extends InitController
      * 列表
      */
     public function index(Request $request){
+
         $type = $request->type ?? User::USER_TYPE_ADMIN;
+        if(!in_array($type,[User::USER_TYPE_ADMIN,User::USER_TYPE_TENANT,User::USER_TYPE_STAFF])){
+            return back();
+        }
+
         $lists = User::where('type',$type)->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists','type'));
     }
@@ -41,7 +48,10 @@ class UserController extends InitController
      */
     public function create(Request $request, User $model = null)
     {
-        $type = $request->type ?? User::USER_TYPE_ADMIN;
+        $type = $model['type'] ?? $request->type ?? User::USER_TYPE_ADMIN;
+        if(!in_array($type,[User::USER_TYPE_ADMIN,User::USER_TYPE_TENANT,User::USER_TYPE_STAFF])){
+            return $request->isMethod('get') ? back():$this->error('type error');
+        }
 
         if($request->isMethod('get')) {
 
@@ -109,7 +119,10 @@ class UserController extends InitController
      */
     public function passwd(Request $request, User $model = null){
 
-        $type = $request->type ?? User::USER_TYPE_ADMIN;
+        $type = $model['type'] ?? $request->type ?? User::USER_TYPE_ADMIN;
+        if(!in_array($type,[User::USER_TYPE_ADMIN,User::USER_TYPE_TENANT,User::USER_TYPE_STAFF])){
+            return $request->isMethod('get') ? back():$this->error('type error');
+        }
 
         if ($request->isMethod('get')) {
 
@@ -147,6 +160,53 @@ class UserController extends InitController
             DB::rollBack();
             return $this->error('异常：'.$e->getMessage());
         }
+    }
 
+    /**
+     * @param Request $request
+     * @param User|null $model
+     * 选择权限
+     */
+    public function auth(Request $request, User $model = null){
+
+        $config = [
+            User::USER_TYPE_ADMIN => config('permission.guard.admin'),
+            User::USER_TYPE_TENANT => config('permission.guard.tenant'),
+            User::USER_TYPE_STAFF => config('permission.guard.tenant'),
+        ];
+
+        $type = $model['type'];
+
+        $guard = $config[$type];
+
+        if ($request->isMethod('get')) {
+            $roles = SysRole::where('guard_name',$guard)->get();
+            $modules = SysPermission::getModules($guard);
+            return view($this->template . __FUNCTION__, compact('model','type','roles','modules','guard'));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param User $account
+     * @return \Illuminate\Http\JsonResponse
+     * 设置用户权限组
+     */
+    public function autorole(Request $request, User $model = null)
+    {
+
+        $roleId = $request->get('role');
+        $type = $request->get('type');
+        $role = SysRole::find($roleId);
+        try {
+            if($type == 'add') {
+                $model->assignRole($role);
+            } else {
+                $model->removeRole($role);
+            }
+            return $this->success('设置用户权限完成');
+        }catch(\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }

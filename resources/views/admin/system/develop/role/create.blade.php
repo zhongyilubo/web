@@ -38,7 +38,7 @@
                                                     <input type="checkbox" value="{!! $second['name'] !!}"
                                                            data-id="{!! $second['id'] !!}"
                                                            data-key="{!! $second['name'] !!}"
-                                                           name="permissions[]" @if($model && $model->hasPermissionTo($second['name'])) checked @endif>
+                                                           name="permissions[]" @if($model && $model->hasPermissionTo($second['name'],$guard)) checked @endif>
                                                     <i class="layui-icon layui-icon-ok"></i>
                                                 </div>
                                                 <span>{{$module['display_name']}} - {!! $second['display_name'] ?? ''  !!}</span>
@@ -54,7 +54,7 @@
                                                             <input type="checkbox" value="{!! $child['name'] !!}"
                                                                    data-id="{!! $child['id'] !!}"
                                                                    data-key="{!! $child['name'] !!}"
-                                                                   name="permissions[]" @if($model && $model->hasPermissionTo($child['name'])) checked @endif>
+                                                                   name="permissions[]" @if($model && $model->hasPermissionTo($child['name'],$guard)) checked @endif>
                                                             <i class="layui-icon layui-icon-ok"></i>
                                                         </div>
                                                         {!! $child['display_name'] !!}

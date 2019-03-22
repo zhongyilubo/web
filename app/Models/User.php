@@ -21,6 +21,8 @@ class User extends Authenticatable implements JWTSubject
     const USER_TYPE_STAFF = 4;
     const USER_TYPE_MEMBER = 8;
 
+    protected $appends = ['type_name'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +31,15 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password','mobile'
     ];
+
+    public function getTypeNameAttribute(){
+        return [
+            self::USER_TYPE_ADMIN => '管理员',
+            self::USER_TYPE_TENANT => '租客',
+            self::USER_TYPE_STAFF => '员工',
+            self::USER_TYPE_MEMBER => '会员',
+        ][$this->type];
+    }
 
     /**
      * The attributes that should be hidden for arrays.

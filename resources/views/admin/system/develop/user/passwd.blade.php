@@ -9,8 +9,10 @@
         <div class="admin_info clearfix">
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
-                <li><a href="{{url('system/maintain/user')}}">员工</a></li>
-                <li class="selected"><a href="javascript:;">登录密码</a></li>
+                <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_ADMIN}}">管理员</a></li>
+                <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_TENANT}}">租客管理</a></li>
+                <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_STAFF}}">员工管理</a></li>
+                <li class="selected"><a href="javascript:;">修改{{$type == \App\Models\User::USER_TYPE_ADMIN ? '管理员':($type == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}密码</a></li>
             </ul>
             <div class="mainbox">
                 <form name="password-form" class="base_form" method="post">

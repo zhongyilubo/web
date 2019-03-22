@@ -9,7 +9,7 @@
                 <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_ADMIN}}">管理员</a></li>
                 <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_TENANT}}">租客管理</a></li>
                 <li><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_STAFF}}">员工管理</a></li>
-                <li class="selected"><a href="jvascript:void(0);">创建/编辑{{request('type') == \App\Models\User::USER_TYPE_ADMIN ? '管理员':(request('type') == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}</a></li>
+                <li class="selected"><a href="jvascript:void(0);">创建/编辑{{$type == \App\Models\User::USER_TYPE_ADMIN ? '管理员':($type == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}</a></li>
             </ul>
             <div class="mainbox">
                 <form method="post" class="mtb20 base_form layui-form">

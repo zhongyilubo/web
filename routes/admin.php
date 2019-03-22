@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('user/create/{model?}', ['as' => 'user.create', 'uses' => 'UserController@create']);
                 Route::any('user/passwd/{model}', ['as' => 'user.passwd', 'uses' => 'UserController@passwd']);
                 Route::any('user/auth/{model}', ['as' => 'user.auth', 'uses' => 'UserController@auth']);
+                Route::any('user/auth/autorole/{model}', ['as' => 'user.auth.autorole', 'uses' => 'UserController@autorole']);
             });
         });
 

@@ -22,7 +22,12 @@ class RoleController extends InitController
      * 列表
      */
     public function index(Request $request){
+
         $guard = $request->guard ?? config('permission.guard.admin');
+        if(!in_array($guard,config('permission.guard'))){
+            return back();
+        }
+
         $lists = SysRole::where('guard_name',$guard)->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists','guard'));
     }
@@ -35,11 +40,14 @@ class RoleController extends InitController
      */
     public function create(Request $request,SysRole $model = null)
     {
-        $guard = $request->guard ?? config('permission.guard.admin');
+        $guard = $model['guard_name'] ?? $request->guard ?? config('permission.guard.admin');
+        if(!in_array($guard,config('permission.guard'))){
+            return $request->isMethod('get') ? back():$this->error('guard error');
+        }
 
         if($request->isMethod('get')) {
             $modules = SysPermission::getModules($guard);
-            return view($this->template.__FUNCTION__ ,compact('model','modules'));
+            return view($this->template.__FUNCTION__ ,compact('model','modules','guard'));
         }
 
         $permissions = $request->permissions;

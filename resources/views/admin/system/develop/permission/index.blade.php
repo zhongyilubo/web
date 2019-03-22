@@ -44,7 +44,7 @@
                                     <td>{{$lv->sorts ?? 0}}</td>
                                     <td>{!! $lv->icon_class !!}</td>
                                     <td>
-                                        <a  href="{!! url('system/develop/permission/create',['id'=>$lv['id']]) !!}?guard={{$guard}}">编辑</a>
+                                        <a  href="{!! url('system/develop/permission/create',['id'=>$lv['id']]) !!}">编辑</a>
                                     </td>
                                 </tr>
                             @empty
