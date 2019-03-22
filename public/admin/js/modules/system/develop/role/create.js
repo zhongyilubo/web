@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
-    var layuiCss = require('layui.css');
-    var layuiJS = require('layui');
-    layui.use(['form', 'layedit', 'laydate','layer'], function () {
+    require('layui.css');
+    require('layui');
+    layui.use(['form', 'layedit','layer'], function () {
         var form = layui.form;
         form.render();
     });
@@ -26,7 +26,6 @@ define(function(require, exports, module) {
             var str = decodeURI(name.substring(0, name.lastIndexOf("\.")));
             var nodes = _this.parents('.crole-children').find('input[data-key="'+str+'"]');
             if(nodes.length > 0){
-                console.log(str);
                 nodes.prop('checked', true);
                 upselect(_this,str);
             }

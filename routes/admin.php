@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::get('role', ['as' => 'role', 'uses' => 'RoleController@index']);
                 Route::any('role/create/{model?}', ['as' => 'role.create', 'uses' => 'RoleController@create']);
                 Route::get('user', ['as' => 'user', 'uses' => 'UserController@index']);
+                Route::any('user/create/{model?}', ['as' => 'user.create', 'uses' => 'UserController@create']);
             });
         });
 

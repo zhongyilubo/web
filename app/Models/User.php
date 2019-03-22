@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ModelQueryExtend;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements JWTSubject
 {
 
-    use HasRoles,Notifiable;
+    use HasRoles,Notifiable,ModelQueryExtend;
 
     const USER_STATUS_OPEN = 1;
     const USER_STATUS_STOP = 0;

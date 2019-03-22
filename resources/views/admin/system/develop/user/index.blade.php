@@ -6,8 +6,10 @@
     <div class="content_ch">
         <div class="admin_info clearfix">
             <ul class="nav_pills mb10 clearfix">
-                <li class="selected"><a href="{{url('system/maintain/user')}}">员工管理</a></li>
-                <a class="btn btn_r" href="{{url('system/maintain/user/create')}}">+ 创建员工</a>
+                <li @if(!request('type') || request('type') == \App\Models\User::USER_TYPE_ADMIN) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_ADMIN}}">管理员</a></li>
+                <li @if(request('type') == \App\Models\User::USER_TYPE_TENANT) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_TENANT}}">租客管理</a></li>
+                <li @if(request('type') == \App\Models\User::USER_TYPE_STAFF) class="selected" @endif><a href="{{url('system/develop/user')}}?type={{\App\Models\User::USER_TYPE_STAFF}}">员工管理</a></li>
+                <a class="btn btn_r" href="{{url('system/develop/user/create')}}?type={{$type}}">+ 创建{{request('type') == \App\Models\User::USER_TYPE_ADMIN ? '管理员':(request('type') == \App\Models\User::USER_TYPE_TENANT ? '租客':'员工')}}</a>
             </ul>
             <div class="mainbox">
                 <!--tab 切换1 bengin-->
@@ -19,15 +21,10 @@
                             <tr>
                                 <th width="8%">用户名</th>
                                 <th width="5%">
-                                    <select id="js_status">
-                                        <option  value="{{url('system/maintain/user')}}" @if(!request()->has('status')) selected @endif>状态</option>
-                                        <option  value="{{url('system/maintain/user')}}?status=0" @if(request('status') === '0') selected @endif>停止</option>
-                                        <option  value="{{url('system/maintain/user')}}?status=1"  @if(request('status') == '1') selected @endif>正常</option>
-                                    </select>
+                                    状态
                                 </th>
                                 <th width=5%">类型</th>
                                 <th width=5%">登录</th>
-                                <th width="15%">部门</th>
                                 <th width="15%">权限组</th>
                                 <th width="10%">移动电话</th>
                                 <th width="20%">邮箱</th>
@@ -38,27 +35,20 @@
                             @if(!empty($lists))
                                 @foreach($lists as $lv)
                                     <tr>
-                                        <td>{{$lv['name'] or  ''}}</td>
+                                        <td>{{$lv['name'] ??  ''}}</td>
                                         <td>
-                                            <select class="js_status" href="{{url('system/maintain/user/upstatus',['type'=>'status','id'=>$lv['id']])}}" @if($lv['type'] & 2) disabled="" @endif>
-                                                <option  @if($lv['status'] === 0) selected @endif value="0">停止</option>
-                                                <option  @if($lv['status'] === 1) selected @endif  value="1">正常</option>
-                                            </select>
+                                            @if($lv['status'] === 1) 正常 @else 停止 @endif
                                         </td>
                                         <td>{{$lv['type'] & 2 ? '租客':'员工'}}</td>
                                         <td> {{!empty($lv['password']) ? '是':'否'}}</td>
-                                        <td></td>
                                         <td>
-
                                         </td>
-                                        <td>{{$lv['mobile'] or  ''}}</td>
-                                        <td>{{$lv['email'] or  ''}}</td>
+                                        <td>{{$lv['mobile'] ??  ''}}</td>
+                                        <td>{{$lv['email'] ??  ''}}</td>
                                         <td>
-                                            <a href="{!! url('system/maintain/user/create',['user'=>$lv['id']]) !!}">编辑</a>
-                                            <a href="{{url('system/maintain/user/password',['user'=>$lv['id']])}}">密码</a>
-                                            @if($lv['type'] & 4)
-                                                <a href="{!! url('system/maintain/user/auth',['user'=>$lv['id']]) !!}">权限</a>
-                                            @endif
+                                            <a href="{!! url('system/develop/user/create',['user'=>$lv['id']]) !!}?type={{$type}}">编辑</a>
+                                            <a href="{{url('system/develop/user/password',['user'=>$lv['id']])}}">密码</a>
+                                            <a href="{!! url('system/develop/user/auth',['user'=>$lv['id']]) !!}">权限</a>
                                         </td>
                                     </tr>
                                 @endforeach

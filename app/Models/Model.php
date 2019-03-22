@@ -8,8 +8,9 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ModelQueryExtend;
 use Illuminate\Database\Eloquent\Model as AbstractModel;
 
 class Model extends  AbstractModel {
-
+    use ModelQueryExtend;
 }

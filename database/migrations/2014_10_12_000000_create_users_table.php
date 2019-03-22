@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('mobile',15)->default('')->nullable();
             $table->string('password')->default('')->nullable();
+            $table->integer('tenant_id')->default(0)->nullable()->comment('员工专属租客ID');
             $table->tinyInteger('type')->default(0)->comment('1：超级管理员2：租客 4：员工8：平台用户');
             $table->tinyInteger('status')->default(0)->comment('0停止 1正常 2冻结');
             $table->integer('balance')->default(0)->comment('账户金额');
