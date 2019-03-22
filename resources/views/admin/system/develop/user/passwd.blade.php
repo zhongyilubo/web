@@ -13,22 +13,15 @@
                 <li class="selected"><a href="javascript:;">登录密码</a></li>
             </ul>
             <div class="mainbox">
-                <form  action="{{url('system/maintain/user/password',['id'=>$account['id']])}}" name="password-form" class="base_form" method="post">
+                <form name="password-form" class="base_form" method="post">
                     {!! csrf_field() !!}
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>用户名：</label>
                         <div class="col-xs-6">
-                           {{$account['name'] or ''}}
+                           {{$model['name'] ?? ''}}
                         </div>
                     </div>
-                    @if($account['id'] == auth('tenant')->user()['id'])
-                    <div class="form-group">
-                        <label class="col-xs-2 t_r"><span class="red">*</span>旧密码：</label>
-                        <div class="col-xs-6">
-                            <input type="password" class="form-control" id="oldpw" placeholder="旧密码" name="data[old_password]">
-                        </div>
-                    </div>
-                    @endif
+
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>新密码：</label>
                         <div class="col-xs-6">
@@ -48,6 +41,7 @@
                             <input type="submit" class="btn" value="提交">
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>

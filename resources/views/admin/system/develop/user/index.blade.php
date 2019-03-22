@@ -47,8 +47,8 @@
                                         <td>{{$lv['email'] ??  ''}}</td>
                                         <td>
                                             <a href="{!! url('system/develop/user/create',['user'=>$lv['id']]) !!}?type={{$type}}">编辑</a>
-                                            <a href="{{url('system/develop/user/password',['user'=>$lv['id']])}}">密码</a>
-                                            <a href="{!! url('system/develop/user/auth',['user'=>$lv['id']]) !!}">权限</a>
+                                            <a href="{{url('system/develop/user/passwd',['user'=>$lv['id']])}}?type={{$type}}">密码</a>
+                                            <a href="{!! url('system/develop/user/auth',['user'=>$lv['id']]) !!}?type={{$type}}">权限</a>
                                         </td>
                                     </tr>
                                 @endforeach

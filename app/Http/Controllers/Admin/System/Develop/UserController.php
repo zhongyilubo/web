@@ -41,7 +41,7 @@ class UserController extends InitController
      */
     public function create(Request $request, User $model = null)
     {
-        $type = $request->type ?? 1;
+        $type = $request->type ?? User::USER_TYPE_ADMIN;
 
         if($request->isMethod('get')) {
 
@@ -98,6 +98,54 @@ class UserController extends InitController
             return $this->success('创建/编辑员工完成',url('/system/develop/user').'?type='.$type);
         }catch (\Exception $e) {
             return $this->error($e->getMessage());
+        }
+
+    }
+
+    /**
+     * @param Request $request
+     * @param User|null $model
+     * 修改登陆密码
+     */
+    public function passwd(Request $request, User $model = null){
+
+        $type = $request->type ?? User::USER_TYPE_ADMIN;
+
+        if ($request->isMethod('get')) {
+
+            return view($this->template . __FUNCTION__, compact('model','type'));
+        }
+        $data = $request->get('data');
+        $rules = [
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
+        ];
+
+        $messages = [
+            'password.required' => '请输入密码',
+            'password.min' => '密码长度最小不能少于6个字符',
+            'password.confirmed' => '两次输入的密码不同',
+            'password_confirmation.required' => '请输入确认密码',
+            'password_confirmation.min' => '确认密码长度不能小于6个字符',
+        ];
+
+        $validator = Validator::make($data, $rules, $messages);
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first());
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $model['password'] = \Hash::make($data['password']);
+            $model->save();
+
+            DB::commit();
+
+            return $this->success('修改密码成功',url('system/develop/user').'?type='.$type);
+        }catch(\Exception $e) {
+            DB::rollBack();
+            return $this->error('异常：'.$e->getMessage());
         }
 
     }
