@@ -176,7 +176,6 @@ class UserController extends InitController
         ];
 
         $type = $model['type'];
-
         $guard = $config[$type];
 
         if ($request->isMethod('get')) {
