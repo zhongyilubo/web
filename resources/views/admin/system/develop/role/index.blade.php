@@ -11,8 +11,8 @@
         <div class="admin_info clearfix">
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
-                <li @if(!request('guard') || request('guard') == config('permission.guard.admin')) class="selected" @endif><a href="{{url('system/develop/role')}}">系统角色</a></li>
-                <li @if(request('guard') == config('permission.guard.tenant')) class="selected"@endif><a href="{{url('system/develop/role')}}?guard={{config('permission.guard.tenant')}}">租客角色</a></li>
+                <li @if(!request('guard') || request('guard') == config('app.guard.admin')) class="selected" @endif><a href="{{url('system/develop/role')}}">系统角色</a></li>
+                <li @if(request('guard') == config('app.guard.tenant')) class="selected"@endif><a href="{{url('system/develop/role')}}?guard={{config('app.guard.tenant')}}">租客角色</a></li>
                 <a class="btn btn_r" href="{!! url('system/develop/role/create') !!}?guard={{$guard}}">新增角色</a>
             </ul>
             <div class="mainbox">

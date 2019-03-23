@@ -1,13 +1,13 @@
 @extends('admin.layout.main')
-@section('title')-创建/编辑{{$guard == config('permission.guard.tenant') ? '租客':'系统'}}权限@stop
+@section('title')-创建/编辑{{$guard == config('app.guard.tenant') ? '租客':'系统'}}权限@stop
 @section('content')
     <div class="content_ch">
         <div class="admin_info clearfix">
             <ul class="nav_pills clearfix">
                 <a href="{!! url('system/develop/permission') !!}"><li>系统权限</li></a>
-                <a href="{!! url('system/develop/permission') !!}?guard={{config('permission.guard.tenant')}}"><li>租客权限</li></a>
+                <a href="{!! url('system/develop/permission') !!}?guard={{config('app.guard.tenant')}}"><li>租客权限</li></a>
                 <li class="selected">
-                    创建/编辑{{request('guard') == config('permission.guard.tenant') ? '租客':'系统'}}权限
+                    创建/编辑{{request('guard') == config('app.guard.tenant') ? '租客':'系统'}}权限
                 </li>
             </ul>
             <div>

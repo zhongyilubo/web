@@ -24,7 +24,7 @@
 
 </ul>
 @inject('system','App\Presenters\Common\MenuPresenter')
-<?php $items = $system->init(config('permission.guard.admin'));?>
+<?php $items = $system->init(config('app.guard.admin'));?>
 
 <div class="nav_wrap_ch">
 

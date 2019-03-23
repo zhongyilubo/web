@@ -23,8 +23,8 @@ class RoleController extends InitController
      */
     public function index(Request $request){
 
-        $guard = $request->guard ?? config('permission.guard.admin');
-        if(!in_array($guard,config('permission.guard'))){
+        $guard = $request->guard ?? config('app.guard.admin');
+        if(!in_array($guard,config('app.guard'))){
             return back();
         }
 
@@ -40,8 +40,8 @@ class RoleController extends InitController
      */
     public function create(Request $request,SysRole $model = null)
     {
-        $guard = $model['guard_name'] ?? $request->guard ?? config('permission.guard.admin');
-        if(!in_array($guard,config('permission.guard'))){
+        $guard = $model['guard_name'] ?? $request->guard ?? config('app.guard.admin');
+        if(!in_array($guard,config('app.guard'))){
             return $request->isMethod('get') ? back():$this->error('guard error');
         }
 

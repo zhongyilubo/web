@@ -24,8 +24,8 @@ class PermissionController extends InitController
 
         $page = $request->page ?? 1;
 
-        $guard = $request->guard ?? config('permission.guard.admin');
-        if(!in_array($guard,config('permission.guard'))){
+        $guard = $request->guard ?? config('app.guard.admin');
+        if(!in_array($guard,config('app.guard'))){
             return back();
         }
 
@@ -47,8 +47,8 @@ class PermissionController extends InitController
      */
     public function create(Request $request,SysPermission $permission=null)
     {
-        $guard = $permission['guard_name'] ?? $request->guard ?? config('permission.guard.admin');
-        if(!in_array($guard,config('permission.guard'))){
+        $guard = $permission['guard_name'] ?? $request->guard ?? config('app.guard.admin');
+        if(!in_array($guard,config('app.guard'))){
             return $request->isMethod('get') ? back():$this->error('guard error');
         }
 

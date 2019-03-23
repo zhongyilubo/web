@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => config('app.guard.web'),
         'passwords' => 'users',
     ],
 
@@ -36,17 +36,22 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        config('app.guard.web') => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'admin' => [
+        config('app.guard.admin') => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'api' => [
+        config('app.guard.tenant') => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        config('app.guard.api') => [
             'driver' => 'jwt',
             'provider' => 'users',
         ],

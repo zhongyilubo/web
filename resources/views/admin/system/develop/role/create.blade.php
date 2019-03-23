@@ -11,8 +11,8 @@
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
                 <li><a href="{{url('system/develop/role')}}">系统角色</a></li>
-                <li><a href="{{url('system/develop/role')}}?guard={{config('permission.guard.tenant')}}">租客角色</a></li>
-                <li class="selected"><a href="javascript:;">创建/编辑{{request('guard') == config('permission.guard.tenant') ? '租客':'系统'}}角色</a></li>
+                <li><a href="{{url('system/develop/role')}}?guard={{config('app.guard.tenant')}}">租客角色</a></li>
+                <li class="selected"><a href="javascript:;">创建/编辑{{request('guard') == config('app.guard.tenant') ? '租客':'系统'}}角色</a></li>
             </ul>
             <div class="mainbox">
                 <form name="profile-form" class="base_form" method="post" class="mtb20" >

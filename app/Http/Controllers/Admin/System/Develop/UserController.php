@@ -170,9 +170,9 @@ class UserController extends InitController
     public function auth(Request $request, User $model = null){
 
         $config = [
-            User::USER_TYPE_ADMIN => config('permission.guard.admin'),
-            User::USER_TYPE_TENANT => config('permission.guard.tenant'),
-            User::USER_TYPE_STAFF => config('permission.guard.tenant'),
+            User::USER_TYPE_ADMIN => config('app.guard.admin'),
+            User::USER_TYPE_TENANT => config('app.guard.tenant'),
+            User::USER_TYPE_STAFF => config('app.guard.tenant'),
         ];
 
         $type = $model['type'];
@@ -194,9 +194,22 @@ class UserController extends InitController
     public function autorole(Request $request, User $model = null)
     {
 
-        $roleId = $request->get('role');
-        $type = $request->get('type');
-        $role = SysRole::find($roleId);
+        $config = [
+            User::USER_TYPE_ADMIN => config('app.guard.admin'),
+            User::USER_TYPE_TENANT => config('app.guard.tenant'),
+            User::USER_TYPE_STAFF => config('app.guard.tenant'),
+        ];
+
+        $guard = $config[$model['type']];
+
+        $roleId = $request->role ?? 0;
+        $type = $request->type ?? '';
+        $role = SysRole::where('guard_name',$guard)->find($roleId);
+
+        if(!$role){
+            return $this->error('非法角色');
+        }
+
         try {
             if($type == 'add') {
                 $model->assignRole($role);

@@ -2,10 +2,6 @@
 
 return [
 
-    'guard' => [
-        'admin' => 'admin',
-        'tenant' => 'tenant',
-    ],
     'models' => [
 
         /*
