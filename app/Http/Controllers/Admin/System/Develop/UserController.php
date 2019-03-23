@@ -169,14 +169,8 @@ class UserController extends InitController
      */
     public function auth(Request $request, User $model = null){
 
-        $config = [
-            User::USER_TYPE_ADMIN => config('app.guard.admin'),
-            User::USER_TYPE_TENANT => config('app.guard.tenant'),
-            User::USER_TYPE_STAFF => config('app.guard.tenant'),
-        ];
-
         $type = $model['type'];
-        $guard = $config[$type];
+        $guard = $model->guard;
 
         if ($request->isMethod('get')) {
             $roles = SysRole::where('guard_name',$guard)->get();
@@ -193,14 +187,7 @@ class UserController extends InitController
      */
     public function autorole(Request $request, User $model = null)
     {
-
-        $config = [
-            User::USER_TYPE_ADMIN => config('app.guard.admin'),
-            User::USER_TYPE_TENANT => config('app.guard.tenant'),
-            User::USER_TYPE_STAFF => config('app.guard.tenant'),
-        ];
-
-        $guard = $config[$model['type']];
+        $guard = $model->guard;
 
         $roleId = $request->role ?? 0;
         $type = $request->type ?? '';
