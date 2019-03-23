@@ -56,7 +56,7 @@ return [
     'asset_url' => env('ASSET_URL', null),
 
     'super_id' => env('SUPER_ID', 0),
-    'defaule_pwd' => env('DEFAULT_PASSWD','12345678'),
+    'defaule_passwd' => env('DEFAULT_PASSWD','12345678'),
 
     'guard' => [
         'web' => env('GUARD_WEB','web'),
