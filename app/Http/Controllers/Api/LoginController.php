@@ -79,6 +79,6 @@ class LoginController extends InitController{
      */
     public function guard()
     {
-        return Auth::guard('api');
+        return Auth::guard(config('app.guard.api'));
     }
 }

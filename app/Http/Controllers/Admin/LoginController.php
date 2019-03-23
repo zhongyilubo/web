@@ -75,6 +75,6 @@ class LoginController extends InitController
      */
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard(config('app.guard.admin'));
     }
 }
