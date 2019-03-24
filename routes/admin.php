@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
+                Route::get('category', ['as' => 'category', 'uses' => 'CategoryController@index']);
             });
         });
 
