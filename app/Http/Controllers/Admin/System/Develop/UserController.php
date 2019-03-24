@@ -170,12 +170,35 @@ class UserController extends InitController
     public function auth(Request $request, User $model = null){
 
         $type = $model['type'];
-        $guard = $model->guard;
+        $guard = $model->guard_name;
 
         if ($request->isMethod('get')) {
             $roles = SysRole::where('guard_name',$guard)->get();
             $modules = SysPermission::getModules($guard);
             return view($this->template . __FUNCTION__, compact('model','type','roles','modules','guard'));
+        }
+
+        $permissions = $request->permissions ?? [];
+        try {
+            $rules = [
+                'id' => 'required'
+            ];
+            $messages = [
+                'id.required' => '未选择用户',
+            ];
+            $validator = Validator::make(['id'=>$model->id], $rules,$messages);
+            if ($validator->fails()) {
+                return $this->error($validator->errors()->first());
+            }
+            DB::beginTransaction();
+
+            $model->syncPermissions($permissions);
+
+            DB::commit();
+            return $this->success('创建权限完成',url('/system/develop/user').'?guard='.$guard);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return $this->error('创建权限异常'.$e->getMessage());
         }
     }
 
@@ -187,7 +210,7 @@ class UserController extends InitController
      */
     public function autorole(Request $request, User $model = null)
     {
-        $guard = $model->guard;
+        $guard = $model->guard_name;
 
         $roleId = $request->role ?? 0;
         $type = $request->type ?? '';

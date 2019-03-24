@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
     const USER_TYPE_STAFF = 4;
     const USER_TYPE_MEMBER = 8;
 
-    protected $appends = ['type_name','guard'];
+    protected $appends = ['type_name','guard_name'];
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password','mobile'
     ];
 
-    public function getGuardAttribute(){
+    public function getGuardNameAttribute(){
         return[
             User::USER_TYPE_ADMIN => config('app.guard.admin'),
             User::USER_TYPE_TENANT => config('app.guard.tenant'),
