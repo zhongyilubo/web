@@ -29,7 +29,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','mobile'
+        'name', 'nickname', 'email', 'password','mobile','openid','type'
     ];
 
     public function getGuardNameAttribute(){
@@ -37,6 +37,7 @@ class User extends Authenticatable implements JWTSubject
             User::USER_TYPE_ADMIN => config('app.guard.admin'),
             User::USER_TYPE_TENANT => config('app.guard.tenant'),
             User::USER_TYPE_STAFF => config('app.guard.tenant'),
+            User::USER_TYPE_MEMBER => config('app.guard.api'),
         ][$this->type];
     }
 

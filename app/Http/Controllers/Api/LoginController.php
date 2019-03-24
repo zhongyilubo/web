@@ -16,7 +16,19 @@ class LoginController extends InitController{
     public function login(Request $request)
     {
 
-        $user = User::first();
+        $appid = 'wxf8d08695c2d862f4'; //填写微信小程序appid
+        $secret = 'ea09ddae2a1b1bf743766455181f89ae'; //填写微信小程序secret
+        $code = $request->code ?? '';
+
+        $wJson = json_decode(file_get_contents("https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code"),true);
+
+        if(!isset($wJson['openid'])){
+            return $this->response->error('openid error', 404);
+        }
+
+        $user = User::firstOrCreate(['openid' => $wJson['openid']], [
+            'type' => User::USER_TYPE_MEMBER
+        ]);
         $token = \JWTAuth::fromUser($user);
 
         return $this->respondWithToken($token);
