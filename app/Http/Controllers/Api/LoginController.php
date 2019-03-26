@@ -31,7 +31,7 @@ class LoginController extends InitController{
         ]);
         $token = \JWTAuth::fromUser($user);
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token,$wJson['openid']);
     }
 
 
@@ -53,7 +53,7 @@ class LoginController extends InitController{
     public function me()
     {
         $user = $this->guard()->user();
-        return $this->response->item($user, new UserTransformer())->withHeader('X-Foo', 'Bar');
+        return $this->response->item($user, new UserTransformer());
     }
 
     /**
@@ -75,10 +75,11 @@ class LoginController extends InitController{
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token,$openid = null)
     {
         return $this->response->array([
             'access_token' => $token,
+            'openid' => $openid,
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60
         ]);
