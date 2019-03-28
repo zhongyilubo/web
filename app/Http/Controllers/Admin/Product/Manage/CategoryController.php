@@ -20,6 +20,7 @@ class CategoryController extends InitController
 
     public function index(Request $request){
 
-        return view( $this->template. __FUNCTION__);
+        $lists = collect([]);
+        return view( $this->template. __FUNCTION__,compact('lists'));
     }
 }
