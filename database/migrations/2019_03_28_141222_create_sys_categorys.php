@@ -19,6 +19,8 @@ class CreateSysCategorys extends Migration
             $table->string('image',160)->default('')->comment('分类图片');
             $table->integer('sorts')->default(0);
             $table->integer('parent_id')->default(0);
+            $table->integer('category_id');
+            $table->string('category_type',160);
             $table->tinyInteger('status')->default(2)->comment('1正常 2冻结');
             $table->timestamps();
         });
