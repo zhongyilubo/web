@@ -13,7 +13,7 @@ class CreateSysCategorys extends Migration
      */
     public function up()
     {
-        Schema::create('sys_categorys', function (Blueprint $table) {
+        Schema::create('sys_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',60)->default('')->comment('分类名称');
             $table->string('image',160)->default('')->comment('分类图片');

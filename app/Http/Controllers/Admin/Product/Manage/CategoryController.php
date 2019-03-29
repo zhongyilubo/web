@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin\Product\Manage;
 
 use App\Http\Controllers\Admin\InitController;
+use App\Models\System\SysCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends InitController
@@ -20,7 +21,7 @@ class CategoryController extends InitController
 
     public function index(Request $request){
 
-        $lists = collect([]);
+        $lists = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 }
