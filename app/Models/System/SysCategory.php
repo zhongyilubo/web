@@ -1,8 +1,8 @@
 <?php
 
-namespace App\.\Models\System;
+namespace App\Models\System;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model;
 
 class SysCategory extends Model
 {
