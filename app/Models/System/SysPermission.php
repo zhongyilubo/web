@@ -27,11 +27,12 @@ class SysPermission extends Permission
      */
     public static function getModules($guard,User $user = null,$menu = false,$status = false)
     {
-        dd(app(PermissionRegistrar::class)->getPermissions());
-        $collection = (new Collection(app(PermissionRegistrar::class)->getPermissions()))->sortByDesc('sorts')->where('guard_name',$guard);
+        $where = ['guard_name'=>$guard];
 
-        $menu && $collection = $collection->where('is_menu',$menu);
-        $status && $collection = $collection->where('status',$status);
+        $menu && $where['is_menu'] = $menu;
+        $status && $where['status'] = $status;
+
+        $collection = (new Collection(app(PermissionRegistrar::class)->getPermissions($where)))->sortByDesc('sorts');
 
         return $collection->filter(function($item) use($user,$guard){
             if($user == null || $user->id == config('app.super_id') || $user->hasPermissionTo($item['name'],$guard)){
