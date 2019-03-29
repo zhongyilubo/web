@@ -20,10 +20,16 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
     Route::group(['middleware' => 'permission:'.config('app.guard.admin')], function () {
 
+        Route::group(['prefix' => 'base', 'as' => 'base.', 'namespace' => 'Base'],function (){
+            Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
+                Route::get('images', ['as' => 'images', 'uses' => 'AlertController@images']);
+            });
+        });
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
                 Route::get('category', ['as' => 'category', 'uses' => 'CategoryController@index']);
+                Route::get('category/create/{model?}', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
             });
         });
 

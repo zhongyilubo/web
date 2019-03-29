@@ -10,8 +10,8 @@
         <div class="admin_info clearfix">
             <!--right bengin-->
             <ul class="nav_pills mb10 clearfix">
-                <a href="{{ url('product/manage/type') }}"><li class="selected">类目管理</li></a>
-                <a class="btn btn_r" href="{{ url('product/manage/type/create') }}">+ 创建类目</a>
+                <a href="{{ url('product/manage/category') }}"><li class="selected">类目管理</li></a>
+                <a class="btn btn_r" href="{{ url('product/manage/category/create') }}">+ 创建类目</a>
             </ul>
             <div class="mainbox">
                 <div class="form-horizontal goods_nav_search clearfix">

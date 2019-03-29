@@ -8512,6 +8512,9 @@ a.b_nav_msg i {
     margin-right: 3px
 }
 
+.multimage-gallery li:first-child{
+    margin: 0;
+}
 .multimage-gallery li {
     position: relative;
     float: left;

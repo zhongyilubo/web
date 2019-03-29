@@ -24,4 +24,8 @@ class CategoryController extends InitController
         $lists = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
+
+    public function create(Request $request,SysCategory $model = null){
+        return view( $this->template. __FUNCTION__,compact('model'));
+    }
 }
