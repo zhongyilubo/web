@@ -13,5 +13,12 @@ use Illuminate\Http\Request;
 
 class AlertController extends InitController
 {
+    public function __construct(Request $request)
+    {
+        $this->template = 'admin.system.base.alert.';
+    }
 
+    public function oss(Request $request){
+        return view( $this->template. __FUNCTION__);
+    }
 }

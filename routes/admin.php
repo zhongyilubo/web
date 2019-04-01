@@ -13,6 +13,9 @@
 Route::get('login', 'LoginController@showLoginForm')->name('login');;
 Route::post('login', 'LoginController@login');
 
+Route::group(['prefix' => 'callback', 'as' => 'callback.', 'namespace' => 'Callback'], function () {
+    Route::any('oss', ['as' => 'oss', 'uses' => 'OssController@index']);
+});
 Route::group(['middleware' => ['auth:admin']], function () {
 
     Route::get('/', 'HomeController@index');
@@ -43,6 +46,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
             Route::group(['prefix' => 'base', 'as' => 'base.', 'namespace' => 'Base'], function(){
                 Route::get('alert/oss', ['as' => 'alert.oss', 'uses' => 'AlertController@oss']);
+                Route::get('oss', ['as' => 'alert.oss', 'uses' => 'OssController@index']);
             });
         });
 

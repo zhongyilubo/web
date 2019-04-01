@@ -39,6 +39,7 @@ seajs.config({
         "commonjs": "common/pc/js/common",
         "layui.css": "layui/css/layui.css",
         "layui": "layui/layui",
+        "plupload": "plupload/3.1.2/js/plupload.full.min.js",
         "datepicker.css": "jq/jquery.datepicker/datepicker.css",
         "datepicker.date": "jq/jquery.datepicker/datepicker.all"
     },
