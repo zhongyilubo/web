@@ -142,7 +142,7 @@ define(function (require, exports, module) {
                 PostInit: function() {
                     document.getElementById('ossfile').innerHTML = '';
                     document.getElementById('postfiles').onclick = function() {
-                        set_upload_param(uploader, '', false);
+                        uploader.total.queued > 0 && set_upload_param(uploader, '', false);
                         return false;
                     };
                 },
