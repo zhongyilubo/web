@@ -9,10 +9,11 @@
 namespace App\Http\Controllers\Admin\System\Base;
 
 use App\Http\Controllers\Admin\InitController;
+use Illuminate\Http\Request;
 
 class OssController extends InitController
 {
-    public function index(){
+    public function index(Request $request){
         $id= 'LTAIHu0bFK0fG3Ia';
         $key= 'j2ie4qdir49cML0ixR6ggjo8FcmLfI';
         $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com';
@@ -32,7 +33,7 @@ class OssController extends InitController
         //回调
         $callback_param = array(
             'callbackUrl'=>$callbackUrl,
-            'callbackBody'=>'filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}',
+            'callbackBody'=>'filename=${object}&size=${size}&mimeType=${mimeType}',
             'callbackBodyType'=>"application/x-www-form-urlencoded");
         $callback_string = json_encode($callback_param);
         $base64_callback_body = base64_encode($callback_string);

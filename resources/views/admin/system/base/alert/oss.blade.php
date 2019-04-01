@@ -41,8 +41,10 @@
                             <div class="local-img-box">
                                 <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
 
-                                <br/>
-                                <div onclick="document.getElementById('selectfiles').click()">aaaaaaaa</div>
+                                <div class="add-local-img" onclick="document.getElementById('selectfiles').click()">
+                                    <i class="iconfont icon-jiahao_1"></i>
+                                </div>
+
                                 <pre id="console"></pre>
                             </div>
                         </div>

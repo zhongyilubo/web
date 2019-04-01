@@ -610,7 +610,7 @@ a {
     text-align: center;
 }
 
-.local-img-box .file-tips .box-delete {
+.local-img-box .box-delete {
     position: absolute;
     top: 0;
     left: 0;
@@ -623,7 +623,7 @@ a {
     z-index: 50;
 }
 
-.local-img-box .file-tips .box-delete i {
+.local-img-box .box-delete i {
     cursor: pointer;
 }
 
@@ -716,4 +716,8 @@ a {
 .btn-primary {
     background-color: #4085cc;
     border-color: #4085cc;
+}
+
+.add-local-img:hover .box-delete{
+    display: block;
 }
