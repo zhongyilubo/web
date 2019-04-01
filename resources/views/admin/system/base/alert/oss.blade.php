@@ -39,17 +39,11 @@
                         <div class="local-img-con">
                             <label>本地资源:</label>
                             <div class="local-img-box">
-                                <div id="ossfile">
-                                    <div class="box" hidden>
-                                        <img src="">
-                                        <div class="box-delete">
-                                            <i class="icon-shanchu iconfont"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="selectfiles" class="add-local-img">
-                                    <i class="iconfont icon-jiahao_1"></i>
-                                </div>
+                                <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+
+                                <br/>
+                                <div onclick="document.getElementById('selectfiles').click()">aaaaaaaa</div>
+                                <pre id="console"></pre>
                             </div>
                         </div>
                     </div>
@@ -59,8 +53,9 @@
                     <button class="el-cancel btn-default">取消</button>
                 </div>
 
-                <div class="content-fl">
-                    <button class="el-blue btn-primary" id="postfiles">上传</button>
+                <div id="container" class="content-fl">
+                    <button id="selectfiles" class="el-blue btn-primary">选择文件</button>
+                    <button id="postfiles" class="el-blue btn-primary">开始上传</button>
                     <button class="btn-default" id="backtoface">返回</button>
                 </div>
             </div>
