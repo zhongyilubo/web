@@ -115,10 +115,8 @@ define(function (require, exports, module) {
                 'url': host,
                 'multipart_params': new_multipart_params
             });
-            console.log(uploader.total.queued)
-            console.log(host)
 
-            up.start();
+            uploader.total.queued > 0 && up.start();
         }
 
         var uploader = new plupload.Uploader({
@@ -142,7 +140,7 @@ define(function (require, exports, module) {
                 PostInit: function() {
                     document.getElementById('ossfile').innerHTML = '';
                     document.getElementById('postfiles').onclick = function() {
-                        uploader.total.queued > 0 && set_upload_param(uploader, '', false);
+                        set_upload_param(uploader, '', false);
                         return false;
                     };
                 },
@@ -154,7 +152,7 @@ define(function (require, exports, module) {
                             <div class="box-delete" hidden>\
                                 <i class="icon-shanchu iconfont"></i>\
                             </div>\
-                            ' + file.name + '\
+                            <p class="box-name">' + file.name + '</p>\
                             <div class="progress"><div class="progress-bar" style="width: 0%"></div></div>\
                         </div>';
                         $('#ossfile').append(str);

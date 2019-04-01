@@ -527,13 +527,14 @@
 
 .add-local-img {
     position: relative;
-    width: 77px;
-    height: 77px;
+    min-width: 100px;
+    height: 100px;
     margin-right: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
     text-align: center;
     border: 1px dashed #d9d9d9;
-    line-height: 75px;
+    line-height: 98px;
+    display: inline-block;
 }
 
 .add-local-img input {
@@ -560,7 +561,7 @@
 .local-img-box {
     flex-wrap: wrap;
     display: flex;
-    width: 550px;
+    width: calc(100% - 220px);
 }
 
 .local-img-con label {
@@ -618,7 +619,7 @@ a {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
-    line-height: 77px;
+    line-height: 98px;
     font-size: 16px;
     z-index: 50;
 }
@@ -628,7 +629,17 @@ a {
 }
 
 .local-img-box img {
-    position: absolute;
+    position: relative;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    display: block;
+    width: auto;
+    height: 98px;
+}
+
+.local-img-box video {
+    position: relative;
     z-index: 5;
     top: 0;
     left: 0;
@@ -720,4 +731,22 @@ a {
 
 .add-local-img:hover .box-delete{
     display: block;
+}
+
+.progress{
+    height: 6px;
+}
+
+.progress-bar{
+    height: 6px;
+}
+
+.box-name{
+    height: 24px;
+    line-height: 24px;
+    font-size: 9px;
+    width: 100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
