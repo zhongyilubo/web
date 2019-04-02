@@ -17,7 +17,7 @@ class OssController extends InitController
         $id= 'LTAIHu0bFK0fG3Ia';
         $key= 'j2ie4qdir49cML0ixR6ggjo8FcmLfI';
         $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com/';
-        $callbackUrl = 'http://admin.qq.im/callback/oss';
+        $callbackurl = 'http://admin.qq.im/callback/oss';
 
         $now = time();
         $expire = 30; //设置该policy超时时间是10s. 即这个policy过了这个有效时间，将不能访问
@@ -29,14 +29,6 @@ class OssController extends InitController
         //最大文件大小.用户可以自己设置
         $condition = array(0=>'content-length-range', 1=>0, 2=>1048576000);
         $conditions[] = $condition;
-
-        //回调
-        $callback_param = array(
-            'callbackUrl'=>$callbackUrl,
-            'callbackBody'=>'filename=${object}&size=${size}&mimeType=${mimeType}',
-            'callbackBodyType'=>"application/x-www-form-urlencoded");
-        $callback_string = json_encode($callback_param);
-        $base64_callback_body = base64_encode($callback_string);
 
         //表示用户上传的数据,必须是以$dir开始, 不然上传会失败,这一步不是必须项,只是为了安全起见,防止用户通过policy上传到别人的目录
         $start = array(0=>'starts-with', 1=>'$key', 2=>$dir);
@@ -53,9 +45,9 @@ class OssController extends InitController
         $response['accessid'] = $id;
         $response['host'] = $host;
         $response['policy'] = $base64_policy;
+        $response['callbackurl'] = $callbackurl;
         $response['signature'] = $signature;
         $response['expire'] = $end;
-        $response['callback'] = $base64_callback_body;
         //这个参数是设置用户上传指定的前缀
         $response['dir'] = $dir;
         echo json_encode($response);

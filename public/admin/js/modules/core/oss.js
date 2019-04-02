@@ -7,8 +7,8 @@ define(function (require, exports, module) {
         host = ''
         policyBase64 = ''
         signature = ''
-        callbackbody = ''
         filename = ''
+        callbackUrl = ''
         key = ''
         expire = 0
         g_object_name = ''
@@ -41,10 +41,10 @@ define(function (require, exports, module) {
                 var obj = send_request()
                 host = obj['host']
                 policyBase64 = obj['policy']
+                callbackUrl = obj['callbackurl']
                 accessid = obj['accessid']
                 signature = obj['signature']
                 expire = parseInt(obj['expire'])
-                callbackbody = obj['callback']
                 key = obj['dir']
                 return true;
             }
@@ -92,6 +92,21 @@ define(function (require, exports, module) {
             }
         }
 
+        function callbackbody(filename) {
+            if(!filename || !callbackUrl){
+                return false;
+            }
+            var res = {
+                'callbackUrl':callbackUrl,
+                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename,
+                'callbackBodyType':"application/x-www-form-urlencoded",
+            };
+
+            //回调
+            return btoa(JSON.stringify(res));
+        }
+
+
         function set_upload_param(up, filename, ret)
         {
             if (ret == false)
@@ -107,7 +122,7 @@ define(function (require, exports, module) {
                 'policy': policyBase64,
                 'OSSAccessKeyId': accessid,
                 'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
-                'callback' : callbackbody,
+                'callback' : callbackbody(filename),
                 'signature': signature,
             };
 
