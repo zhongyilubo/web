@@ -22,7 +22,8 @@ class CreateSysMedias extends Migration
             $table->integer('sorts')->default(0);
             $table->integer('size')->default(0);
             $table->integer('parent_id')->default(0);
-            $table->string('mime_type')->default(0)->comment('文件类型');
+            $table->tinyInteger('type')->default(2)->comment('备注见模型');
+            $table->string('mime_type')->default('')->comment('文件类型');
             $table->timestamps();
         });
 

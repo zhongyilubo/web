@@ -189,7 +189,7 @@ define(function (require, exports, module) {
             shadeClose: true,
             shade: 0.8,
             area: ['817px', '540px'],
-            content: '/system/base/alert/oss'
+            content: '/system/alert/oss'
         });
     };
 
