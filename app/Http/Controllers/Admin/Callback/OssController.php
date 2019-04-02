@@ -41,6 +41,7 @@ class OssController extends InitController
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         $pubKey = curl_exec($ch);
         if ($pubKey == "") {
+            header("http/1.1 403 Forbidden");
             exit();   //header("http/1.1 403 Forbidden");
         }
 
@@ -74,7 +75,7 @@ class OssController extends InitController
             $data = array("Status" => "Ok");
             return response()->json($data);
         } else {
-            info('error');
+            header("http/1.1 403 Forbidden");
             exit(); //header("http/1.1 403 Forbidden");
         }
     }
