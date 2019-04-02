@@ -28,7 +28,20 @@
                             </div>
                         </div>
                         <div class="img-row-layout" flex="dir:top">
-                            <div class="img-row">
+                            <div class="img-row" id="parent_dir" data-parent="0">
+
+                                <div class="folder-item-box" data-id="145">
+                                    <div>
+                                        <i class="icon-wenjianjia1 iconfont"></i>
+                                        <p>阿萨德啊</p>
+                                    </div>
+                                </div>
+
+                                <div class="img-item-box">
+                                    <img src="/storage/admin/1/2019/03/26/1553568396_5c99928c9e0d5.jpg">
+                                    <p>图层3.jpg</p>
+                                    <i class="iconfont img-mark icon-fuxuankuang1"></i>
+                                </div>
 
                             </div>
                         </div>

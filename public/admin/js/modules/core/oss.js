@@ -98,7 +98,7 @@ define(function (require, exports, module) {
             }
             var res = {
                 'callbackUrl':callbackUrl,
-                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename,
+                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename+'&parent='+$('#parent_dir').data('parent'),
                 'callbackBodyType':"application/x-www-form-urlencoded",
             };
 
