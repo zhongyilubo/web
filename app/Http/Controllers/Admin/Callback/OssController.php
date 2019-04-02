@@ -68,6 +68,7 @@ class OssController extends InitController
                 'title' => $request->viewname ?? '',
                 'path' => $request->filename ?? '',
                 'size' => $request->size ?? '',
+                'type' => SysMedia::MEDIA_TYPE_FILE,
                 'parent_id' => $request->parent ?? '',
                 'mime_type' => $request->mimeType ?? '',
             ]);

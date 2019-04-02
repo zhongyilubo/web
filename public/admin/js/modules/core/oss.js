@@ -19,7 +19,7 @@ define(function (require, exports, module) {
         {
             var getData = null;
             $.ajax({
-                url: '/system/base/oss',
+                url: '/system/alert/oss/auth',
                 data: {},
                 async: false,
                 dataType:'json',

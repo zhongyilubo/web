@@ -35,23 +35,26 @@
                                 </div>
 
                                 <div class="img-item-box">
-                                    <img src="/storage/admin/1/2019/03/26/1553568396_5c99928c9e0d5.jpg">
+                                    <img src="/admin/images/default.png">
                                     <p>图层3.jpg</p>
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>
                                 </div>
 
                             </div>
 
-                            <div id="scroll-add-more">
-                                <div class="preloader">下拉加载更多！</div>
-                            </div>
-                            <div id="infinite-scroll-preloader">
-                                <div class="preloader">玩命加载中！
+                            <div>
+                                <div id="scroll-add-more" hidden>
+                                    <div class="preloader">下拉加载更多！</div>
+                                </div>
+                                <div id="infinite-scroll-preloader" hidden>
+                                    <div class="preloader">玩命加载中！
+                                    </div>
+                                </div>
+                                <div id="scroll-add-end" hidden>
+                                    <div class="preloader">这回真没有了！</div>
                                 </div>
                             </div>
-                            <div id="scroll-add-end">
-                                <div class="preloader">这回真没有了！</div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
         var __seajs_debug = 1;
         seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
-            app.load('system/base/alert/oss');
+            app.load('system/alert/oss/index');
             app.load('core/oss');
         });
 

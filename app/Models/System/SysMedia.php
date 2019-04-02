@@ -12,5 +12,6 @@ use App\Models\Model;
 
 class SysMedia extends Model
 {
-
+    const MEDIA_TYPE_DIR = 1;
+    const MEDIA_TYPE_FILE = 2;
 }

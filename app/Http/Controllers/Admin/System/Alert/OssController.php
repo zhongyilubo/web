@@ -6,14 +6,24 @@
  * Time: 10:19
  */
 
-namespace App\Http\Controllers\Admin\System\Base;
+namespace App\Http\Controllers\Admin\System\Alert;
 
 use App\Http\Controllers\Admin\InitController;
 use Illuminate\Http\Request;
 
 class OssController extends InitController
 {
+
+    public function __construct(Request $request)
+    {
+        $this->template = 'admin.system.alert.oss.';
+    }
+
     public function index(Request $request){
+        return view( $this->template. __FUNCTION__);
+    }
+
+    public function auth(Request $request){
         $id= 'LTAIHu0bFK0fG3Ia';
         $key= 'j2ie4qdir49cML0ixR6ggjo8FcmLfI';
         $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com/';

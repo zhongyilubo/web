@@ -44,9 +44,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('user/auth/autorole/{model}', ['as' => 'user.auth.autorole', 'uses' => 'UserController@autorole']);
             });
 
-            Route::group(['prefix' => 'base', 'as' => 'base.', 'namespace' => 'Base'], function(){
-                Route::get('alert/oss', ['as' => 'alert.oss', 'uses' => 'AlertController@oss']);
-                Route::get('oss', ['as' => 'alert.oss', 'uses' => 'OssController@index']);
+            Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
+                Route::get('oss', ['as' => 'oss', 'uses' => 'OssController@index']);
+                Route::get('oss/auth', ['as' => 'oss.auth', 'uses' => 'OssController@auth']);
             });
         });
 
