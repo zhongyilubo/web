@@ -9,11 +9,13 @@
 namespace App\Http\Controllers\Admin\Callback;
 
 use App\Http\Controllers\Admin\InitController;
+use App\Models\System\SysMedia;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OssController extends InitController
 {
-    public function index(Request $request){
+    public function index(Request $request,User $user = null){
         // 1.获取OSS的签名header和公钥url header
         $authorizationBase64 = "";
         $pubKeyUrlBase64 = "";
@@ -58,9 +60,18 @@ class OssController extends InitController
         // 6.验证签名
         $ok = openssl_verify($authStr, $authorization, $pubKey, OPENSSL_ALGO_MD5);
         if ($ok == 1) {
+            //数据进行保存
+            SysMedia::saveBy([
+                'tenant_id' => $user->tenant_id ?? 0,
+                'user_id' => $user->id ?? 0,
+                'title' => $request->viewname ?? '',
+                'path' => $request->filename ?? '',
+                'size' => $request->size ?? '',
+                'parent_id' => $request->parent ?? '',
+                'mime_type' => $request->mimeType ?? '',
+            ]);
             header("Content-Type: application/json");
             $data = array("Status" => "Ok");
-            info($body);
             return response()->json($data);
         } else {
             info('error');

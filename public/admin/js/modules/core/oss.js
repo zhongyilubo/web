@@ -2,6 +2,7 @@ define(function (require, exports, module) {
     require('plupload');
     var e = function (e, s) {
 
+        userid = ''
         accessid = ''
         accesskey = ''
         host = ''
@@ -43,6 +44,7 @@ define(function (require, exports, module) {
                 policyBase64 = obj['policy']
                 callbackUrl = obj['callbackurl']
                 accessid = obj['accessid']
+                userid = obj['userid']
                 signature = obj['signature']
                 expire = parseInt(obj['expire'])
                 key = obj['dir']
@@ -98,7 +100,7 @@ define(function (require, exports, module) {
             }
             var res = {
                 'callbackUrl':callbackUrl,
-                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename+'&parent='+$('#parent_dir').data('parent'),
+                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename+'&userid='+userid+'&parent='+$('#parent_dir').data('parent'),
                 'callbackBodyType':"application/x-www-form-urlencoded",
             };
 
@@ -150,7 +152,7 @@ define(function (require, exports, module) {
                 max_file_size : '1024mb', //最大只能上传1G的文件
                 prevent_duplicates : true //不允许选取重复文件
             },
-            chunk_size: "10mb", //当该值为0时表示不使用分片上传功能
+            // chunk_size: "10mb", //当该值为0时表示不使用分片上传功能
             init: {
                 PostInit: function() {
                     document.getElementById('ossfile').innerHTML = '<div class="add-local-img" onclick="document.getElementById(\'selectfiles\').click()">\
@@ -164,7 +166,7 @@ define(function (require, exports, module) {
 
                 FilesAdded: function(up, files) {
                     plupload.each(files, function(file) {
-                        var str = '<div id="' + file.id + '" class="add-local-img">\
+                        var str = '<div id="' + file.id + '" class="add-local-img" title="' + file.name + '">\
                             <img src="/admin/images/default.png">\
                             <div class="box-delete" hidden>\
                                 <i class="icon-shanchu iconfont"></i>\

@@ -13,15 +13,16 @@ class CreateSysMedias extends Migration
      */
     public function up()
     {
-        Schema::create('sys_medias', function (Blueprint $table) {
+        Schema::create('sys_media', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tenant_id')->default(0);
             $table->integer('user_id')->default(0);
             $table->string('title',60)->default('')->comment('分类名称');
             $table->string('path')->default('')->comment('分类路径');
             $table->integer('sorts')->default(0);
+            $table->integer('size')->default(0);
             $table->integer('parent_id')->default(0);
-            $table->tinyInteger('type')->default(0)->comment('文件类型详情见模型');
+            $table->string('mime_type')->default(0)->comment('文件类型');
             $table->timestamps();
         });
 

@@ -14,7 +14,7 @@ Route::get('login', 'LoginController@showLoginForm')->name('login');;
 Route::post('login', 'LoginController@login');
 
 Route::group(['prefix' => 'callback', 'as' => 'callback.', 'namespace' => 'Callback'], function () {
-    Route::any('oss', ['as' => 'oss', 'uses' => 'OssController@index']);
+    Route::any('oss/{user}', ['as' => 'oss', 'uses' => 'OssController@index']);
 });
 Route::group(['middleware' => ['auth:admin']], function () {
 

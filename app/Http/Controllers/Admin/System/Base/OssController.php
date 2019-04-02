@@ -17,7 +17,7 @@ class OssController extends InitController
         $id= 'LTAIHu0bFK0fG3Ia';
         $key= 'j2ie4qdir49cML0ixR6ggjo8FcmLfI';
         $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com/';
-        $callbackurl = 'http://admin.qq.im/callback/oss';
+        $callbackurl = 'http://admin.qq.im/callback/oss/'.\Auth::user()->id ?? 0;
 
         $now = time();
         $expire = 30; //设置该policy超时时间是10s. 即这个policy过了这个有效时间，将不能访问
