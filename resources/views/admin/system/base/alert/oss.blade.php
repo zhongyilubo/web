@@ -18,9 +18,6 @@
                                 <button type="button" class="btn-default">
                                     <span>新建文件夹</span>
                                 </button>
-                                <label><i class="iconfont icon-fuxuankuang1 img-add-all"></i>
-                                    <span class="img-num-text">请选择图片</span>
-                                </label>
                             </div>
                             <div class="toolbar-search">
                                 <input type="text" placeholder="按文件夹/图片名称搜索">
@@ -43,6 +40,17 @@
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>
                                 </div>
 
+                            </div>
+
+                            <div id="scroll-add-more">
+                                <div class="preloader">下拉加载更多！</div>
+                            </div>
+                            <div id="infinite-scroll-preloader">
+                                <div class="preloader">玩命加载中！
+                                </div>
+                            </div>
+                            <div id="scroll-add-end">
+                                <div class="preloader">这回真没有了！</div>
                             </div>
                         </div>
                     </div>
