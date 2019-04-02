@@ -38,14 +38,8 @@
                     <div class="img_up_load">
                         <div class="local-img-con">
                             <label>本地资源:</label>
-                            <div class="local-img-box">
-                                <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
-
-                                <div class="add-local-img" onclick="document.getElementById('selectfiles').click()">
-                                    <i class="iconfont icon-jiahao_1"></i>
-                                </div>
-
-                                <pre id="console"></pre>
+                            <div id="ossfile" class="local-img-box">
+                                你的浏览器不支持flash,Silverlight或者HTML5！
                             </div>
                         </div>
                     </div>
@@ -56,7 +50,7 @@
                 </div>
 
                 <div id="container" class="content-fl">
-                    <button id="selectfiles" class="el-blue btn-primary">选择文件</button>
+                    <button id="selectfiles" class="el-blue btn-primary" hidden>选择文件</button>
                     <button id="postfiles" class="el-blue btn-primary">开始上传</button>
                     <button class="btn-default" id="backtoface">返回</button>
                 </div>

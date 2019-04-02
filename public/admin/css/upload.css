@@ -324,7 +324,9 @@
 .upload-img-con {
     position: absolute;
     left: 50%;
-    height: 100%;
+    top: 0;
+    bottom: 52px;
+    overflow-y: scroll;
 }
 
 .img-list {
@@ -745,7 +747,8 @@ a {
     height: 24px;
     line-height: 24px;
     font-size: 9px;
-    width: 100%;
+    width: 100px;
+    margin: 0 auto;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;

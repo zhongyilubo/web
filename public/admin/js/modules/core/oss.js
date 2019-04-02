@@ -138,7 +138,9 @@ define(function (require, exports, module) {
             chunk_size: "10mb", //当该值为0时表示不使用分片上传功能
             init: {
                 PostInit: function() {
-                    document.getElementById('ossfile').innerHTML = '';
+                    document.getElementById('ossfile').innerHTML = '<div class="add-local-img" onclick="document.getElementById(\'selectfiles\').click()">\
+                        <i class="iconfont icon-jiahao_1"></i>\
+                        </div>';
                     document.getElementById('postfiles').onclick = function() {
                         set_upload_param(uploader, '', false);
                         return false;
@@ -155,7 +157,7 @@ define(function (require, exports, module) {
                             <p class="box-name">' + file.name + '</p>\
                             <div class="progress"><div class="progress-bar" style="width: 0%"></div></div>\
                         </div>';
-                        $('#ossfile').append(str);
+                        $('#ossfile').prepend(str);
 
                         $('#'+file.id+' .box-delete').click(function () {
                             up.removeFile(file);
@@ -165,7 +167,6 @@ define(function (require, exports, module) {
                 },
 
                 BeforeUpload: function(up, file) {
-                    console.log('filename:'+file.name);
                     set_upload_param(up, file.name, true);
                 },
 
@@ -177,36 +178,31 @@ define(function (require, exports, module) {
                 },
 
                 FileUploaded: function(up, file, info) {
-                    console.log(info);
-                    // if (info.status == 200)
-                    // {
-                    //     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name) + ' 回调服务器返回的内容是:' + info.response;
-                    // }
-                    // else if (info.status == 203)
-                    // {
-                    //     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '上传到OSS成功，但是oss访问用户设置的上传回调服务器失败，失败原因是:' + info.response;
-                    // }
-                    // else
-                    // {
-                    //     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = info.response;
-                    // }
+                    if (info.status == 200) {
+                        console.log('upload to oss success, object name:' + get_uploaded_object_name(file.name) + ' 回调服务器返回的内容是:' + info.response);
+                        $('#'+file.id).find('.box-delete').remove();
+                        if (/image\//.test(file.type)){
+                            $('#'+file.id).find('img').attr('src',host+get_uploaded_object_name(file.name));
+                        }else if(/video\//.test(file.type)){
+                            $('#'+file.id).find('img').attr('src',host+get_uploaded_object_name(file.name)+'?x-oss-process=video/snapshot,t_0');
+                        }
+                    } else if (info.status == 203) {
+                        console.log('上传到OSS成功，但是oss访问用户设置的上传回调服务器失败，失败原因是:' + info.response);
+                    } else {
+                        console.log(info.response);
+                    }
                 },
 
                 Error: function(up, err) {
-                    console.log(err);
-                    // if (err.code == -600) {
-                    //     document.getElementById('console').appendChild(document.createTextNode("\n选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小"));
-                    // }
-                    // else if (err.code == -601) {
-                    //     document.getElementById('console').appendChild(document.createTextNode("\n选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型"));
-                    // }
-                    // else if (err.code == -602) {
-                    //     document.getElementById('console').appendChild(document.createTextNode("\n这个文件已经上传过一遍了"));
-                    // }
-                    // else
-                    // {
-                    //     document.getElementById('console').appendChild(document.createTextNode("\nError xml:" + err.response));
-                    // }
+                    if (err.code == -600) {
+                        message.error("选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小");
+                    }else if (err.code == -601) {
+                        message.error("选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型");
+                    }else if (err.code == -602) {
+                        message.error("选这个文件已经上传过一遍了");
+                    }else{
+                        console.log("Error xml:" + err.response);
+                    }
                 }
             }
         });

@@ -16,7 +16,7 @@ class OssController extends InitController
     public function index(Request $request){
         $id= 'LTAIHu0bFK0fG3Ia';
         $key= 'j2ie4qdir49cML0ixR6ggjo8FcmLfI';
-        $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com';
+        $host = 'https://tinyuse-video.oss-cn-beijing.aliyuncs.com/';
         $callbackUrl = 'http://admin.qq.im/callback/oss';
 
         $now = time();
