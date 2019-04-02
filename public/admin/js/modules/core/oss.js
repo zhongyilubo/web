@@ -2,7 +2,6 @@ define(function (require, exports, module) {
     require('plupload');
     var e = function (e, s) {
 
-        userid = ''
         accessid = ''
         accesskey = ''
         host = ''
@@ -44,7 +43,6 @@ define(function (require, exports, module) {
                 policyBase64 = obj['policy']
                 callbackUrl = obj['callbackurl']
                 accessid = obj['accessid']
-                userid = obj['userid']
                 signature = obj['signature']
                 expire = parseInt(obj['expire'])
                 key = obj['dir']
@@ -100,7 +98,7 @@ define(function (require, exports, module) {
             }
             var res = {
                 'callbackUrl':callbackUrl,
-                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename+'&userid='+userid+'&parent='+$('#parent_dir').data('parent'),
+                'callbackBody':'filename=${object}&size=${size}&mimeType=${mimeType}&viewname='+filename+'&parent='+$('#parent_dir').data('parent'),
                 'callbackBodyType':"application/x-www-form-urlencoded",
             };
 
