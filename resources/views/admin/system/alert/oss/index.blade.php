@@ -20,39 +20,23 @@
                                 </button>
                             </div>
                             <div class="toolbar-search">
-                                <input type="text" placeholder="按文件夹/图片名称搜索">
-                                <i class="iconfont icon-sousuo_sousuo"></i>
+                                <span>返回上级目录</span>
                             </div>
                         </div>
-                        <div class="img-row-layout" flex="dir:top">
+                        <div class="img-row-layout" id="autobrowse" flex="dir:top">
                             <div class="img-row" id="parent_dir" data-parent="0">
-
-                                <div class="folder-item-box" data-id="145">
-                                    <div>
-                                        <i class="icon-wenjianjia1 iconfont"></i>
-                                        <p>阿萨德啊</p>
-                                    </div>
-                                </div>
-
-                                <div class="img-item-box">
-                                    <img src="/admin/images/default.png">
-                                    <p>图层3.jpg</p>
-                                    <i class="iconfont img-mark icon-fuxuankuang1"></i>
-                                </div>
 
                             </div>
 
-                            <div>
-                                <div id="scroll-add-more" hidden>
-                                    <div class="preloader">下拉加载更多！</div>
+                            <div id="scroll-add-more">
+                                <div class="preloader">下拉加载更多！</div>
+                            </div>
+                            <div id="infinite-scroll-preloader">
+                                <div class="preloader">玩命加载中！
                                 </div>
-                                <div id="infinite-scroll-preloader" hidden>
-                                    <div class="preloader">玩命加载中！
-                                    </div>
-                                </div>
-                                <div id="scroll-add-end" hidden>
-                                    <div class="preloader">这回真没有了！</div>
-                                </div>
+                            </div>
+                            <div id="scroll-add-end">
+                                <div class="preloader">这回真没有了！</div>
                             </div>
 
                         </div>

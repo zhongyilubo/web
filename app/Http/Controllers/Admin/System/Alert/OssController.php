@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin\System\Alert;
 
 use App\Http\Controllers\Admin\InitController;
+use App\Models\System\SysMedia;
 use Illuminate\Http\Request;
 
 class OssController extends InitController
@@ -21,6 +22,12 @@ class OssController extends InitController
 
     public function index(Request $request){
         return view( $this->template. __FUNCTION__);
+    }
+
+    public function file(Request $request){
+        return SysMedia::where([
+            'parent_id' => 0
+        ])->orderBy('type','ASC')->paginate(self::PAGESIZE);
     }
 
     public function auth(Request $request){
