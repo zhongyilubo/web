@@ -18,6 +18,7 @@ class CreateSysMedias extends Migration
             $table->integer('tenant_id')->default(0);
             $table->integer('user_id')->default(0);
             $table->string('title',60)->default('')->comment('分类名称');
+            $table->string('host')->default('')->comment('oss域名');
             $table->string('path')->default('')->comment('分类路径');
             $table->integer('sorts')->default(0);
             $table->integer('size')->default(0);

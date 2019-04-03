@@ -61,11 +61,13 @@ class OssController extends InitController
         // 6.验证签名
         $ok = openssl_verify($authStr, $authorization, $pubKey, OPENSSL_ALGO_MD5);
         if ($ok == 1) {
+            info($request->all());
             //数据进行保存
             SysMedia::saveBy([
                 'tenant_id' => $user->tenant_id ?? 0,
                 'user_id' => $user->id ?? 0,
                 'title' => $request->viewname ?? '',
+                'host' => $request->host ?? '',
                 'path' => $request->filename ?? '',
                 'size' => $request->size ?? '',
                 'type' => SysMedia::MEDIA_TYPE_FILE,

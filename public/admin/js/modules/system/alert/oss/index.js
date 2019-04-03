@@ -38,7 +38,7 @@ define(function(require, exports, module) {
                     success: function (data) {
 
                         if(data.data.length <= 0){
-                            $('#autobrowse').unbind('scroll')
+                            return $('#autobrowse').unbind('scroll')
                         }
 
                         var str = '';
@@ -51,11 +51,25 @@ define(function(require, exports, module) {
                                     </div>\
                                     </div>';
                             }else if(data.data[i].type == 2){
-                                str += '<div class="img-item-box">\
+                                if (/image\//.test(data.data[i].mime_type)){
+                                    str += '<div class="img-item-box">\
                                     <img src="/admin/images/default.png">\
                                     <p>'+data.data[i].title+'</p>\
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>\
                                     </div>';
+                                }else if(/video\//.test(data.data[i].mime_type)){
+                                    str += '<div class="img-item-box">\
+                                    <img src="/admin/images/default.png">\
+                                    <p>'+data.data[i].title+'</p>\
+                                    <i class="iconfont img-mark icon-fuxuankuang1"></i>\
+                                    </div>';
+                                }else{
+                                    str += '<div class="img-item-box">\
+                                    <img src="/admin/images/default.png">\
+                                    <p>'+data.data[i].title+'</p>\
+                                    <i class="iconfont img-mark icon-fuxuankuang1"></i>\
+                                    </div>';
+                                }
                             }
                         }
 
@@ -63,6 +77,7 @@ define(function(require, exports, module) {
 
 
                         list_loading = false;
+                        page++;
                         if(($('#parent_dir').height() - $('#autobrowse').height()) <= $('#autobrowse').scrollTop()){
                             load_more_msg();
                         }
