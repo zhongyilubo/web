@@ -14,10 +14,17 @@ define(function(require, exports, module) {
             $('.content-bd-warp').animate({
                 left:'0'
             },300);
+            list_loading = false,page = 1,$('#parent_dir').html('');
+            load_more_msg();
         });
         $('.content-ft .el-cancel').click('click', function() {
             parent.layer.close(index); //执行关闭
         });
+
+        function showdoing(index) {
+            $('.doing_1,.doing_2,.doing_3').hide();
+            $('.doing_'+index).show();
+        }
 
         var list_loading = false,page = 1;
 
@@ -26,18 +33,19 @@ define(function(require, exports, module) {
                 load_more_msg();
             }
         });
-        load_more_msg()
+        load_more_msg();
         function load_more_msg() {
 
             if(($('#parent_dir').height() - $('#autobrowse').height()) <= $('#autobrowse').scrollTop()){
-                list_loading = true;
+                list_loading = true,showdoing(2);
                 $.ajax({
                     url: '/system/alert/oss/file?page='+page,
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {
-
+                        showdoing(1)
                         if(data.data.length <= 0){
+                            showdoing(3)
                             return $('#autobrowse').unbind('scroll')
                         }
 
@@ -53,13 +61,13 @@ define(function(require, exports, module) {
                             }else if(data.data[i].type == 2){
                                 if (/image\//.test(data.data[i].mime_type)){
                                     str += '<div class="img-item-box">\
-                                    <img src="/admin/images/default.png">\
+                                    <img src="'+data.data[i].host+data.data[i].path+'">\
                                     <p>'+data.data[i].title+'</p>\
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>\
                                     </div>';
                                 }else if(/video\//.test(data.data[i].mime_type)){
                                     str += '<div class="img-item-box">\
-                                    <img src="/admin/images/default.png">\
+                                    <img src="'+data.data[i].host+data.data[i].path+'?x-oss-process=video/snapshot,t_0">\
                                     <p>'+data.data[i].title+'</p>\
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>\
                                     </div>';

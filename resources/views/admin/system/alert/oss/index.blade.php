@@ -28,14 +28,14 @@
 
                             </div>
 
-                            <div id="scroll-add-more">
+                            <div class="doing_1">
                                 <div class="preloader">下拉加载更多！</div>
                             </div>
-                            <div id="infinite-scroll-preloader">
+                            <div class="doing_2">
                                 <div class="preloader">玩命加载中！
                                 </div>
                             </div>
-                            <div id="scroll-add-end">
+                            <div class="doing_3">
                                 <div class="preloader">这回真没有了！</div>
                             </div>
 

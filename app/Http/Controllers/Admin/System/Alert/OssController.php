@@ -27,7 +27,7 @@ class OssController extends InitController
     public function file(Request $request){
         return SysMedia::where([
             'parent_id' => 0
-        ])->orderBy('type','ASC')->paginate(self::PAGESIZE);
+        ])->orderBy('type','ASC')->orderBy('id','DESC')->paginate(self::PAGESIZE);
     }
 
     public function auth(Request $request){
