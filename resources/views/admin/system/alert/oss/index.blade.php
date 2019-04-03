@@ -15,28 +15,28 @@
                                     <i class="iconfont icon-wenjian"></i>
                                     <span>点击上传</span>
                                 </button>
-                                <button type="button" class="btn-default">
+                                <button type="button" class="btn-default" id="mkdir">
                                     <span>新建文件夹</span>
                                 </button>
                             </div>
-                            <div class="toolbar-search">
+                            <div class="toolbar-search" onclick="window.location.href='{{url('system/alert/oss')}}?parent={{$parent['parent_id'] ?? 0}}'">
                                 <span>返回上级目录</span>
                             </div>
                         </div>
                         <div class="img-row-layout" id="autobrowse" flex="dir:top">
-                            <div class="img-row" id="parent_dir" data-parent="0">
+                            <div class="img-row" id="parent_dir" data-parent="{{$parent['id'] ?? 0}}">
 
                             </div>
 
-                            <div class="doing_1">
+                            <div class="doing_1" style="display: none;">
                                 <div class="preloader">下拉加载更多！</div>
                             </div>
-                            <div class="doing_2">
-                                <div class="preloader">玩命加载中！
+                            <div class="doing_2" style="display: none;">
+                                <div class="preloader">加载中！
                                 </div>
                             </div>
-                            <div class="doing_3">
-                                <div class="preloader">这回真没有了！</div>
+                            <div class="doing_3" style="display: none;">
+                                <div class="preloader">没有了！</div>
                             </div>
 
                         </div>
@@ -63,6 +63,11 @@
                     <button class="btn-default" id="backtoface">返回</button>
                 </div>
             </div>
+        </div>
+
+        <!--新增-->
+        <div id="add-new-file" style="display: none;">
+            <lable class="set-new-name">文件夹名称：<input type="text" class="" placeholder="请输入文件夹名称"></lable>
         </div>
     </div>
 

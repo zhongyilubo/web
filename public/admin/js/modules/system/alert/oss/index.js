@@ -14,11 +14,58 @@ define(function(require, exports, module) {
             $('.content-bd-warp').animate({
                 left:'0'
             },300);
-            list_loading = false,page = 1,$('#parent_dir').html('');
+            list_loading = false,page = 1,$('#parent_dir').html(''),is_over = false;
             load_more_msg();
         });
         $('.content-ft .el-cancel').click('click', function() {
             parent.layer.close(index); //执行关闭
+        });
+
+        $(document).on('click','.folder-item-box',function () {
+            window.location.href = '/system/alert/oss?parent='+$(this).data('id')
+        })
+
+        //添加文件夹
+        $('#mkdir').on('click', function() {
+            $('.add-new-file input').val('');
+            layer.open({
+                id: 'new-fil',
+                skin: 'img-space-layer',
+                title: '设置文件夹名称',
+                type: 1,
+                area: ['400px', '200px'], //宽高
+                content: $('#add-new-file'),
+                btn: ['确定', '取消'],
+                btn1: function() {
+                    fileName = $('#add-new-file input').val();
+                    if (fileName.length == 0) {
+                        message.error('文件夹名称不能为空！');
+                        return false
+                    } else if (fileName.length > 20) {
+                        message.error('文件夹名称超出限制！');
+                        return false
+                    } else {
+                        $.ajax({
+                            url: '/system/alert/oss/mkdir',
+                            type: 'POST',
+                            data: {
+                                viewname:fileName,
+                                parent:$('#parent_dir').data('parent')
+                            },
+                            async: false,
+                            dataType:'json',
+                            success: function(data){
+                                if(data.status){
+                                    message.success('添加成功');
+                                    window.location.href = '/system/alert/oss?parent='+$('#parent_dir').data('parent')
+                                }else{
+                                    message.success('添加失败');
+                                }
+                            }
+                        });
+                    };
+                }
+            })
         });
 
         function showdoing(index) {
@@ -26,7 +73,7 @@ define(function(require, exports, module) {
             $('.doing_'+index).show();
         }
 
-        var list_loading = false,page = 1;
+        var list_loading = false,page = 1,is_over = false;
 
         $('#autobrowse').scroll(function () {
             if (!list_loading){
@@ -35,24 +82,26 @@ define(function(require, exports, module) {
         });
         load_more_msg();
         function load_more_msg() {
-
+            if(is_over){
+                return false;
+            }
             if(($('#parent_dir').height() - $('#autobrowse').height()) <= $('#autobrowse').scrollTop()){
                 list_loading = true,showdoing(2);
                 $.ajax({
-                    url: '/system/alert/oss/file?page='+page,
+                    url: '/system/alert/oss/file/'+$('#parent_dir').data('parent')+'?page='+page,
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {
                         showdoing(1)
                         if(data.data.length <= 0){
                             showdoing(3)
-                            return $('#autobrowse').unbind('scroll')
+                            return is_over = true;
                         }
 
                         var str = '';
                         for(var i in data.data){
                             if(data.data[i].type == 1){
-                                str += '<div class="folder-item-box" data-id="145">\
+                                str += '<div class="folder-item-box" data-id="'+data.data[i].id+'">\
                                     <div>\
                                     <i class="icon-wenjianjia1 iconfont"></i>\
                                     <p>'+data.data[i].title+'</p>\
@@ -92,7 +141,6 @@ define(function(require, exports, module) {
                     }
                 });
             }
-            console.log($('#parent_dir').height() + ' - ' + $('#autobrowse').scrollTop() + ' - ' + $('#autobrowse').height());
         }
 
     };

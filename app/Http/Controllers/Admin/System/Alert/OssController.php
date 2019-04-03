@@ -21,13 +21,27 @@ class OssController extends InitController
     }
 
     public function index(Request $request){
-        return view( $this->template. __FUNCTION__);
+        $parent = SysMedia::find($request->parent ?? 0);
+        return view( $this->template. __FUNCTION__,compact('parent'));
     }
 
-    public function file(Request $request){
+    public function file(Request $request,$parent = 0){
         return SysMedia::where([
-            'parent_id' => 0
+            'parent_id' => $parent
         ])->orderBy('type','ASC')->orderBy('id','DESC')->paginate(self::PAGESIZE);
+    }
+
+    public function mkdir(Request $request){
+        $user = \Auth::user();
+        SysMedia::saveBy([
+            'tenant_id' => $user->tenant_id ?? 0,
+            'user_id' => $user->id ?? 0,
+            'title' => $request->viewname ?? '',
+            'type' => SysMedia::MEDIA_TYPE_DIR,
+            'parent_id' => $request->parent ?? '',
+        ]);
+
+        return $this->success('添加成功');
     }
 
     public function auth(Request $request){

@@ -47,7 +47,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
                 Route::get('oss', ['as' => 'oss', 'uses' => 'OssController@index']);
                 Route::get('oss/auth', ['as' => 'oss.auth', 'uses' => 'OssController@auth']);
-                Route::post('oss/file', ['as' => 'oss.file', 'uses' => 'OssController@file']);
+                Route::post('oss/file/{parent}', ['as' => 'oss.file', 'uses' => 'OssController@file']);
+                Route::post('oss/mkdir', ['as' => 'oss.mkdir', 'uses' => 'OssController@mkdir']);
             });
         });
 
