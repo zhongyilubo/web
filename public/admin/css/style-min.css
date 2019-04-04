@@ -13117,7 +13117,11 @@ input[type=button].goods_filter_submit {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.my-upload-img .self-add-img:hover .img-delete{
+    display: block;
 }
 
 .my-upload-img .self-add-img .img-delete i {

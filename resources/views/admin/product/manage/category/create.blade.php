@@ -36,8 +36,9 @@
                             <label class="col-xs-2 t_r">类目图片：</label>
                             <div class="col-xs-9">
                                 <ul class="multimage-gallery clearfix" id="photo-list">
-                                    <li></li>
-                                    <li class="insert-before image-upload-add" data-num="5" data-name="data[imgs][]" data-file="gift" data-class="duo">
+                                    <li id="image_box" class="my-upload-img">
+                                    </li>
+                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[imgs][]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
                                         <a class="tra_photofile">上传图片</a>
                                     </li>
                                 </ul>

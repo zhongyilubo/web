@@ -4,6 +4,10 @@ define(function(require, exports, module) {
 
     var t = function(e,i) {
         var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+        var upNum = localStorage.upNum;
+        var hasNum = localStorage.hasNum;
+        var upBox = localStorage.upBox;
+        var upHtml = localStorage.upHtml;
 
         $('#toupload').click(function () {
             $('.content-bd-warp').animate({
@@ -24,6 +28,75 @@ define(function(require, exports, module) {
         $(document).on('click','.folder-item-box',function () {
             window.location.href = '/system/alert/oss?parent='+$(this).data('id')
         })
+
+        //保存图片
+        $('.content-ft .btn-primary').click(function(){
+            var allImg = $('.img-row .img-item-box .img-mark.icon-fuxuankuang');
+            var allImgAddress = allImg.prevAll('img');
+            allImgAddress.each(function(k, v) {
+                if(k >= (upNum-hasNum)){
+                    return false;
+                }
+                if((k+1) >= (upNum-hasNum)){
+                    parent.$('#'+upBox).next().hide();
+                }
+                var img = $(v).attr('src');
+                var node = $(upHtml);
+                node.find('img').attr('src',img);
+                node.find('input').val(img);
+                parent.$('#'+upBox).append(node);
+            });
+            parent.layer.close(index); //执行关闭
+        });
+
+        //图片的全选
+        $('.toolbar-left .img-add-all').on('click', function() {
+            var th = $(this);
+            //下方所有图片
+            var allImg = $('.img-row .img-item-box .img-mark');
+            if (th.hasClass('icon-fuxuankuang1')) {
+                allImg.removeClass('icon-fuxuankuang1').addClass('icon-fuxuankuang');
+                th.removeClass('icon-fuxuankuang1').addClass('icon-fuxuankuang');
+            } else {
+                allImg.removeClass('icon-fuxuankuang').addClass('icon-fuxuankuang1');
+                th.removeClass('icon-fuxuankuang').addClass('icon-fuxuankuang1');
+            }
+            changeNum();
+        });
+
+        //图片单选
+        $('.img-row').on('click','.img-item-box',function () {
+            var th = $(this).find('.img-mark');
+            if (th.hasClass('icon-fuxuankuang1')) {
+                th.removeClass('icon-fuxuankuang1').addClass('icon-fuxuankuang');
+            } else {
+                th.removeClass('icon-fuxuankuang').addClass('icon-fuxuankuang1');
+            }
+            if($('.img-row .img-mark.icon-fuxuankuang').length > 0){
+                $('.toolbar-left .img-add-all').removeClass('icon-fuxuankuang1').addClass('icon-fuxuankuang');
+            }else{
+                $('.toolbar-left .img-add-all').removeClass('icon-fuxuankuang').addClass('icon-fuxuankuang1');
+            }
+            changeNum();
+        });
+
+        //字数变化
+        function changeNum() {
+            var num = $('.img-row .img-mark.icon-fuxuankuang').length;
+            var text = $('.img-num-text');
+
+            if (num == 0) {
+                text.text('请选择图片');
+            } else if (num > 0 && num < (upNum-hasNum)) {
+                var alsoText = '您已选择' + num + '张，还能上传' + (upNum-hasNum - num) + '张';
+                text.text(alsoText);
+            } else if (num == (upNum-hasNum)) {
+                text.text('已选择图片数量达到上限，请保存');
+            } else {
+                text.text('已选择图片数量超出上限，只为您保留前' + (upNum-hasNum) + '张！');
+            }
+
+        }
 
         //添加文件夹
         $('#mkdir').on('click', function() {

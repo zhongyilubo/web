@@ -18,6 +18,9 @@
                                 <button type="button" class="btn-default" id="mkdir">
                                     <span>新建文件夹</span>
                                 </button>
+                                <label><i class="iconfont img-add-all icon-fuxuankuang1"></i>
+                                    <span class="img-num-text">请选择图片</span>
+                                </label>
                             </div>
                             <div class="toolbar-search">
                                 <a href="{{url('system/alert/oss')}}?parent={{$parent['parent_id'] ?? 0}}">返回上级目录</a>
