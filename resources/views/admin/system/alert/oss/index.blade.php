@@ -19,8 +19,8 @@
                                     <span>新建文件夹</span>
                                 </button>
                             </div>
-                            <div class="toolbar-search" onclick="window.location.href='{{url('system/alert/oss')}}?parent={{$parent['parent_id'] ?? 0}}'">
-                                <span>返回上级目录</span>
+                            <div class="toolbar-search">
+                                <a href="{{url('system/alert/oss')}}?parent={{$parent['parent_id'] ?? 0}}">返回上级目录</a>
                             </div>
                         </div>
                         <div class="img-row-layout" id="autobrowse" flex="dir:top">
