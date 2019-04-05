@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
                 Route::get('category', ['as' => 'category', 'uses' => 'CategoryController@index']);
-                Route::any('category/create/{model?}', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+                Route::any('category/create/{category?}', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
             });
         });
 

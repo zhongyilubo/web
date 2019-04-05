@@ -9,6 +9,9 @@ class SysCategory extends Model
 {
     const TYPE_PRODUCT = 1;
 
+    const STATUS_OK = 1;
+    const STATUS_NO = 2;
+
     /**
      * @param int $gurad
      * @return Collection

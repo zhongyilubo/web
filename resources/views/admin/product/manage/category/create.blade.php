@@ -11,13 +11,13 @@
             </ul>
             <div class="mainbox">
                 <form name="profile-form" id="profile-form" method="post" class="mtb20 base_form">
-                    @if(!empty($model))
-                        <input type="hidden" name="data[id]" value="{!! $model['id'] ?? '' !!}">
+                    @if(!empty($category))
+                        <input type="hidden" name="data[id]" value="{!! $category['id'] ?? '' !!}">
                     @endif
                     <div class="form-group">
                         <label class="col-xs-2 t_r">上级类目：</label>
                         <div class="col-xs-8">
-                            <select name="data[parent_id]" class="select-change-style w160" @if(!empty($model['id'])) disabled="disabled" @endif >
+                            <select name="data[parent_id]" class="select-change-style w160" @if(!empty($category['id'])) disabled="disabled" @endif >
                             <option value="0">---请选择----</option>
 
                         </select>
@@ -27,7 +27,7 @@
                     <div class="form-group category-msg-l1">
                         <label class="col-xs-2 t_r"><span class="red">*</span>类目名称：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="1-32个字符" name="data[name]" maxlength="32" value="{{$model->name ?? ''}}">
+                            <input type="text" class="form-control" placeholder="1-32个字符" name="data[name]" maxlength="32" value="{{$category->name ?? ''}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@
                                 <ul class="multimage-gallery clearfix" id="photo-list">
                                     <li id="image_box" class="my-upload-img">
                                     </li>
-                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[imgs][]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
+                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[imgs]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
                                         <a class="tra_photofile">上传图片</a>
                                     </li>
                                 </ul>
@@ -49,14 +49,14 @@
                     <div class="form-group">
                         <label class="col-xs-2 t_r">状态：</label>
                         <div class="col-xs-4">
-                            <label class="mr20"><input type="radio" name="data[status]"  @if(!isset($model['status']) || $model['status'] == 1) checked @endif value="1">正常</label>
-                            <label class="mr20"><input type="radio" name="data[status]" @if(isset($model['status']) && $model['status'] == 0) checked @endif value="0">停止</label>
+                            <label class="mr20"><input type="radio" name="data[status]"  @if(!isset($category['status']) || $category['status'] == 1) checked @endif value="1">正常</label>
+                            <label class="mr20"><input type="radio" name="data[status]" @if(isset($category['status']) && $category['status'] == 0) checked @endif value="0">停止</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 t_r">排序：</label>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="0" name="data[sorts]" value="{!! $model['sorts'] ?? 0 !!}">
+                            <input type="text" class="form-control" placeholder="0" name="data[sorts]" value="{!! $category['sorts'] ?? 0 !!}">
                         </div>
                     </div>
                     <div class="form-group">
