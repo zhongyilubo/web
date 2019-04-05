@@ -31,7 +31,6 @@
                             <tr>
                                 <th style="width: 5%">图片</th>
                                 <th  style="width: 40%">名称</th>
-                                <th style="width: 10%">货品数</th>
                                 <th  style="width: 5%">排序</th>
                                 <th  style="width: 5%">状态</th>
                                 <th  style="width: 10%">操作</th>
@@ -40,18 +39,12 @@
                             <tbody>
                             @forelse($lists as $lv)
                                 <tr>
-                                    <td><img src="{{$lv['img'] or '/admin/images/default.png'}}" style="width:50px;height:50px;"></td>
-                                    <td>{{'|' . str_repeat('---',$lv['level'])}}{{$lv['name'] or ''}}</td>
+                                    <td><img src="{{$lv['image'] ?? '/admin/images/default.png'}}" style="width:50px;height:50px;"></td>
+                                    <td>{{'|' . str_repeat('---',$lv['level'])}}{{$lv['name'] ?? ''}}</td>
+                                    <td>{{$lv['sorts'] ?? ''}}</td>
+                                    <td>{{$lv['status'] != 1? '停止':'正常'}}</td>
                                     <td>
-                                        {{get_recursions($lv,$types,'products') }}
-                                    </td>
-                                    <td>{{$lv['sorts'] or ''}}</td>
-                                    <td>{{$lv['status'] == 0 ? '停止':'正常'}}</td>
-                                    <td>
-                                        <a href="{!! url('product/manage/type/create',['category'=>$lv['id']]) !!}">编辑</a>
-                                        @if($lv['child']->isEmpty())
-                                            <a href="{!! url('product/manage/attribute') !!}?type_id={{$lv['id']}}" >属性</a>
-                                        @endif
+                                        <a href="{!! url('product/manage/category/create',['category'=>$lv['id']]) !!}">编辑</a>
                                     </td>
                                 </tr>
                             @empty
@@ -60,9 +53,6 @@
                             </tbody>
                         </table>
                     </div>
-                    @if(!$lists->isEmpty())
-                        {!! $lists->render('vendor.pagination.admin') !!}
-                    @endif
                 </div>
                 <!--tab 切换1 end-->
             </div>

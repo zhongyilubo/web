@@ -38,7 +38,7 @@
                                 <ul class="multimage-gallery clearfix" id="photo-list">
                                     <li id="image_box" class="my-upload-img">
                                     </li>
-                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[imgs]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
+                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
                                         <a class="tra_photofile">上传图片</a>
                                     </li>
                                 </ul>
@@ -50,7 +50,7 @@
                         <label class="col-xs-2 t_r">状态：</label>
                         <div class="col-xs-4">
                             <label class="mr20"><input type="radio" name="data[status]"  @if(!isset($category['status']) || $category['status'] == 1) checked @endif value="1">正常</label>
-                            <label class="mr20"><input type="radio" name="data[status]" @if(isset($category['status']) && $category['status'] == 0) checked @endif value="0">停止</label>
+                            <label class="mr20"><input type="radio" name="data[status]" @if(isset($category['status']) && $category['status'] == 2) checked @endif value="2">停止</label>
                         </div>
                     </div>
                     <div class="form-group">

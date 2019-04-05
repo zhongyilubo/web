@@ -20,22 +20,22 @@ class CategoryController extends InitController
         $this->template = 'admin.product.manage.category.';
     }
 
-    public function index(Request $request,SysCategory $category = null){
+    public function index(Request $request){
 
         $lists = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 
-    public function create(Request $request,SysCategory $model = null){
+    public function create(Request $request,SysCategory $category = null){
 
         if($request->isMethod('get')) {
-            return view($this->template . __FUNCTION__, compact('model'));
+            return view($this->template . __FUNCTION__, compact('category'));
         }
 
         $data = $request->data;
 
         $rules = [
-            'name' => 'required|unique:sys_categories,name,'.($category['id'] ?? 'NULL').',id,',
+            'name' => 'required|unique:sys_categories,name,'.($category['id'] ?? 'NULL').',id',
         ];
         $messages = [
             'name.required' => '请输入分类名称',
@@ -48,15 +48,10 @@ class CategoryController extends InitController
         }
 
         try {
-            SysCategory::saveBy([
-                'id' => $category['id'] ?? null,
-                'name' => $data['name'],
-                'parent_id' => $data['parent_id'],
-                'img' => $data['img'] ?? '',
-                'sorts' => $data['sorts'] ?? 0,
+            $category || $data = array_merge([
                 'type' => SysCategory::TYPE_PRODUCT,
-                'status' => SysCategory::STATUS_OK,
-            ]);
+            ],$data);
+            SysCategory::saveBy($data);
             return $this->success('操作成功',url('product/manage/category'));
         }catch (\Exception $e) {
             return $this->error('操作异常，请联系开发人员'.$e->getMessage());
