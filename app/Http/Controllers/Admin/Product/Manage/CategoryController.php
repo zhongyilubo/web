@@ -34,7 +34,6 @@ class CategoryController extends InitController
         }
 
         $data = $request->data;
-        sleep(3);
 
         $rules = [
             'name' => 'required|unique:sys_categories,name,'.($category['id'] ?? 'NULL').',id',
