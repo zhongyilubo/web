@@ -166,7 +166,7 @@ define(function(require, exports, module) {
                     dataType: 'json',
                     success: function (data) {
                         showdoing(1)
-                        if(!data.status){
+                        if(data.status == 0){
                             return message.error(data.message);
                         }
                         if(data.data.length <= 0){
