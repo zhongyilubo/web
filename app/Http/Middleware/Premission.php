@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Traits\ResponseTrait;
 use Closure;
 
 class Premission
 {
+    use ResponseTrait;
     /**
      * Handle an incoming request.
      *
@@ -22,6 +24,9 @@ class Premission
         if(\Auth::user()->hasPermissionTo(\Route::currentRouteName(),$guard)){
             return $next($request);
         }else{
+            if($request->ajax()){
+                return $this->error('对不起，您无权访问！');
+            }
             return abort(403,'对不起，您无权访问该页面！');
         }
     }

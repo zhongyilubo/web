@@ -19,8 +19,10 @@
                         <div class="col-xs-8">
                             <select name="data[parent_id]" class="select-change-style w160" @if(!empty($category['id'])) disabled="disabled" @endif >
                             <option value="0">---请选择----</option>
-
-                        </select>
+                            @foreach($categories as $item)
+                                <option value="{{$item['id']}}" @if($category['parent_id'] == $item['id']) selected @endif >{{'|' . str_repeat(' -- ',$item['level'])}}{{$item['name']}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -30,22 +32,22 @@
                             <input type="text" class="form-control" placeholder="1-32个字符" name="data[name]" maxlength="32" value="{{$category->name ?? ''}}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 t_r"></label>
-                        <div class="form-group">
-                            <label class="col-xs-2 t_r">类目图片：</label>
-                            <div class="col-xs-9">
-                                <ul class="multimage-gallery clearfix" id="photo-list">
-                                    <li id="image_box" class="my-upload-img">
-                                    </li>
-                                    <li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
-                                        <a class="tra_photofile">上传图片</a>
-                                    </li>
-                                </ul>
-                                <p class="fgray">最多五张，第一张为赠品主图，建议尺寸：800*800 像素</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-xs-2 t_r"></label>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label class="col-xs-2 t_r">类目图片：</label>--}}
+                            {{--<div class="col-xs-9">--}}
+                                {{--<ul class="multimage-gallery clearfix" id="photo-list">--}}
+                                    {{--<li id="image_box" class="my-upload-img">--}}
+                                    {{--</li>--}}
+                                    {{--<li class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>--}}
+                                        {{--<a class="tra_photofile">上传图片</a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                                {{--<p class="fgray">最多五张，第一张为赠品主图，建议尺寸：800*800 像素</p>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <label class="col-xs-2 t_r">状态：</label>
                         <div class="col-xs-4">

@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/score.txt
 /storage/*.key
 /storage/debugbar
 composer.lock

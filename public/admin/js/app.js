@@ -55,6 +55,7 @@ define(function(require, exports, module) {
     require('jquery.form')($);
     window.$ = window.jQuery = $;
     message = require('message');
+    ajaxaction = require("ajaxactionjs");
 
     exports.context = {};
     exports.load = function(e, a) {
@@ -67,6 +68,8 @@ define(function(require, exports, module) {
     window.app_load = exports.load;
     exports.bootstrap = function() {
 
+        var isload = false;
+
         //子菜单切换
         $(".sidenav .nav_tit").off().click(function() {
             $(this).parent().toggleClass('on').siblings().removeClass('on');
@@ -75,7 +78,10 @@ define(function(require, exports, module) {
         //表单提交
         var options = {
             beforeSerialize: function() {
-
+                if(isload){
+                    return false;
+                }
+                return isload = true;
             },
             success: function(data) {
                 if (data.status)
@@ -93,6 +99,9 @@ define(function(require, exports, module) {
                 {
                     message.error(data.message);
                 }
+            },
+            complete: function () {
+                isload = false;
             }
         };
         $.ajaxSetup({
@@ -102,5 +111,6 @@ define(function(require, exports, module) {
         });
         $('.base_form').ajaxForm(options);
 
+        ajaxaction.on($("a.do_action"))
     }
 });

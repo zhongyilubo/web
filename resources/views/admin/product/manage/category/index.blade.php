@@ -29,7 +29,6 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th style="width: 5%">图片</th>
                                 <th  style="width: 40%">名称</th>
                                 <th  style="width: 5%">排序</th>
                                 <th  style="width: 5%">状态</th>
@@ -39,8 +38,7 @@
                             <tbody>
                             @forelse($lists as $lv)
                                 <tr>
-                                    <td><img src="{{$lv['image'] ?? '/admin/images/default.png'}}" style="width:50px;height:50px;"></td>
-                                    <td>{{'|' . str_repeat('---',$lv['level'])}}{{$lv['name'] ?? ''}}</td>
+                                    <td>{{'|' . str_repeat(' -- ',$lv['level'])}}{{$lv['name'] ?? ''}}</td>
                                     <td>{{$lv['sorts'] ?? ''}}</td>
                                     <td>{{$lv['status'] != 1? '停止':'正常'}}</td>
                                     <td>

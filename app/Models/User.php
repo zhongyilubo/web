@@ -16,6 +16,8 @@ class User extends Authenticatable implements JWTSubject
 
     const USER_STATUS_OPEN = 1;
     const USER_STATUS_STOP = 0;
+    const USER_STATUS_DELETE = 9;
+
     const USER_TYPE_ADMIN = 1;
     const USER_TYPE_TENANT = 2;
     const USER_TYPE_STAFF = 4;

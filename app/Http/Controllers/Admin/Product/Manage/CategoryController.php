@@ -22,17 +22,19 @@ class CategoryController extends InitController
 
     public function index(Request $request){
 
-        $lists = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT);
+        $lists = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT)->mergeTree('node');
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 
     public function create(Request $request,SysCategory $category = null){
 
         if($request->isMethod('get')) {
-            return view($this->template . __FUNCTION__, compact('category'));
+            $categories = SysCategory::getCategorys(SysCategory::TYPE_PRODUCT,SysCategory::STATUS_OK)->mergeTree('node');
+            return view($this->template . __FUNCTION__, compact('category','categories'));
         }
 
         $data = $request->data;
+        sleep(3);
 
         $rules = [
             'name' => 'required|unique:sys_categories,name,'.($category['id'] ?? 'NULL').',id',

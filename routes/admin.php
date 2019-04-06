@@ -23,6 +23,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
     Route::group(['middleware' => 'permission:'.config('app.guard.admin')], function () {
 
+        Route::group(['prefix' => 'member', 'as' => 'member.', 'namespace' => 'Member'], function(){
+            Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
+                Route::get('user', ['as' => 'user', 'uses' => 'UserController@index']);
+                Route::get('user/{operate}/{model}', ['as' => 'user.operate', 'uses' => 'UserController@operate']);
+            });
+        });
+
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
@@ -42,6 +49,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('user/passwd/{model}', ['as' => 'user.passwd', 'uses' => 'UserController@passwd']);
                 Route::any('user/auth/{model}', ['as' => 'user.auth', 'uses' => 'UserController@auth']);
                 Route::any('user/auth/autorole/{model}', ['as' => 'user.auth.autorole', 'uses' => 'UserController@autorole']);
+            });
+
+            Route::group(['prefix' => 'base', 'as' => 'base.', 'namespace' => 'Base'], function(){
+                Route::any('score', ['as' => 'score', 'uses' => 'ScoreController@index']);
             });
 
             Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
