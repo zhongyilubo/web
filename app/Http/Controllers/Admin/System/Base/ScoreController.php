@@ -22,10 +22,11 @@ class ScoreController extends InitController
     public function index(Request $request){
 
         if($request->isMethod('get')) {
-            return view( $this->template. __FUNCTION__,compact('lists'));
+            $conf = file_get_contents('score.txt');
+            $model = $conf ? json_decode($conf,true):[];
+            return view( $this->template. __FUNCTION__,compact('lists','model'));
         }
         $data = $request->data;
-
         file_put_contents('score.txt',json_encode($data));
 
         return $this->success('设置成功');

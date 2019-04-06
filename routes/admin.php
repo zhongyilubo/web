@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('user', ['as' => 'user', 'uses' => 'UserController@index']);
                 Route::get('user/{operate}/{model}', ['as' => 'user.operate', 'uses' => 'UserController@operate']);
+                Route::get('callback', ['as' => 'callback', 'uses' => 'CallbackController@index']);
+                Route::get('callback/{model}', ['as' => 'callback.info', 'uses' => 'CallbackController@info']);
             });
         });
 

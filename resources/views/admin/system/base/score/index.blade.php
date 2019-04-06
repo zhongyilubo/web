@@ -17,40 +17,40 @@
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>转发获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[zhuanfa]"  value="{!! $model['zhuanfa'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[zhuanfa]"  value="{!! $model['zhuanfa'] ?? 0 !!}">
                         </div>
                         <label class="col-xs-2 t_r"><span class="red">*</span>分享获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[fenxiang]"  value="{!! $model['fenxiang'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[fenxiang]"  value="{!! $model['fenxiang'] ?? 0 !!}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>评论获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[pinglun]"  value="{!! $model['pinglun'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[pinglun]"  value="{!! $model['pinglun'] ?? 0 !!}">
                         </div>
                         <label class="col-xs-2 t_r"><span class="red">*</span>支付获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[zhifu]"  value="{!! $model['zhifu'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[zhifu]"  value="{!! $model['zhifu'] ?? 0 !!}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>签到获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[qiandao]"  value="{!! $model['qiandao'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[qiandao]"  value="{!! $model['qiandao'] ?? 0 !!}">
                         </div>
                         <label class="col-xs-2 t_r"><span class="red">*</span>关注公众号获取积分：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[guanzhu]"  value="{!! $model['guanzhu'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[guanzhu]"  value="{!! $model['guanzhu'] ?? 0 !!}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-xs-2 t_r"><span class="red">*</span>每日积分上限：</label>
                         <div class="col-xs-3">
-                            <input autocomplete="off" type="text" class="form-control" name="data[shangxian]"  value="{!! $model['name'] ?? 0 !!}">
+                            <input autocomplete="off" type="number" class="form-control" name="data[shangxian]"  value="{!! $model['shangxian'] ?? 0 !!}">
                         </div>
                     </div>
 
@@ -58,7 +58,6 @@
                         <label class="col-xs-2 t_r">&nbsp;</label>
                         <div class="col-xs-8">
                             <input type="submit" class="btn w80" value="确定">
-                            <input type="input" class="btn btn_white w80" value="取消" onclick="javascript:window.location.href='{{ url('system/maintain/role') }}'">
                         </div>
                     </div>
                 </form>
