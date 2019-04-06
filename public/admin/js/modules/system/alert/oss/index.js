@@ -166,6 +166,9 @@ define(function(require, exports, module) {
                     dataType: 'json',
                     success: function (data) {
                         showdoing(1)
+                        if(!data.status){
+                            return message.error(data.message);
+                        }
                         if(data.data.length <= 0){
                             showdoing(3)
                             return is_over = true;
