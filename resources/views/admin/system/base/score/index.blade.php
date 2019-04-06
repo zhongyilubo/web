@@ -73,7 +73,6 @@
         var __seajs_debug = 1;
         seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
-            app.load('system/develop/role/create');
         });
 
     </script>

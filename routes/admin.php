@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
             Route::group(['prefix' => 'base', 'as' => 'base.', 'namespace' => 'Base'], function(){
                 Route::any('score', ['as' => 'score', 'uses' => 'ScoreController@index']);
+                Route::any('tel', ['as' => 'tel', 'uses' => 'TelController@index']);
+                Route::any('banner', ['as' => 'banner', 'uses' => 'BannerController@index']);
             });
 
             Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
