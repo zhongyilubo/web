@@ -23,6 +23,7 @@
                     <div class="col-xs-9">
                     <ul class="multimage-gallery clearfix" id="photo-list">
                     <li id="image_box" class="my-upload-img">
+                        @if(!empty($model['image']))
                         @foreach($model['image'] as $item)
                             <span class="self-add-img">
                                 <img src="{{$item}}">
@@ -32,8 +33,9 @@
                                 </span>
                             </span>
                         @endforeach
+                        @endif
                     </li>
-                    <li @if(count($model['image']) >= 4) hidden @endif class="image-upload-add" data-num="4" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image][]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
+                    <li @if(isset($model['image']) && count($model['image']) >= 4) hidden @endif class="image-upload-add" data-num="4" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image][]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
                     <a class="tra_photofile">上传图片</a>
                     </li>
                     </ul>
