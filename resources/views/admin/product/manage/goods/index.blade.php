@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{$lv['name'] ?? ''}}</td>
                                     <td>{{$lv['teacher'] ?? ''}}</td>
-                                    <td>{{$lv['timer'] ?? ''}}</td>
+                                    <td>{{$lv['timer_long'] ?? ''}}</td>
                                     <td>{{$lv['price'] ?? ''}}</td>
                                     <td>{{$lv['pay_name'] ?? ''}}</td>
                                     <td>{{$lv['category']['name'] ?? ''}}</td>

@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>{{$lv['name'] ?? ''}}</td>
                                     <td>{{$lv['teacher'] ?? ''}}</td>
-                                    <td>{{$lv['timer'] ?? ''}}</td>
+                                    <td>{{$lv['timer_long'] ?? ''}}</td>
                                     <td>{{$lv['pay_name'] ?? ''}}</td>
                                     <td>
                                         <a href="{!! url('product/manage/goods/skus/'.$model['id'].'/create',['id'=>$lv['id']]) !!}">编辑</a>

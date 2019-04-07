@@ -13,7 +13,7 @@ use App\Models\System\SysCategory;
 
 class GdsGood extends Model
 {
-    protected $appends = ['pay_name'];
+    protected $appends = ['pay_name','timer_long'];
     public function setPriceAttribute($value)
     {
         $this->attributes['price'] = $value*100;
@@ -27,6 +27,10 @@ class GdsGood extends Model
     public function getPayNameAttribute()
     {
         return $this->pay == 1 ? '免费' : ($this->pay == 2 ? '微信支付' :'积分支付');
+    }
+
+    public function getTimerLongAttribute(){
+        return (floor($this->timer/60)).'分'.($this->timer%60)."秒";
     }
 
     public function category(){

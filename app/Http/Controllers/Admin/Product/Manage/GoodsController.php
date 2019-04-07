@@ -27,7 +27,7 @@ class GoodsController extends InitController
         $name = $request->name ?? '';
         $lists = GdsGood::where(function ($query) use ($name){
             $name && $query->where('name',$name)->orWhere('teacher',$name);
-        })->paginate(self::PAGESIZE);
+        })->orderBy('sorts','DESC')->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 
