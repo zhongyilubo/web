@@ -24,8 +24,10 @@ class GoodsController extends InitController
     }
 
     public function index(Request $request){
-
-        $lists = GdsGood::paginate(self::PAGESIZE);
+        $name = $request->name ?? '';
+        $lists = GdsGood::where(function ($query) use ($name){
+            $name && $query->where('name',$name)->orWhere('teacher',$name);
+        })->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 
