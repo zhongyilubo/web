@@ -23,6 +23,7 @@ class CreateGdsSkus extends Migration
             $table->string('intro')->default('')->comment('介绍');
             $table->integer('price')->default(0)->comment('价格');
             $table->integer('sorts')->default(0)->comment('排序');
+            $table->integer('scan')->default(0)->comment('浏览');
             $table->tinyInteger('pay')->default(0)->comment('支持支付方式 详情见模型');
             $table->integer('number')->default(0)->comment('视频数量');
             $table->timestamps();

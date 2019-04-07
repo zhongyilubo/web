@@ -25,6 +25,7 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api'], function ($api) {
     $api->post('refresh', 'LoginController@refresh');
 
     $api->group(['middleware' => ['jwt.auth']], function ($api) {
+        $api->post('index', 'IndexController@index');
         $api->post('logout', 'LoginController@logout');
         $api->post('me', 'LoginController@me');
     });
