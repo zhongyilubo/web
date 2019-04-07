@@ -32,6 +32,12 @@ Route::group(['middleware' => ['auth:admin']], function () {
             });
         });
 
+        Route::group(['prefix' => 'order', 'as' => 'order.', 'namespace' => 'Order'], function(){
+            Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
+                Route::get('index', ['as' => 'index', 'uses' => 'IndexController@index']);
+            });
+        });
+
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
@@ -42,6 +48,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('goods/skus/delete/{sku?}', ['as' => 'goods.skus.delete', 'uses' => 'SkusController@delete']);
                 Route::get('category', ['as' => 'category', 'uses' => 'CategoryController@index']);
                 Route::any('category/create/{category?}', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+                Route::get('comment', ['as' => 'comment', 'uses' => 'CommentController@index']);
             });
         });
 
