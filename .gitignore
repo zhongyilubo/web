@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /public/score.txt
+/public/banner.txt
+/public/tel.txt
 /storage/*.key
 /storage/debugbar
 composer.lock
