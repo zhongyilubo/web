@@ -35,8 +35,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::group(['prefix' => 'product', 'as' => 'product.', 'namespace' => 'Product'], function(){
             Route::group(['prefix' => 'manage', 'as' => 'manage.', 'namespace' => 'Manage'], function(){
                 Route::get('goods', ['as' => 'goods', 'uses' => 'GoodsController@index']);
-                Route::get('goods/delete/{model}', ['as' => 'goods.delete', 'uses' => 'GoodsController@delete']);
                 Route::any('goods/create/{model?}', ['as' => 'goods.create', 'uses' => 'GoodsController@create']);
+                Route::get('goods/delete/{model}', ['as' => 'goods.delete', 'uses' => 'GoodsController@delete']);
                 Route::get('goods/skus/{model}', ['as' => 'goods.skus', 'uses' => 'SkusController@index']);
                 Route::any('goods/skus/{model}/create/{sku?}', ['as' => 'goods.skus.create', 'uses' => 'SkusController@create']);
                 Route::any('goods/skus/delete/{sku?}', ['as' => 'goods.skus.delete', 'uses' => 'SkusController@delete']);
