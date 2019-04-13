@@ -53,7 +53,7 @@ class LoginController extends InitController{
     public function me()
     {
         $user = $this->guard()->user();
-        return $this->response->item($user, new UserTransformer());
+        return $this->success('success',null,$user);
     }
 
     /**
@@ -65,7 +65,7 @@ class LoginController extends InitController{
     {
         $this->guard()->logout();
 
-        return $this->response->array(['message' => 'Successfully logged out']);
+        return $this->success('Successfully logged out');
     }
 
     /**
@@ -77,7 +77,7 @@ class LoginController extends InitController{
      */
     protected function respondWithToken($token,$openid = null)
     {
-        return $this->response->array([
+        return $this->success('success',null,[
             'access_token' => $token,
             'openid' => $openid,
             'token_type' => 'bearer',

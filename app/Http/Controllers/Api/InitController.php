@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ResponseTrait;
 
 class InitController extends Controller
 {
-    use Helpers;
-
+    use ResponseTrait;
     const PAGESIZE = 20;
 }
