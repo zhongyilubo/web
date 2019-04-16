@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Resources\User as UserResource;
+use App\Resources\UserCollection;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +55,8 @@ class LoginController extends InitController{
     public function me()
     {
         $user = $this->guard()->user();
-        return $this->success('success',null,$user);
+        $userall = User::all();
+        return $this->success('success',null, new UserCollection($userall));
     }
 
     /**

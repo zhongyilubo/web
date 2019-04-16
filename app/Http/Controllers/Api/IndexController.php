@@ -16,6 +16,8 @@ class IndexController extends InitController
     public function index(){
         $conf = @file_get_contents('banner.txt');
         $banner = $conf ? json_decode($conf,true):[];
-        return $banner;
+        return $this->success('success',null,[
+            'banner' => $banner
+        ]);
     }
 }
