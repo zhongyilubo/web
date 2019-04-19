@@ -10,14 +10,19 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use App\Resources\Gds\GdsGood as GdsGoodRescource;
+use App\Resources\Gds\GdsGoodCollection;
 
 class IndexController extends InitController
 {
     public function index(){
         $conf = @file_get_contents('banner.txt');
         $banner = $conf ? json_decode($conf,true):[];
+
         return $this->success('success',null,[
-            'banner' => $banner
+            'banner' => $banner,
+            'hot' => GdsGoodRescource::collection(GdsGood::paginate()),
+            'new' => new GdsGoodRescource(GdsGood::find(3)),
         ]);
     }
 }

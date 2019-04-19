@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 //https://learnku.com/articles/10885/full-use-of-jwt#852929
-//https://learnku.com/docs/dingo-api/2.0.0/Rate-Limiting/1450
 //https://learnku.com/articles/9842/user-role-permission-control-package-laravel-permission-usage-description
 
 
@@ -27,4 +26,6 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('logout', 'LoginController@logout');
     Route::post('me', 'LoginController@me');
 });
+
+Route::get('u', 'IndexController@index');
 

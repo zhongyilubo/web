@@ -1,9 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 89340
+ * Date: 2019/4/18
+ * Time: 15:35
+ */
 
-namespace App\Resources;
+namespace App\Resources\Gds;
 
-class UserCollection extends BaseCollection
+use App\Resources\BaseCollection;
+
+class GdsGoodCollection extends BaseCollection
 {
+
     /**
      * Transform the resource collection into an array.
      *
@@ -14,9 +23,7 @@ class UserCollection extends BaseCollection
     {
         return [
             'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
         ];
     }
+
 }
