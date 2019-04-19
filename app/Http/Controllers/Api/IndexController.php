@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Gds\GdsGood;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
-use App\Resources\Gds\GdsGoodCollection;
 
 class IndexController extends InitController
 {
