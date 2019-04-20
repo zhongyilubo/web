@@ -24,6 +24,12 @@ class GdsGood extends Base
         return [
             'id' => $this->id ?? 0,
             'name' => $this->name ?? '',
+            'price' => $this->price ?? '',
+            'teacher' => $this->teacher ?? '',
+            'type' => $this->type ?? '',
+            'number' => $this->number ?? 0,
+            'type_name' => $this->type == 1 ? '单课' :'系列课',
+            'cover' => $this->skus->first()->url ?? '',
         ];
     }
 

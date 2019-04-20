@@ -10,7 +10,9 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use App\Models\System\SysCategory;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
+use App\Resources\System\SysCategory as SysCategoryRescource;
 
 class IndexController extends InitController
 {
@@ -20,8 +22,14 @@ class IndexController extends InitController
 
         return $this->success('success',null,[
             'banner' => $banner,
-            'hot' => GdsGoodRescource::collection(GdsGood::paginate()),
-            'new' => new GdsGoodRescource(GdsGood::find(3)),
+            'hot' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('sorts','DESC')->take(2)->get()),
+            'new' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('id','DESC')->take(4)->get()),
         ]);
+    }
+
+    public function category(){
+        $category = SysCategory::where('status',1)->where('parent_id',0)->get();
+
+        return SysCategoryRescource::collection($category);
     }
 }

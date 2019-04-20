@@ -23,9 +23,7 @@ Route::post('refresh', 'LoginController@refresh');
 
 Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('index', 'IndexController@index');
+    Route::post('category', 'IndexController@category');
     Route::post('logout', 'LoginController@logout');
     Route::post('me', 'LoginController@me');
 });
-
-Route::get('u', 'IndexController@index');
-
