@@ -3,12 +3,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Resources\User as UserResource;
-use App\Resources\UserCollection;
+use App\Services\IntegralService;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends InitController{
+
+    public function __construct(IntegralService $integralService = null)
+    {
+        $this->integralService = $integralService;
+    }
 
     /**
      * Create a new AuthController instance.
@@ -18,14 +24,18 @@ class LoginController extends InitController{
     public function login(Request $request)
     {
 
-        $appid = 'wxf8d08695c2d862f4'; //填写微信小程序appid
-        $secret = 'ea09ddae2a1b1bf743766455181f89ae'; //填写微信小程序secret
+//        $appid = 'wxf8d08695c2d862f4'; //填写微信小程序appid
+//        $secret = 'ea09ddae2a1b1bf743766455181f89ae'; //填写微信小程序secret
+
+
+        $appid = 'wx1c7c48b523714138'; //填写微信小程序appid
+        $secret = '3ae529b648adbe027bda06cec84d061a'; //填写微信小程序secret
         $code = $request->code ?? '';
 
         $wJson = json_decode(file_get_contents("https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code"),true);
 
         if(!isset($wJson['openid'])){
-            return $this->response->error('openid error', 404);
+            return $this->error('openid error', 404);
         }
 
         $user = User::firstOrCreate(['openid' => $wJson['openid']], [
@@ -47,16 +57,40 @@ class LoginController extends InitController{
         return $this->respondWithToken($this->guard()->refresh());
     }
 
+    public function sign(){
+        $user = $this->guard()->user();
+        try{
+            DB::beginTransaction();
+
+            $this->integralService->sign($user);
+
+            DB::commit();
+            return $this->success('success',null,[
+                'issign' => 1
+            ]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return $this->error($e->getMessage());
+        }
+
+    }
+
     /**
      * Get the authenticated User
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function userinfo()
     {
         $user = $this->guard()->user();
-        $userall = User::all();
-        return $this->success('success',null, new UserCollection($userall));
+
+        return $this->success('success',null,[
+            'user' => new UserResource($user),
+            'issign' => User\UserIntegralLog::where([
+                ['type','=',User\UserIntegralLog::TYPE_SIGN_IN],
+                ['created_at','>',date('Y-m-d 00:00:00')],
+            ])->first() ? 1 : 0,
+        ]);
     }
 
     /**
