@@ -32,4 +32,19 @@ class IndexController extends InitController
 
         return SysCategoryRescource::collection($category);
     }
+
+    /**
+     * 我的积分
+     */
+    public function integral(){
+        $user = \Auth::user();
+
+        return $this->success('success',null,[
+            'user' => new UserResource($user),
+            'lists' => User\UserIntegralLog::where([
+                ['type','=',User\UserIntegralLog::TYPE_SIGN_IN],
+                ['created_at','>',date('Y-m-d 00:00:00')],
+            ])->get(),
+        ]);
+    }
 }
