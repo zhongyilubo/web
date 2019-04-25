@@ -13,7 +13,8 @@ class User extends Base
     public function toArray($request)
     {
         return [
-            'id' => $this->id ?? 0
+            'id' => $this->id ?? 0,
+            'integral' => $this->integral ?? 0,
         ];
     }
 }

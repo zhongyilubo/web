@@ -32,6 +32,7 @@ class IntegralService
 
         if(User\UserIntegralLog::where([
             ['type','=',User\UserIntegralLog::TYPE_SIGN_IN],
+            ['user_id','=',$user->id],
             ['created_at','>',date('Y-m-d 00:00:00')],
         ])->first()){
             throw new \Exception('已经签到');
@@ -50,6 +51,7 @@ class IntegralService
 
         $today = User\UserIntegralLog::where([
             ['type','>',10],
+            ['user_id','=',$user->id],
             ['created_at','>',date('Y-m-d 00:00:00')],
         ])->sum('integral');
 
@@ -70,7 +72,7 @@ class IntegralService
             'type' => $type,
             'integral' => $number,
             'integral_new' => $user->integral,
-            'content' => 1,
+            'content' => $remark,
         ]);
 
         $user->save();

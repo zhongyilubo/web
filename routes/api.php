@@ -28,4 +28,5 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('userinfo', 'LoginController@userinfo');
     Route::post('sign', 'LoginController@sign');
     Route::post('integral', 'IndexController@integral');
+    Route::post('integral/delete/{model}', 'IndexController@integralDelete');
 });

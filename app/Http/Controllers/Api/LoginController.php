@@ -89,6 +89,7 @@ class LoginController extends InitController{
             'user' => new UserResource($user),
             'issign' => User\UserIntegralLog::where([
                 ['type','=',User\UserIntegralLog::TYPE_SIGN_IN],
+                ['user_id','=',$user->id],
                 ['created_at','>',date('Y-m-d 00:00:00')],
             ])->first() ? 1 : 0,
         ]);
