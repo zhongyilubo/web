@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
@@ -57,6 +58,63 @@ class IndexController extends InitController
         }
         $model->status = 0;
         $model->save();
+        return $this->success('success');
+    }
+
+    /**
+     * tel
+     */
+    public function tel(){
+        $conf = @file_get_contents('tel.txt');
+        $model = $conf ? json_decode($conf,true):[];
+        return $this->success('success',null,$model);
+    }
+
+    /**
+     * buy 购买详情
+     */
+    public function buy(Request $request){
+        $user = \Auth::user();
+        $cid = $request->cid ?? 0;
+        $data = GdsGood::whereHas('order',function ($query) use ($user){
+            $query->where('user_id',$user->id);
+        });
+        $cid && $data = $data->where('category_id',$cid);
+        return $this->success('success',null,GdsGoodRescource::collection($data->get()));
+    }
+
+    /**
+     * 积分规则
+     */
+    public function rule(){
+        $conf = @file_get_contents('score.txt');
+        $model = $conf ? json_decode($conf,true):[];
+        return $this->success('success',null,$model);
+    }
+
+    /**
+     * 清除缓存
+     */
+    public function clearcatch(){
+        sleep(2);
+        return $this->success('清除成功');
+    }
+
+    /**
+     * 消息通知
+     */
+    public function message(){
+        $user = \Auth::user();
+        return $this->success('success',null,[
+            'type' => $user->job_number == 1 ? 1:0
+        ]);
+    }
+
+    public function changemessage(Request $request){
+        $user = \Auth::user();
+
+        $user->job_number = $request->type ?? 0;
+        $user->save();
         return $this->success('success');
     }
 }

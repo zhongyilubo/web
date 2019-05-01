@@ -29,4 +29,10 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('sign', 'LoginController@sign');
     Route::post('integral', 'IndexController@integral');
     Route::post('integral/delete/{model}', 'IndexController@integralDelete');
+    Route::post('tel', 'IndexController@tel');
+    Route::post('buy', 'IndexController@buy');
+    Route::post('rule', 'IndexController@rule');
+    Route::post('clearcatch', 'IndexController@clearcatch');
+    Route::post('message', 'IndexController@message');
+    Route::post('message/change', 'IndexController@changemessage');
 });

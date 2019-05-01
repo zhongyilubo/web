@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\ModelQueryExtend;
+use App\Models\Ord\OrdOrder;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -79,5 +80,12 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * 获取用户订单
+     */
+    public function order(){
+        return $this->hasMany(OrdOrder::class,'user_id');
     }
 }

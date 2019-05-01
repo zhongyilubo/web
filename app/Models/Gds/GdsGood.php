@@ -9,6 +9,7 @@
 namespace App\Models\Gds;
 
 use App\Models\Model;
+use App\Models\Ord\OrdOrder;
 use App\Models\System\SysCategory;
 
 class GdsGood extends Model
@@ -39,5 +40,9 @@ class GdsGood extends Model
 
     public function skus(){
         return $this->hasMany(GdsSku::class,'goods_id');
+    }
+
+    public function order(){
+        return $this->belongsToMany(OrdOrder::class,'ord_order_items','spu_id','order_id');
     }
 }
