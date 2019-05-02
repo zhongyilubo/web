@@ -33,6 +33,7 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('buy', 'IndexController@buy');
     Route::post('rule', 'IndexController@rule');
     Route::post('clearcatch', 'IndexController@clearcatch');
+    Route::post('question', 'IndexController@question');
     Route::post('message', 'IndexController@message');
     Route::post('message/change', 'IndexController@changemessage');
 });

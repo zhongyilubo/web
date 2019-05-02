@@ -10,12 +10,14 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use App\Models\User\UserCallback;
 use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
 use App\Resources\System\SysCategory as SysCategoryRescource;
 use App\Resources\User as UserResource;
+use Illuminate\Support\Facades\Validator;
 
 class IndexController extends InitController
 {
@@ -113,8 +115,46 @@ class IndexController extends InitController
     public function changemessage(Request $request){
         $user = \Auth::user();
 
+        if(!isset($request->type)){
+            return $this->error('缺少状态参数');
+        }
         $user->job_number = $request->type ?? 0;
         $user->save();
         return $this->success('success');
+    }
+
+    public function question(Request $request){
+
+        $data = [
+            'content' => $request->content,
+            'mobile' => $request->mobile,
+            'name' => $request->name,
+        ];
+
+        $rules = [
+            'content' => 'required',
+            'mobile' => 'required',
+            'name' => 'required',
+        ];
+        $messages = [
+            'name.required' => '请输入姓名',
+            'content.required' => '请输入问题',
+            'mobile.required' => '请输入联系方式',
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first(), null, true);
+        }
+        $user = \Auth::user();
+
+        UserCallback::saveBy([
+            'user_id' => $user->id ?? 0,
+            'name' => $data['name'],
+            'mobile' => $data['mobile'],
+            'content' => $data['content'],
+        ]);
+
+        return $this->success('提交成功');
     }
 }
