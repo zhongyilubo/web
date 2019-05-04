@@ -24,8 +24,12 @@ class OrdOrder extends Model
         return $value/100;
     }
 
-    public function item(){
+    public function items(){
         return $this->hasMany(OrdOrderItem::class,'order_id');
+    }
+
+    public function item(){
+        return $this->hasOne(OrdOrderItem::class,'order_id');
     }
 
 }

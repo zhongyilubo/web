@@ -9,9 +9,12 @@
 namespace App\Models\Ord;
 
 
+use App\Models\Gds\GdsGood;
 use App\Models\Model;
 
 class OrdOrderItem extends Model
 {
-
+    public function good(){
+        return $this->belongsTo(GdsGood::class,'spu_id');
+    }
 }

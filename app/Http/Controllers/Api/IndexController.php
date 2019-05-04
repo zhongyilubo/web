@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Gds\GdsGood;
 use App\Models\User\UserCallback;
+use App\Models\User\UserMessage;
 use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
@@ -18,6 +19,7 @@ use App\Resources\Gds\GdsGood as GdsGoodRescource;
 use App\Resources\System\SysCategory as SysCategoryRescource;
 use App\Resources\User as UserResource;
 use Illuminate\Support\Facades\Validator;
+use App\Resources\User\UserMessage as UserMessageRescource;
 
 class IndexController extends InitController
 {
@@ -156,5 +158,14 @@ class IndexController extends InitController
         ]);
 
         return $this->success('提交成功');
+    }
+
+    public function mlists(){
+        $user = \Auth::user();
+        return UserMessageRescource::collection($user->message);
+    }
+
+    public function dmessage(Request $request,UserMessage $model = null){
+        return new UserMessageRescource($model);
     }
 }
