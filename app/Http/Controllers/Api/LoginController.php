@@ -24,12 +24,12 @@ class LoginController extends InitController{
     public function login(Request $request)
     {
 
-        $appid = 'wxf8d08695c2d862f4'; //填写微信小程序appid
-        $secret = 'ea09ddae2a1b1bf743766455181f89ae'; //填写微信小程序secret
+//        $appid = 'wxf8d08695c2d862f4'; //填写微信小程序appid
+//        $secret = 'ea09ddae2a1b1bf743766455181f89ae'; //填写微信小程序secret
 
 
-//        $appid = 'wx1c7c48b523714138'; //填写微信小程序appid  正式服
-//        $secret = '3ae529b648adbe027bda06cec84d061a'; //填写微信小程序secret
+        $appid = 'wx1c7c48b523714138'; //填写微信小程序appid  正式服
+        $secret = '3ae529b648adbe027bda06cec84d061a'; //填写微信小程序secret
 
         $code = $request->code ?? '';
 
