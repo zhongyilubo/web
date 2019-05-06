@@ -168,4 +168,14 @@ class IndexController extends InitController
     public function dmessage(Request $request,UserMessage $model = null){
         return new UserMessageRescource($model);
     }
+
+    /**
+     * 商品列表
+     */
+    public function goods(Request $request){
+        $cid = $request->cid ?? 0;
+        $data = GdsGood::where('id','>',0);
+        $cid && $data = $data->where('category_id',$cid);
+        return $this->success('success',null,GdsGoodRescource::collection($data->get()));
+    }
 }
