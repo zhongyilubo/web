@@ -34,6 +34,7 @@ class GdsGood extends Base
             'cover' => $this->skus->first()->url ?? '',
             'date' => date('m-d',strtotime($this->created_at)),
             'timer' => $this->timer_longs,
+            'pay' => $this->pay,
             'pay_name' => $this->pay_name,
             'pay_view' => $this->pay_view,
             'sons' => $this->skus,

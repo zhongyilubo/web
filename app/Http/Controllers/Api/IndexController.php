@@ -13,6 +13,7 @@ use App\Models\Gds\GdsGood;
 use App\Models\Ord\OrdOrder;
 use App\Models\User\UserCallback;
 use App\Models\User\UserMessage;
+use App\Models\User\UserShare;
 use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
@@ -203,14 +204,25 @@ class IndexController extends InitController
         $ispay = ($model->pay == 1 || !$buys->isEmpty())?1:0;
 
         //是否分享
-
+        $isshare = UserShare::where([
+            'user_id' => $user->id ?? 0,
+            'spu_id' => $model->id ?? 0,
+        ])->first()? 1 :0;
         //逻辑处理
-        $ispay == 1 && $isshare = 1;
 
         return $this->success('success',null,[
             'cover' => $poster,
             'ispay' => $ispay,
             'isshare' => $isshare,
         ]);
+    }
+
+    public function share(GdsGood $model = null){
+        $user = \Auth::user();
+        UserShare::firstOrCreate([
+            'user_id' => $user->id ?? 0,
+            'spu_id' => $model->id ?? 0,
+        ]);
+        return $this->success('success',null,$user);
     }
 }
