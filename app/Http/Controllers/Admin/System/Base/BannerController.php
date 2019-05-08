@@ -31,4 +31,16 @@ class BannerController extends InitController
 
         return $this->success('设置成功');
     }
+
+    public function poster(Request $request){
+        if($request->isMethod('get')) {
+            $conf = @file_get_contents('poster.txt');
+            $model = $conf ? json_decode($conf,true):[];
+            return view( $this->template. __FUNCTION__,compact('model'));
+        }
+        $data = $request->data;
+        file_put_contents('poster.txt',json_encode($data));
+
+        return $this->success('设置成功');
+    }
 }

@@ -25,11 +25,18 @@ class GdsGood extends Base
             'id' => $this->id ?? 0,
             'name' => $this->name ?? '',
             'price' => $this->price ?? '',
+            'video' => explode('?',$this->skus->first()->url)[0],
             'teacher' => $this->teacher ?? '',
             'type' => $this->type ?? '',
             'number' => $this->number ?? 0,
+            'intro' => $this->intro ?? '暂无简介',
             'type_name' => $this->type == 1 ? '单课' :'系列课',
             'cover' => $this->skus->first()->url ?? '',
+            'date' => date('m-d',strtotime($this->created_at)),
+            'timer' => $this->timer_longs,
+            'pay_name' => $this->pay_name,
+            'pay_view' => $this->pay_view,
+            'sons' => $this->skus,
         ];
     }
 

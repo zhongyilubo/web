@@ -178,4 +178,29 @@ class IndexController extends InitController
         $cid && $data = $data->where('category_id',$cid);
         return $this->success('success',null,GdsGoodRescource::collection($data->get()));
     }
+
+    public function detail(GdsGood $model = null){
+        $model->number++;
+        $model->save();
+        return $this->success('success',null,new GdsGoodRescource($model));
+
+    }
+
+    /**
+     * 是否购买/分享
+     */
+    public function isbuyed(GdsGood $model = null){
+        //分享海报
+        $conf = @file_get_contents('poster.txt');
+        $model = $conf ? json_decode($conf,true):[];
+        //是否支付
+
+        //是否分享
+
+        return $this->success('success',null,[
+            'cover' => $model,
+            'ispay' => 0,
+            'isshare' => 1,
+        ]);
+    }
 }

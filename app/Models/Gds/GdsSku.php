@@ -12,11 +12,17 @@ use App\Models\Model;
 
 class GdsSku extends Model
 {
-    protected $appends = ['pay_name','timer_long'];
+    protected $appends = ['pay_name','timer_long','pay_view'];
 
     public function setPriceAttribute($value)
     {
         $this->attributes['price'] = $value*100;
+    }
+
+
+    public function getPayViewAttribute()
+    {
+        return $this->pay == 1 ? '免费' : '购买后观看';
     }
 
     public function getTimerLongAttribute(){

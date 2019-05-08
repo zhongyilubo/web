@@ -39,4 +39,6 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('message/lists', 'IndexController@mlists');
     Route::post('message/detail/{model}', 'IndexController@dmessage');
     Route::post('goods', 'IndexController@goods');
+    Route::post('detail/{model}', 'IndexController@detail');
+    Route::post('goods/buyed/{model}', 'IndexController@isbuyed');
 });

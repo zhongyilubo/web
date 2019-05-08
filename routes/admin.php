@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('score', ['as' => 'score', 'uses' => 'ScoreController@index']);
                 Route::any('tel', ['as' => 'tel', 'uses' => 'TelController@index']);
                 Route::any('banner', ['as' => 'banner', 'uses' => 'BannerController@index']);
+                Route::any('poster', ['as' => 'poster', 'uses' => 'BannerController@poster']);
             });
 
             Route::group(['prefix' => 'alert', 'as' => 'alert.', 'namespace' => 'Alert'], function(){
