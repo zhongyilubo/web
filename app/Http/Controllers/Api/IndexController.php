@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use App\Models\Ord\OrdOrder;
 use App\Models\User\UserCallback;
 use App\Models\User\UserMessage;
 use Illuminate\Http\Request;
@@ -190,17 +191,26 @@ class IndexController extends InitController
      * 是否购买/分享
      */
     public function isbuyed(GdsGood $model = null){
+        $user = \Auth::user();
         //分享海报
         $conf = @file_get_contents('poster.txt');
-        $model = $conf ? json_decode($conf,true):[];
+        $poster = $conf ? json_decode($conf,true):[];
         //是否支付
+        $buys = OrdOrder::where('user_id',$user['id'])->whereHas('items',function ($query)use($model){
+            $query->where('spu_id',$model['id']);
+        })->get();
+
+        $ispay = ($model->pay == 1 || !$buys->isEmpty())?1:0;
 
         //是否分享
 
+        //逻辑处理
+        $ispay == 1 && $isshare = 1;
+
         return $this->success('success',null,[
-            'cover' => $model,
-            'ispay' => 0,
-            'isshare' => 1,
+            'cover' => $poster,
+            'ispay' => $ispay,
+            'isshare' => $isshare,
         ]);
     }
 }
