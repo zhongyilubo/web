@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Gds\GdsGood;
+use App\Models\Gds\GdsSku;
 use App\Models\Ord\OrdOrder;
 use App\Models\User\UserCallback;
 use App\Models\User\UserMessage;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
+use App\Resources\Gds\GdsSku as GdsSkuRescource;
 use App\Resources\System\SysCategory as SysCategoryRescource;
 use App\Resources\User as UserResource;
 use Illuminate\Support\Facades\Validator;
@@ -186,6 +188,12 @@ class IndexController extends InitController
         $model->save();
         return $this->success('success',null,new GdsGoodRescource($model));
 
+    }
+
+    public function detailsku(GdsSku $model = null){
+        $model->number++;
+        $model->save();
+        return $this->success('success',null,new GdsSkuRescource($model));
     }
 
     /**

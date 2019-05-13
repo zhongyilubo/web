@@ -12,7 +12,7 @@ use App\Models\Model;
 
 class GdsSku extends Model
 {
-    protected $appends = ['pay_name','timer_long','pay_view'];
+    protected $appends = ['pay_name','timer_long','timer_longs','pay_view'];
 
     public function setPriceAttribute($value)
     {
@@ -27,6 +27,10 @@ class GdsSku extends Model
 
     public function getTimerLongAttribute(){
         return (floor($this->timer/60)).'分'.($this->timer%60)."秒";
+    }
+
+    public function getTimerLongsAttribute(){
+        return (floor($this->timer/60)).':'.($this->timer%60);
     }
 
     public function getPriceAttribute($value)
