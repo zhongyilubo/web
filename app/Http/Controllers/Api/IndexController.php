@@ -233,4 +233,23 @@ class IndexController extends InitController
         ]);
         return $this->success('success',null,$user);
     }
+
+    public function pay(GdsGood $model = null){
+
+        if($model->pay == 2){//weixin
+            return $this->weixin($model);
+        }else if($model->pay == 3){//jifen
+            return $this->jifen($model);
+        }else{
+            return $this->error('免费视频不用支付');
+        }
+    }
+
+    protected function weixin(GdsGood $model){
+
+    }
+
+    protected function jifen(GdsGood $model){
+
+    }
 }

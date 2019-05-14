@@ -43,4 +43,5 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('sku/detail/{model}', 'IndexController@detailsku');
     Route::post('goods/buyed/{model}', 'IndexController@isbuyed');
     Route::post('share/{model}', 'IndexController@share');
+    Route::post('pay/{model}', 'IndexController@pay');
 });
