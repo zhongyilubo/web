@@ -45,3 +45,7 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('share/{model}', 'IndexController@share');
     Route::post('pay/{model}', 'IndexController@pay');
 });
+
+Route::any('conf/video', function (){
+    return request()->all();
+});
