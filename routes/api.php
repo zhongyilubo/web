@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 Route::post('login', 'LoginController@login');
 Route::post('refresh', 'LoginController@refresh');
 Route::post('index', 'IndexController@index');
+Route::post('callback', 'IndexController@callback');
 
 Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('category', 'IndexController@category');

@@ -15,6 +15,7 @@ use App\Models\Ord\OrdOrder;
 use App\Models\User\UserCallback;
 use App\Models\User\UserMessage;
 use App\Models\User\UserShare;
+use App\Services\PayService;
 use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
 use App\Models\User\UserIntegralLog;
@@ -27,6 +28,11 @@ use App\Resources\User\UserMessage as UserMessageRescource;
 
 class IndexController extends InitController
 {
+    public function __construct(PayService $payService)
+    {
+        $this->payService = $payService;
+    }
+
     public function index(){
         $conf = @file_get_contents('banner.txt');
         $banner = $conf ? json_decode($conf,true):[];
@@ -246,10 +252,26 @@ class IndexController extends InitController
     }
 
     protected function weixin(GdsGood $model){
+        $user = \Auth::user();
 
+        return $this->payService->pay([
+            'openid' => $user->openid
+        ]);
     }
 
     protected function jifen(GdsGood $model){
+        $user = \Auth::user();
+        $buyIntegral = $model->price;
+        $hasIntegral = $user->integral ?? 0;
+        if($buyIntegral > $hasIntegral){
+            return $this->error('积分不足');
+        }
+    }
 
+    public function callback(Request $request){
+        $options = file_get_contents('php://input');
+        $options = (array)simplexml_load_string($options, 'SimpleXMLElement', LIBXML_NOCDATA);
+        info($options);
+        echo 'success';
     }
 }

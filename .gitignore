@@ -3,6 +3,7 @@
 /public/storage
 /public/score.txt
 /public/banner.txt
+/public/poster.txt
 /public/tel.txt
 /storage/*.key
 /storage/debugbar
