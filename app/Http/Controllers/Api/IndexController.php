@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Gds\GdsGood;
 use App\Models\Gds\GdsSku;
 use App\Models\Ord\OrdOrder;
+use App\Models\Ord\OrdOrderItem;
 use App\Models\User\UserCallback;
 use App\Models\User\UserMessage;
 use App\Models\User\UserShare;
@@ -25,6 +26,7 @@ use App\Resources\System\SysCategory as SysCategoryRescource;
 use App\Resources\User as UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Resources\User\UserMessage as UserMessageRescource;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends InitController
 {
@@ -92,6 +94,7 @@ class IndexController extends InitController
         $cid = $request->cid ?? 0;
         $data = GdsGood::whereHas('order',function ($query) use ($user){
             $query->where('user_id',$user->id);
+            $query->where('status','>',1);
         });
         $cid && $data = $data->where('category_id',$cid);
         return $this->success('success',null,GdsGoodRescource::collection($data->get()));
@@ -184,8 +187,10 @@ class IndexController extends InitController
      */
     public function goods(Request $request){
         $cid = $request->cid ?? 0;
+        $key = $request->key ?? 0;
         $data = GdsGood::where('id','>',0);
         $cid && $data = $data->where('category_id',$cid);
+        $key && $data = $data->where('name','like',"%{$key}%");
         return $this->success('success',null,GdsGoodRescource::collection($data->get()));
     }
 
@@ -211,7 +216,7 @@ class IndexController extends InitController
         $conf = @file_get_contents('poster.txt');
         $poster = $conf ? json_decode($conf,true):[];
         //是否支付
-        $buys = OrdOrder::where('user_id',$user['id'])->whereHas('items',function ($query)use($model){
+        $buys = OrdOrder::where('user_id',$user['id'])->where('status','>',1)->whereHas('items',function ($query)use($model){
             $query->where('spu_id',$model['id']);
         })->get();
 
@@ -253,10 +258,22 @@ class IndexController extends InitController
 
     protected function weixin(GdsGood $model){
         $user = \Auth::user();
+        try{
+            DB::beginTransaction();
 
-        return $this->payService->pay([
-            'openid' => $user->openid
-        ]);
+            $order = $this->mkOrder($user,$model,1);
+            $res = $this->payService->pay([
+                'openid' => $user->openid,
+                'serial' => $order->serial,
+                'total_fee' => $order->price,
+            ]);
+            DB::commit();
+            return $res;
+        }catch (\Exception $e) {
+            DB::rollback();
+            return $this->error($e->getMessage());
+        }
+
     }
 
     protected function jifen(GdsGood $model){
@@ -266,12 +283,59 @@ class IndexController extends InitController
         if($buyIntegral > $hasIntegral){
             return $this->error('积分不足');
         }
+
+        try{
+            DB::beginTransaction();
+
+            $order = $this->mkOrder($user,$model,2);
+            $user->integral -= $model->price;
+            $user->save();
+
+            $this->orderOk($order);
+            DB::commit();
+            return $this->success('success',null,[
+                'type' => 'jifen',
+            ]);
+        }catch (\Exception $e) {
+            DB::rollback();
+            return $this->error($e->getMessage());
+        }
+    }
+
+    protected function mkOrder($user,GdsGood $model,$paytype=1){
+        $serial = time().$user['id'];
+        $order = OrdOrder::saveBy([
+            'serial' => $serial,
+            'user_id' => $user['id'],
+            'mobile' => '',
+            'goods_name' => $model->name,
+            'pay_type' => $paytype,
+            'status' => 1,
+            'price' => $model->price,
+            'name' => $user['nickname'],
+        ]);
+        OrdOrderItem::saveBy([
+            'order_id' => $order['id'],
+            'spu_id' => $model['id'],
+        ]);
+
+        return $order;
+    }
+
+    protected function orderOk(OrdOrder $order = null){
+        $order->status = 5;
+        $order->payed_at = date('Y-m-d H:i:s');
+        $order->save();
     }
 
     public function callback(Request $request){
         $options = file_get_contents('php://input');
         $options = (array)simplexml_load_string($options, 'SimpleXMLElement', LIBXML_NOCDATA);
         info($options);
+        if($options['result_code'] == 'SUCCESS'){
+            $order = OrdOrder::where('serial',$options['out_trade_no'])->first();
+            $this->orderOk($order);
+        }
         echo 'success';
     }
 }

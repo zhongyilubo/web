@@ -20,13 +20,12 @@ class PayService
      */
     public function pay($config = null)
     {
-
         $this->wxpay = app('easywechat.payment');
 
         $unify = $this->wxpay->order->unify([
             'body'         => '中推在线订单',
-            'out_trade_no' => 'ORDT'.time(),
-            'total_fee'    => 1, // 总价
+            'out_trade_no' => $config['serial'],
+            'total_fee'    => $config['total_fee']*100, // 总价
             'trade_type' => 'JSAPI',
             'openid' => $config['openid'], // 用户的openid
         ]);
