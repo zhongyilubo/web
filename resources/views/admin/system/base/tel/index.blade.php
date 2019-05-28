@@ -16,9 +16,16 @@
                 <form name="profile-form" class="base_form layui-form" method="post" class="mtb20" >
 
                     <div class="form-group">
-                        <label class="col-xs-2 t_r"><span class="red">*</span>图片：</label>
+                        <label class="col-xs-2 t_r"><span class="red">*</span>电话：</label>
                         <div class="col-xs-3">
                             <input autocomplete="off" type="text" class="form-control" name="data[kefudianhua]"  value="{!! $model['kefudianhua'] ?? '' !!}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 t_r"><span class="red">*</span>IOS提示语：</label>
+                        <div class="col-xs-3">
+                            <input autocomplete="off" type="text" class="form-control" name="data[ios]"  value="{!! $model['ios'] ?? '' !!}">
                         </div>
                     </div>
 

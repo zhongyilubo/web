@@ -197,7 +197,11 @@ class IndexController extends InitController
     public function detail(GdsGood $model = null){
         $model->number++;
         $model->save();
-        return $this->success('success',null,new GdsGoodRescource($model));
+
+        $conf = @file_get_contents('tel.txt');
+        $need = $conf ? json_decode($conf,true):[];
+
+        return $this->success('success',$need,new GdsGoodRescource($model));
 
     }
 
