@@ -79,12 +79,12 @@
                     </div>
                     </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 t_r">支付方式：</label>
-                        <div class="col-xs-4">
-                            <label class="mr20"><input type="checkbox" name="data[pay]"  @if($sku['pay'] == 1) checked @endif value="1">免费</label>
-                         </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-xs-2 t_r">支付方式：</label>--}}
+                        {{--<div class="col-xs-4">--}}
+                            {{--<label class="mr20"><input type="checkbox" name="data[pay]"  @if($sku['pay'] == 1) checked @endif value="1">免费</label>--}}
+                         {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <label class="col-xs-2 t_r">&nbsp;</label>
                         <div class="col-xs-8">

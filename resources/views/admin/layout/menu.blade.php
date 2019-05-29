@@ -1,24 +1,15 @@
 <ul class="top-suspension">
     <li class="li-left top-picture">
         <a href="javascript:;">
-            {{--<img src="#" alt=""/>--}}
+            <img src="/images/basicprofile" alt=""/>
         </a>
     </li>
     <li class="li-left sixty"><a href=""> <i class="iconfont">&#xe640;</i></a></li>
     <li class="li-left sixty"><a href="#"> <i class="iconfont">&#xe604;</i></a></li>
     <li class="li-right hundred-three">
         {{$user['name'] ?? ' -- '}}<sup></sup>
-        <div class="account-information">
-            <a href="{{url('base/account/log')}}">登录日志</a>
-            <a href="{{url('base/account/password')}}">修改密码</a>
+        <div class="account-information" style="bottom: -34px;">
             <a href="{{url('logout')}}">退出</a>
-        </div>
-    </li>
-    <!-- 系统设置 -->
-    <li class="li-right sixty znx">
-        <i class='iconfont'>&#xe605;</i>
-        <div class="con-mail">
-            <a href="">@widget('message')</a>
         </div>
     </li>
 

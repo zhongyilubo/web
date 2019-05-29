@@ -24,7 +24,7 @@ define(function (require, exports, module) {
                 async: false,
                 dataType:'json',
                 success: function(json){
-                    if(!json.status){
+                    if(!json.accessid){
                         return message.error(json.message);
                     }
                     getData = json;
