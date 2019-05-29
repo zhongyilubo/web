@@ -45,6 +45,7 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('goods/buyed/{model}', 'IndexController@isbuyed');
     Route::post('share/{model}', 'IndexController@share');
     Route::post('pay/{model}', 'IndexController@pay');
+    Route::post('saveuserinfo', 'IndexController@saveuserinfo');
 });
 
 Route::any('conf/video', function (){

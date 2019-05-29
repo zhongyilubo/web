@@ -29,7 +29,7 @@
                             <thead>
                             <tr>
                                 <th  style="width: 8%">ID</th>
-                                <th  style="width: 12%">手机号</th>
+                                <th  style="width: 12%">状态</th>
                                 <th  style="width: 15%">昵称</th>
                                 <th  style="width: 15%">所在地</th>
                                 <th  style="width: 5%">性别</th>
@@ -42,12 +42,12 @@
                             @forelse($lists as $lv)
                                 <tr>
                                     <td>{{$lv['id'] ?? ' -- '}}</td>
-                                    <td>{{$lv['mobile'] ?? ' -- '}}</td>
+                                    <td>{{$lv['status'] == 1 ? '正常' : '禁用'}}</td>
                                     <td>{{$lv['nickname'] ?? ' -- '}}</td>
-                                    <td>{{$lv['id'] ?? ' -- '}}</td>
+                                    <td>{{$lv['mobile'] ?? ' -- '}}</td>
                                     <td>{{$lv['gender'] == 1?'男':'女'}}</td>
                                     <td>{{$lv['created_at'] ?? ' -- '}}</td>
-                                    <td>{{$lv['balance'] ?? ' -- '}}</td>
+                                    <td>{{$lv['integral'] ?? ' -- '}}</td>
                                     <td>
                                         @if($lv['status'] != \App\Models\User::USER_STATUS_STOP)
                                             <a class="do_action" data-confirm="确定要冻结吗？" data-url="{!! url('member/manage/user/close',['user'=>$lv['id']]) !!}">冻结</a>

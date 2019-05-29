@@ -342,4 +342,12 @@ class IndexController extends InitController
         }
         echo 'success';
     }
+
+    public function saveuserinfo(Request $request){
+        $user = \Auth::user();
+        $user->mobile = ($request->province ?? '') . ($request->city ?? '');
+        $user->nickname = $request->nickName;
+        $user->avatar = $request->avatarUrl;
+        $user->save();
+    }
 }
