@@ -28,7 +28,7 @@
                             <select name="data[category_id]" class="select-change-style w160" @if(!empty($model['id'])) disabled="disabled" @endif >
                                 <option value="0">---请选择----</option>
                                 @foreach($categories as $item)
-                                    <option value="{{$item['id']}}" @if($model['id'] == $item['id']) selected @endif >{{'|' . str_repeat(' -- ',$item['level'])}}{{$item['name']}}</option>
+                                    <option value="{{$item['id']}}" @if($model['category_id'] == $item['id']) selected @endif >{{'|' . str_repeat(' -- ',$item['level'])}}{{$item['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
