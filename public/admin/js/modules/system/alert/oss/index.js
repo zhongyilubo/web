@@ -192,7 +192,7 @@ define(function(require, exports, module) {
                                     </div>';
                                 }else if(/video\//.test(data.data[i].mime_type)){
                                     str += '<div class="img-item-box">\
-                                    <img src="'+data.data[i].host+data.data[i].path+'?x-oss-process=video/snapshot,t_0">\
+                                    <img src="'+data.data[i].host+data.data[i].path+'?x-oss-process=video/snapshot,t_6000">\
                                     <p>'+data.data[i].title+'</p>\
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>\
                                     </div>';

@@ -29,18 +29,20 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th  style="width: 20%">名称</th>
+                                <th  style="width: 8%">ID</th>
+                                <th  style="width: 22%">名称</th>
                                 <th  style="width: 10%">主讲人</th>
-                                <th  style="width: 15%">时长</th>
+                                <th  style="width: 10%">时长</th>
                                 <th  style="width: 10%">价格</th>
                                 <th  style="width: 10%">支付方式</th>
                                 <th  style="width: 15%">所属分类</th>
-                                <th  style="width: 20%">操作</th>
+                                <th  style="width: 15%">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($lists as $lv)
                                 <tr>
+                                    <td>{{$lv['id'] ?? ''}}</td>
                                     <td>{{$lv['name'] ?? ''}}</td>
                                     <td>{{$lv['teacher'] ?? ''}}</td>
                                     <td>{{$lv['timer_long'] ?? ''}}</td>

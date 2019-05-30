@@ -202,7 +202,7 @@ define(function (require, exports, module) {
                         if (/image\//.test(file.type)){
                             $('#'+file.id).find('img').attr('src',host+get_uploaded_object_name(file.name));
                         }else if(/video\//.test(file.type)){
-                            $('#'+file.id).find('img').attr('src',host+get_uploaded_object_name(file.name)+'?x-oss-process=video/snapshot,t_0');
+                            $('#'+file.id).find('img').attr('src',host+get_uploaded_object_name(file.name)+'?x-oss-process=video/snapshot,t_6000');
                         }
                     } else if (info.status == 203) {
                         console.log('上传到OSS成功，但是oss访问用户设置的上传回调服务器失败，失败原因是:' + info.response);
