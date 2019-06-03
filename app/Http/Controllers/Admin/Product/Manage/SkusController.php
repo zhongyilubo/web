@@ -56,7 +56,9 @@ class SkusController extends InitController
         if ($validator->fails()) {
             return $this->error($validator->errors()->first(), null, true);
         }
-
+        $data['intro'] || $data['intro'] = '';
+        $data['timer'] || $data['timer'] = 100;
+        $data['sorts'] || $data['sorts'] = 0;
         try {
             $data['goods_id'] = $model['id'];
             $data['pay'] = $data['pay'] ?? $model['pay'];

@@ -69,6 +69,9 @@ class GoodsController extends InitController
         }
 
         try {
+            $data['intro'] || $data['intro'] = '';
+            $data['timer'] || $data['timer'] = 100;
+            $data['sorts'] || $data['sorts'] = 0;
             GdsGood::saveBy($data);
             return $this->success('操作成功',url('product/manage/goods'));
         }catch (\Exception $e) {
