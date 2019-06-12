@@ -190,7 +190,7 @@ define(function(require, exports, module) {
                                     <p>'+data.data[i].title+'</p>\
                                     <i class="iconfont img-mark icon-fuxuankuang1"></i>\
                                     </div>';
-                                }else if(/video\//.test(data.data[i].mime_type)){
+                                }else if(/video\//.test(data.data[i].mime_type) || data.data[i].file_tail == 'mkv'){
                                     str += '<div class="img-item-box">\
                                     <img src="'+data.data[i].host+data.data[i].path+'?x-oss-process=video/snapshot,t_6000">\
                                     <p>'+data.data[i].title+'</p>\

@@ -14,4 +14,13 @@ class SysMedia extends Model
 {
     const MEDIA_TYPE_DIR = 1;
     const MEDIA_TYPE_FILE = 2;
+
+    protected $appends = ['file_tail'];
+
+    public function getFileTailAttribute()
+    {
+        $file = explode('.',$this->path);
+        return end($file);
+    }
+
 }
