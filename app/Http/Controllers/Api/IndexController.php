@@ -236,7 +236,7 @@ class IndexController extends InitController
         return $this->success('success',null,[
             'cover' => $poster,
             'ispay' => $ispay,
-            'isshare' => $isshare,
+            'isshare' => 1 ?? $isshare,
         ]);
     }
 
