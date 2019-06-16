@@ -43,6 +43,36 @@ class IndexController extends InitController
             'banner' => $banner,
             'hot' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('sorts','DESC')->take(2)->get()),
             'new' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('id','DESC')->take(4)->get()),
+            'version' => 0,
+            'join' => [
+                [
+                    'id' => 1,
+                    'name' => '5.15公司台球比赛',
+                    'date' => '5.15 - 5.18',
+                    'teacher' => '组织人:彭勇',
+                    'number' => '成功申报:12',
+                    'type_name' => '已结束',
+                    'cover' => 'https://zhongtuizaixian.oss-cn-beijing.aliyuncs.com/201906/16/ZXBnPYNEAc.jpg',
+                ],
+                [
+                    'id' => 2,
+                    'name' => '6.23公司礼仪培训',
+                    'date' => '6.23 - 6.23',
+                    'teacher' => '组织人:彭勇',
+                    'number' => '成功申报:1',
+                    'type_name' => '进行中',
+                    'cover' => 'https://zhongtuizaixian.oss-cn-beijing.aliyuncs.com/201906/16/TkyMCT6HPB.jpg',
+                ],
+                [
+                    'id' => 3,
+                    'name' => '7.10公司篮球比赛',
+                    'date' => '7.10 - 7.10',
+                    'teacher' => '组织人:彭勇',
+                    'number' => '成功申报:6',
+                    'type_name' => '未开始',
+                    'cover' => 'https://zhongtuizaixian.oss-cn-beijing.aliyuncs.com/201906/16/bWsExMGWKJ.jpg',
+                ],
+            ]
         ]);
     }
 
@@ -173,6 +203,33 @@ class IndexController extends InitController
         return $this->success('提交成功');
     }
 
+    public function question2(Request $request){
+
+        $data = [
+            'area' => $request->area,
+            'mobile' => $request->mobile,
+            'name' => $request->name,
+        ];
+
+        $rules = [
+            'area' => 'required',
+            'mobile' => 'required',
+            'name' => 'required',
+        ];
+        $messages = [
+            'name.required' => '请输入姓名',
+            'area.required' => '请输入部门',
+            'mobile.required' => '请输入联系方式',
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first(), null, true);
+        }
+
+        return $this->success('提交成功，请等待组织人与你联系核实');
+    }
+
     public function mlists(){
         $user = \Auth::user();
         return UserMessageRescource::collection($user->message);
@@ -236,7 +293,7 @@ class IndexController extends InitController
         return $this->success('success',null,[
             'cover' => $poster,
             'ispay' => $ispay,
-            'isshare' => 1 ?? $isshare,
+            'isshare' => $isshare,
         ]);
     }
 
