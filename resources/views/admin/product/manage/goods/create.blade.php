@@ -34,6 +34,28 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-xs-2 t_r">封面：</label>
+                        <div class="col-xs-9">
+                            <ul class="multimage-gallery clearfix" id="photo-list">
+                                <li id="image_box" class="my-upload-img">
+                                    @if(!empty($model['image']))
+                                            <span class="self-add-img">
+                            <img src="{{$model['image']}}">
+                            <input type="hidden" name="data[image]" value="{{$model['image']}}">
+                            <span hidden="" class="img-delete">
+                                <i class="icon-shanchu iconfont"></i>
+                            </span>
+                        </span>
+                                    @endif
+                                </li>
+                                <li @if(isset($model['image'])) hidden @endif class="image-upload-add" data-num="1" data-box="image_box" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[image]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
+                                    <a class="tra_photofile">上传图片</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="form-group category-msg-l1">
                         <label class="col-xs-2 t_r"><span class="red">*</span>课程名称：</label>
                         <div class="col-xs-4">
@@ -115,6 +137,7 @@
         var __seajs_debug = 1;
         seajs.use("/admin/js/app.js", function (app) {
             app.bootstrap();
+            app.load('core/upload');
         });
 
     </script>
