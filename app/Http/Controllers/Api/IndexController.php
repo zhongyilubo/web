@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Models\Gds\GdsComment;
 use App\Models\Gds\GdsGood;
 use App\Models\Gds\GdsSku;
 use App\Models\Ord\OrdOrder;
@@ -35,6 +36,38 @@ class IndexController extends InitController
         $this->payService = $payService;
     }
 
+    public function comment(Request $request){
+        $data = [
+            'content' => $request->content,
+            'goodsid' => $request->goodsid,
+            'backid' => $request->backid,
+        ];
+
+        $rules = [
+            'content' => 'required',
+            'goodsid' => 'required',
+        ];
+        $messages = [
+            'content.required' => '请输入评论',
+            'goodsid.required' => '缺少ID',
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->first(), null, true);
+        }
+        $user = \Auth::user();
+
+        GdsComment::saveBy([
+            'user_id' => $user->id ?? 0,
+            'order_id' => $data['backid'] ?? 0,
+            'spu_id' => $data['goodsid'],
+            'content' => $data['content'],
+        ]);
+
+        return $this->success('提交成功');
+    }
+
     public function index(){
         $conf = @file_get_contents('banner.txt');
         $banner = $conf ? json_decode($conf,true):[];
@@ -43,7 +76,7 @@ class IndexController extends InitController
             'banner' => $banner,
             'hot' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('sorts','DESC')->take(2)->get()),
             'new' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('id','DESC')->take(4)->get()),
-            'version' => 0,
+            'version' => 1,
             'join' => [
                 [
                     'id' => 1,

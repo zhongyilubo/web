@@ -52,4 +52,8 @@ class GdsGood extends Model
     public function order(){
         return $this->belongsToMany(OrdOrder::class,'ord_order_items','spu_id','order_id');
     }
+
+    public function comment(){
+        return $this->hasMany(GdsComment::class,'spu_id');
+    }
 }

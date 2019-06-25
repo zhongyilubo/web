@@ -38,6 +38,7 @@ class GdsGood extends Base
             'pay_name' => $this->pay_name,
             'pay_view' => $this->pay_view,
             'sons' => $this->skus,
+            'comment' => GdsComment::collection($this->comment)
         ];
     }
 

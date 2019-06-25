@@ -20,4 +20,8 @@ class GdsComment extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function parent(){
+        return $this->belongsTo(GdsComment::class,'order_id');
+    }
 }
