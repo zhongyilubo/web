@@ -25,7 +25,7 @@ class UserController extends InitController
         $name = $request->name ?? '';
         $lists = User::where('type',User::USER_TYPE_MEMBER)->where(function ($query)use($name){
             $name && $query->where('mobile',$name)->orWhere('nickname','like',"%{$name}%");
-        })->whereIn('status',[User::USER_STATUS_OPEN,User::USER_STATUS_STOP])->paginate(self::PAGESIZE);
+        })->whereIn('status',[User::USER_STATUS_OPEN,User::USER_STATUS_STOP])->orderBy('id','DESC')->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 

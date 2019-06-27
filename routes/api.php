@@ -48,6 +48,7 @@ Route::group(['middleware' => ['jwt.auth']], function ($api) {
     Route::post('pay/{model}', 'IndexController@pay');
     Route::post('saveuserinfo', 'IndexController@saveuserinfo');
     Route::post('comment', 'IndexController@comment');
+    Route::post('tozan', 'IndexController@tozan');
 });
 
 Route::any('conf/video', function (){

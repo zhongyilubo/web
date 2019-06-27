@@ -65,6 +65,9 @@
                     </div>
                 </div>
                 <!--tab 切换1 end-->
+                @if(!$lists->isEmpty())
+                    {!! $lists->appends(request()->all())->render() !!}
+                @endif
             </div>
             <!--right end-->
         </div>

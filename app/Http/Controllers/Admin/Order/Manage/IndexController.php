@@ -24,7 +24,7 @@ class IndexController extends InitController
         $name = $request->name ?? '';
         $lists = OrdOrder::where(function ($query)use($name){
             $name && $query->where('mobile',$name)->orWhere('serial',$name)->orWhere('goods_name','like',"%{$name}%");
-        })->paginate(self::PAGESIZE);
+        })->orderBy('id','DESC')->paginate(self::PAGESIZE);
         return view( $this->template. __FUNCTION__,compact('lists'));
     }
 }

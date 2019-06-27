@@ -24,4 +24,8 @@ class GdsComment extends Model
     public function parent(){
         return $this->belongsTo(GdsComment::class,'order_id');
     }
+
+    public function zan(){
+        return $this->hasMany(GdsZan::class,'comment_id');
+    }
 }

@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Gds\GdsComment;
 use App\Models\Gds\GdsGood;
 use App\Models\Gds\GdsSku;
+use App\Models\Gds\GdsZan;
 use App\Models\Ord\OrdOrder;
 use App\Models\Ord\OrdOrderItem;
 use App\Models\User\UserCallback;
@@ -28,12 +29,42 @@ use App\Resources\User as UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Resources\User\UserMessage as UserMessageRescource;
 use Illuminate\Support\Facades\DB;
+use App\Services\IntegralService;
 
 class IndexController extends InitController
 {
-    public function __construct(PayService $payService)
+    public function __construct(
+        PayService $payService,
+        IntegralService $integralService = null
+    )
     {
         $this->payService = $payService;
+        $this->integralService = $integralService;
+    }
+
+    public function tozan(Request $request){
+        $id = $request->id ?? 0;
+        $sign = $request->sign ?? 0;
+
+        $user = \Auth::user();
+
+
+        if($sign){
+            //添加
+            GdsZan::saveBy([
+                'comment_id' => $id,
+                'user_id' => $user->id,
+                'spu_id' => 0,
+            ]);
+        }else{
+            //删除
+            GdsZan::where([
+                'comment_id' => $id,
+                'user_id' => $user->id,
+            ])->delete();
+        }
+        return $this->success('提交成功');
+
     }
 
     public function comment(Request $request){
@@ -64,6 +95,9 @@ class IndexController extends InitController
             'spu_id' => $data['goodsid'],
             'content' => $data['content'],
         ]);
+
+        $this->integralService->pinglun($user);
+
 
         return $this->success('提交成功');
     }
@@ -336,6 +370,8 @@ class IndexController extends InitController
             'user_id' => $user->id ?? 0,
             'spu_id' => $model->id ?? 0,
         ]);
+        $this->integralService->share($user);
+
         return $this->success('success',null,$user);
     }
 

@@ -44,6 +44,21 @@ class IntegralService
     }
 
     /**
+     * 分享积分
+     */
+    public function share(User $user = null){
+        //进行分享
+        $this->setIntegralIn($user,$this->config['fenxiang'] ?? 0,User\UserIntegralLog::TYPE_SIGN_IN,'分享 获得'.($this->config['fenxiang'] ?? 0).'积分');
+    }
+
+    /**
+     * 评论积分
+     */
+    public function pinglun(User $user = null){
+        $this->setIntegralIn($user,$this->config['pinglun'] ?? 0,User\UserIntegralLog::TYPE_SIGN_IN,'评论 获得'.($this->config['pinglun'] ?? 0).'积分');
+    }
+
+    /**
      * @param int $number
      * 写入积分与备注 收入
      */

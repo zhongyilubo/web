@@ -56,4 +56,8 @@ class GdsGood extends Model
     public function comment(){
         return $this->hasMany(GdsComment::class,'spu_id');
     }
+
+    public function zan(){
+        return $this->hasMany(GdsZan::class,'spu_id');
+    }
 }

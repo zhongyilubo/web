@@ -22,8 +22,8 @@ class GdsComment extends Base
             'time' => (string)$this->created_at ?? ' -- ',
             'pname' => $this->parent->user->nickname ?? '',
             'content' => $this->content ?? ' -- ',
-            'zan' => 0,
-            'selfzan' => 0,
+            'zan' => $this->zan->count(),
+            'selfzan' => $this->zan->where('user_id',$this->user_id)->count(),
         ];
     }
 }
