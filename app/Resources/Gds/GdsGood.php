@@ -30,6 +30,7 @@ class GdsGood extends Base
             'type' => $this->type ?? '',
             'number' => $this->number ?? 0,
             'intro' => $this->intro ?? '暂无简介',
+            'intro_images' => $this->intro_images ?? [],
             'type_name' => $this->type == 1 ? '单课' :'系列课',
             'cover' => $this->image ?? '',
             'date' => date('m-d',strtotime($this->created_at)),

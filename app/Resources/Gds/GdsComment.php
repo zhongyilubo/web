@@ -15,6 +15,7 @@ class GdsComment extends Base
 {
     public function toArray($request)
     {
+        $user = \Auth::user();
         return [
             'id' => $this->id ?? 0,
             'name' => $this->user->nickname ?? ' -- ',
@@ -23,7 +24,7 @@ class GdsComment extends Base
             'pname' => $this->parent->user->nickname ?? '',
             'content' => $this->content ?? ' -- ',
             'zan' => $this->zan->count(),
-            'selfzan' => $this->zan->where('user_id',$this->user_id)->count(),
+            'selfzan' => $this->zan->where('user_id',$user->id ?? 0)->count(),
         ];
     }
 }

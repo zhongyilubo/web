@@ -80,7 +80,7 @@
                     <div class="form-group category-msg-l1">
                         <label class="col-xs-2 t_r">视频时长：</label>
                         <div class="col-xs-4">
-                            <input type="number" class="form-control" placeholder="单位秒" name="data[timer]" maxlength="32" value="{{$model->timer ?? ''}}">
+                            <input type="text" class="form-control" placeholder="单位秒" name="data[timer]" maxlength="32" value="{{$model->timer ?? ''}}">
                         </div>
                     </div>
 
@@ -88,6 +88,30 @@
                         <label class="col-xs-2 t_r">视频介绍：</label>
                         <div class="col-xs-4">
                             <textarea class="form-control" name="data[intro]">{{$model->intro ?? ''}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 t_r">介绍图片：</label>
+                        <div class="col-xs-9">
+                            <ul class="multimage-gallery clearfix" id="photo-list">
+                                <li id="image_box222" class="my-upload-img">
+                                    @if(!empty($model['intro_images']))
+                                        @foreach($model['intro_images'] as $key => $item)
+                                            <span class="self-add-img">
+                                        <img src="{{$item}}">
+                                        <input type="hidden" name="data[intro_images][]" value="{{$item}}">
+                                        <span hidden="" class="img-delete">
+                                            <i class="icon-shanchu iconfont"></i>
+                                        </span>
+                                    </span>
+                                        @endforeach
+                                    @endif
+                                </li>
+                                <li class="image-upload-add" data-num="10" data-box="image_box222" data-item='<span class="self-add-img"><img src=""><input type="hidden" name="data[intro_images][]" value=""><span hidden="" class="img-delete"><i class="icon-shanchu iconfont"></i></span></span>'>
+                                    <a class="tra_photofile">上传图片</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 

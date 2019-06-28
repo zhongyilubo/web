@@ -144,7 +144,7 @@ class IndexController extends InitController
     }
 
     public function category(){
-        $category = SysCategory::where('status',1)->where('parent_id',0)->get();
+        $category = SysCategory::where('status',1)->where('parent_id',0)->orderBy('sorts','DESC')->get();
 
         return SysCategoryRescource::collection($category);
     }
@@ -314,7 +314,9 @@ class IndexController extends InitController
         $key = $request->key ?? 0;
         $data = GdsGood::where('id','>',0);
         $cid && $data = $data->where('category_id',$cid);
-        $key && $data = $data->where('name','like',"%{$key}%");
+        $key && $data = $data->where(function ($query)use($key){
+            $query->where('name','like',"%{$key}%")->orWhere('teacher','like',"%{$key}%");
+        });
         return $this->success('success',null,GdsGoodRescource::collection($data->get()));
     }
 
