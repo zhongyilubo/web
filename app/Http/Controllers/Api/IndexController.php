@@ -307,7 +307,7 @@ class IndexController extends InitController
 
     public function mlists(){
         $user = \Auth::user();
-        return UserMessageRescource::collection(UserMessage::all());
+        return UserMessageRescource::collection(UserMessage::where('created_at','>',$user->created_at)->get());
     }
 
     public function dmessage(Request $request,UserMessage $model = null){

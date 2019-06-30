@@ -16,7 +16,7 @@
 
                 <form action="./message/create" name="profile-form" id="profile-form" method="post" class="mtb20 base_form">
                     <div class="form-group">
-                        <label class="col-xs-2 t_r">排序：</label>
+                        <label class="col-xs-2 t_r">消息内容：</label>
                         <div class="col-xs-4">
                             <textarea  class="form-control" placeholder="请输入发送的消息" name="message"></textarea>
                         </div>
