@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
                 Route::any('category/create/{category?}', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
                 Route::get('comment', ['as' => 'comment', 'uses' => 'CommentController@index']);
                 Route::get('comment/delete/{model}', ['as' => 'comment.delete', 'uses' => 'CommentController@delete']);
+                Route::get('class', ['as' => 'class', 'uses' => 'ClassController@index']);
+                Route::any('class/create/{category?}', ['as' => 'class.create', 'uses' => 'ClassController@create']);
             });
         });
 

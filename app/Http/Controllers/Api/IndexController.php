@@ -21,10 +21,12 @@ use App\Models\User\UserShare;
 use App\Services\PayService;
 use Illuminate\Http\Request;
 use App\Models\System\SysCategory;
+use App\Models\System\SysCate;
 use App\Models\User\UserIntegralLog;
 use App\Resources\Gds\GdsGood as GdsGoodRescource;
 use App\Resources\Gds\GdsSku as GdsSkuRescource;
 use App\Resources\System\SysCategory as SysCategoryRescource;
+use App\Resources\System\SysCate as SysCateRescource;
 use App\Resources\User as UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Resources\User\UserMessage as UserMessageRescource;
@@ -108,7 +110,7 @@ class IndexController extends InitController
 
         return $this->success('success',null,[
             'banner' => $banner,
-            'hot' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('sorts','DESC')->take(2)->get()),
+            'hot' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('is_hot','DESC')->take(2)->get()),
             'new' => GdsGoodRescource::collection(GdsGood::whereHas('skus')->orderBy('id','DESC')->take(4)->get()),
             'version' => 1,
             'join' => [
@@ -147,6 +149,12 @@ class IndexController extends InitController
         $category = SysCategory::where('status',1)->where('parent_id',0)->orderBy('sorts','DESC')->get();
 
         return SysCategoryRescource::collection($category);
+    }
+
+    public function cate(){
+        $category = SysCate::where('status',1)->where('parent_id',0)->orderBy('sorts','DESC')->get();
+
+        return SysCateRescource::collection($category);
     }
 
     /**
@@ -311,9 +319,11 @@ class IndexController extends InitController
      */
     public function goods(Request $request){
         $cid = $request->cid ?? 0;
+        $tid = $request->tid ?? 0;
         $key = $request->key ?? 0;
         $data = GdsGood::where('id','>',0);
         $cid && $data = $data->where('category_id',$cid);
+        $tid && $data = $data->where('teacher_id',$tid);
         $key && $data = $data->where(function ($query)use($key){
             $query->where('name','like',"%{$key}%")->orWhere('teacher','like',"%{$key}%");
         });
