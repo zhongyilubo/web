@@ -18,6 +18,7 @@ class UserMessage extends Base
             'type_name' => $this->type == 1 ? '支付消息' : ($this->type == 2 ? '积分消息' : '系统消息'),
             'id' => $this->id,
             'content' => $this->content,
+            'item_id' => $this->item_id,
             'created_at' => (string)$this->created_at,
             'order'=> $this->item_id ? (new OrdOrder($this->order)):''
         ];

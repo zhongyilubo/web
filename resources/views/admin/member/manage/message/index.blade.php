@@ -22,6 +22,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-xs-2 t_r">课程ID：</label>
+                        <div class="col-xs-4">
+                            <input type="number" class="form-control" placeholder="请输入课程ID" name="item_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-xs-2 t_r">&nbsp;</label>
                         <div class="col-xs-8">
                             <input type="submit" class="btn" value="提交">
@@ -36,6 +42,7 @@
                             <thead>
                             <tr>
                                 <th  style="width: 8%">ID</th>
+                                <th  style="width: 15%">课程ID</th>
                                 <th>内容</th>
                                 <th  style="width: 15%">发送时间</th>
                             </tr>
@@ -44,6 +51,7 @@
                             @forelse($lists as $lv)
                                 <tr>
                                     <td>{{$lv['id'] ?? ' -- '}}</td>
+                                    <td>{{$lv['item_id'] ?? ' -- '}}</td>
                                     <td>{{$lv['content'] ?? ' -- '}}</td>
                                     <td>{{$lv['created_at']}}</td>
                                 </tr>

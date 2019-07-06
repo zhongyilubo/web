@@ -29,9 +29,13 @@ class MessageController extends InitController
 
     public function create(Request $request,UserCallback $model = null){
 
+        if(!$request->message){
+            return $this->error('缺少内容',url('member/manage/message'));
+        }
         UserMessage::saveBy([
             'type' => 3,
             'content' => $request->message,
+            'item_id' => $request->item_id,
         ]);
 
         return $this->success('操作成功',url('member/manage/message'));
