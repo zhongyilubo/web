@@ -25,13 +25,13 @@ class UserController extends InitController
 
         $name = $request->name ?? '';
         $lists = User::where('type',User::USER_TYPE_MEMBER)->where(function ($query)use($name){
-            $name && $query->where('mobile',$name)->orWhere('nickname','like',"%{$name}%");
+            $name && $query->where('email',$name)->orWhere('nickname','like',"%{$name}%");
         })->whereIn('status',[User::USER_STATUS_OPEN,User::USER_STATUS_STOP])->orderBy('id','DESC')->paginate(self::PAGESIZE);
 
         if($request->excel){
-            $lists = User::select('nickname','created_at','integral','avatar','type')->where('type',User::USER_TYPE_MEMBER)->where(function ($query)use($name){
-                $name && $query->where('mobile',$name)->orWhere('nickname','like',"%{$name}%");
-            })->whereIn('status',[User::USER_STATUS_OPEN,User::USER_STATUS_STOP])->orderBy('id','DESC')->get()->toArray();
+            $lists = User::select('nickname','email','created_at','integral','avatar','type')->where('type',User::USER_TYPE_MEMBER)->where(function ($query)use($name){
+                $name && $query->where('email',$name)->orWhere('nickname','like',"%{$name}%");
+            })->whereIn('status',[User::USER_STATUS_OPEN,User::USER_STATUS_STOP])->orderBy('id','DESC')->get();
 
             self::export($lists);
         }else{
@@ -60,9 +60,9 @@ class UserController extends InitController
         ini_set('memory_limit','500M');
         set_time_limit(0);//设置超时限制为0分钟
 
-        Excel::create('测试详情',function($excel) use ($cellData){
+        Excel::create('下载',function($excel) use ($cellData){
             $excel->sheet('detail', function($sheet) use ($cellData){
-                $sheet->rows($cellData);
+                $sheet->rows($cellData->toArray());
             });
         })->export('xls');
         die;

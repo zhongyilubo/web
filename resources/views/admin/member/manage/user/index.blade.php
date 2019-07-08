@@ -36,7 +36,8 @@
                                 <th  style="width: 5%">性别</th>
                                 <th  style="width: 15%">注册时间</th>
                                 <th  style="width: 10%">积分</th>
-                                <th  style="width: 20%">操作</th>
+                                <th  style="width: 10%">手机号</th>
+                                <th  style="width: 10%">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,7 @@
                                     <td>{{$lv['gender'] == 1?'男':'女'}}</td>
                                     <td>{{$lv['created_at'] ?? ' -- '}}</td>
                                     <td>{{$lv['integral'] ?? ' -- '}}</td>
+                                    <td>{{$lv['email'] ?? ' -- '}}</td>
                                     <td>
                                         @if($lv['status'] != \App\Models\User::USER_STATUS_STOP)
                                             <a class="do_action" data-confirm="确定要冻结吗？" data-url="{!! url('member/manage/user/close',['user'=>$lv['id']]) !!}">冻结</a>
