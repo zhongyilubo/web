@@ -15,6 +15,7 @@ class User extends Base
         return [
             'id' => $this->id ?? 0,
             'integral' => $this->integral ?? 0,
+            'mobile' => $this->email ?? 0,
         ];
     }
 }

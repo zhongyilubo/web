@@ -44,6 +44,17 @@ class IndexController extends InitController
         $this->integralService = $integralService;
     }
 
+
+    public function userinfomobile(Request $request){
+        if(!preg_match("/^1[34578]\d{9}$/", $request->mobile)){
+            return $this->error('手机号错误', null, true);
+        }
+        $user = \Auth::user();
+        $user->email = $request->mobile ?? '';
+        $user->save();
+        return $this->success('提交成功');
+
+    }
     public function tozan(Request $request){
         $id = $request->id ?? 0;
         $sign = $request->sign ?? 0;
