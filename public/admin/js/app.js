@@ -41,7 +41,8 @@ seajs.config({
         "layui": "layui/layui",
         "plupload": "plupload/3.1.2/js/plupload.full.min.js",
         "datepicker.css": "jq/jquery.datepicker/datepicker.css",
-        "datepicker.date": "jq/jquery.datepicker/datepicker.all"
+        "datepicker.date": "jq/jquery.datepicker/datepicker.all",
+        "oss": "oss/aliyun-oss-sdk"
     },
     vars: { locale: "zh-cn" },
     preload: ["jquery"],

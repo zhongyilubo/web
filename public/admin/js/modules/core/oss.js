@@ -37,6 +37,7 @@ define(function (require, exports, module) {
 
         function get_signature()
         {
+            console.log(11111111);
             // 可以判断当前expire是否超过了当前时间， 如果超过了当前时间， 就重新取一下，3s 作为缓冲。
             now = timestamp = Date.parse(new Date()) / 1000;
             if (expire < now + 3)
@@ -150,7 +151,7 @@ define(function (require, exports, module) {
                     { title : "Image files", extensions : "jpg,gif,png,bmp" },
                     { title : "files", extensions: "mpg,m4v,mp4,flv,3gp,mov,avi,rmvb,mkv,wmv"}
                 ],
-                max_file_size : '1024mb', //最大只能上传1G的文件
+                max_file_size : '5096mb', //最大只能上传1G的文件
                 prevent_duplicates : true //不允许选取重复文件
             },
             // chunk_size: "10mb", //当该值为0时表示不使用分片上传功能

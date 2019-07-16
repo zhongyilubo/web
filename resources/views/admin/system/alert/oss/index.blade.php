@@ -50,7 +50,7 @@
                         <div class="local-img-con">
                             <label>本地资源:</label>
                             <div id="ossfile" class="local-img-box">
-                                你的浏览器不支持flash,Silverlight或者HTML5！
+
                             </div>
                         </div>
                     </div>
